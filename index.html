@@ -39,9 +39,11 @@
                 </div>
             </div>
             <div class="main-menu" id="main-menu">
-				<div class="menu-inner">
-					<nav></nav>
-				</div>
+				<script>
+					$('#main-menu').load('sections/menu.html', function() {
+						console.log('Content loaded successfully!');
+					});
+				</script>
 			</div>
         </div>
         <div class="main-content">
