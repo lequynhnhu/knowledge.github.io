@@ -115,7 +115,7 @@
     <script src="https://lequynhnhu.github.io/knowledge.github.io/assets/js/jquery.slicknav.min.js"></script>
 
     <script>
-	$('#main-menu').load('sections/menu.html', function(response, status, xhr) {
+	$('#main-menu').load('https://lequynhnhu.github.io/knowledge.github.io/sections/menu.html', function(response, status, xhr) {
 		if (status == "error") {
 			console.error('Error loading menu:', xhr.status, xhr.statusText);
 			$('#main-menu').html('<p>Menu failed to load</p>');
