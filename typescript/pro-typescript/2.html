@@ -76,8 +76,11 @@
 					<h5>Ambient Declarations</h5>
 						<br/>
 						<p>Ambient declarations can be used to add type information to existing JavaScript code. Commonly, this is used to add type information for your own existing code, or for a third-party library that you want to consume in your TypeScript program.</p>
-						
+						<p>Ambient declarations can be gradually constructed by starting with a simple imprecise declaration and turning up the dial on the details over time.&nbsp;</p>
 						<br/>
+						<p>declare var $: any;<br />$('#id').html('Hello World');</p>
+						<br/>
+						<p> => shows an example of the least precise ambient<br />declaration you can write for the jQuery framework. The declaration simply notifies the compiler that<br />an external variable will exist at runtime without supplying further details of the structure of the external<br />variable. This will suppress errors for the $ variable, but will not supply deep type checking or useful<br />autocompletion.</p>
 				</div>
 			</div>
 		</div>
