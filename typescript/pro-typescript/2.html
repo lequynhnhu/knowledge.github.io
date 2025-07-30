@@ -33,50 +33,6 @@
 						<p>For example, if you are targeting ECMAScript 5, where classes are not available, all your classes will be converted into immediately invoked function expressions that create appropriate representations using the prototypal inheritance available in ECMAScript 5. Type erasure is</p>
 						<p>Type erasure removes type annotations, custom types, and interfaces. These are only required at design time and at compile time for the purpose of static checking. At runtime types are not checked so the type information is not needed. You shouldn&rsquo;t encounter a problem at runtime because the logical use of types has been checked, except where you have opted out by using the "any" type.</p>
 						<br/>
-					<h5>Type Inference</h5>
-						<br/>
-						<p>Type inference is the polar opposite of type erasure. Type inference is the process by which types are determined at compile time in the absence of explicit type annotations.</p>
-						<p>TypeScript performs deep inspections to create a schedule of types in your program and compares assignments, expressions, and operations using this schedule of types. During this process, there are some clever tricks that are employed when a direct type is not available, which allow the type to be found indirectly. One such trick is contextual typing, where TypeScript uses the context of an expression to determine the types.</p>
-						<br/>
-						<h6>a. Best Common Type</h6>
-							<br/>
-								<p>When type information is being inferred, there are a limited number of situations where the best common type must be determined.</p>
-								<p>The process of determining the best common type is not just used for array literal expressions; they also are used to determine any case where multiple values have different types, such as the return type of a function or method that contains multiple return statements.</p>
-								<br/>
-								<p>// number[]<br />let x = [0, 1, null];</p>
-								<p><br />// (string | number)[]<br />let y = [0, 1, null, 'a'];</p>
-							<br/>
-						<h6>b. Contextual Types</h6>
-							<br/>
-							<p>Contextual types are a good example of how advanced type inference can be. Contextual typing occurs when the compiler bases its types on the location of an expression.</p>
-							<p>window.onclick = function(event) {<br />var button = event.button;<br />};</p>
-							<br/>
-						<h6>c. Widened Types</h6>
-							<br/>
-							<p>The term &ldquo;widened type&rdquo; refers to situations in TypeScript where the type of a function call, expression, or assignment is null or undefined.</p>
-							<p>function example() {<br />return null;<br />}<br />var widened = example ();</p>
-							<br/>
-						<h6>When to Annotate</h6>
-							<br/>
-							<p>Because type inference has been a key feature of TypeScript since day one, the discussion on when to make types explicit with type annotations can take place without controversy. This has been a tricky topic for statically typed languages that have later decided to add some level of support for type inference.</p>
-							<p>The final decision about the level of type annotations you add to your program should be made jointly between all team members, but you may wish to use the following suggestions as a starting point for your discussion.</p>
-								<p>&bull; Start by adding no type annotations (full inference.)</p>
-								<p>&bull; Add type annotations where the inferred type would be any.</p>
-								<p>&bull; Add type annotations for public method return types.</p>
-								<p>&bull; Add type annotations for public method parameters.</p>
-							<br/>
-					<h5>Duplicate Identifiers</h5>
-						<br/>
-							<p>Overall, you should do your best to avoid name clashes in your program. TypeScript supplies the tools to make name clashes unnecessary by allowing you to move your program out of the global scope and into modules. However, there are some interesting features around identifiers in TypeScript, including many situations where you are permitted to use the same name within the same scope.</p>
-							<p>In most cases, the use of an existing class or variable name within the same scope will result in a &ldquo;Duplicate identifier&rdquo; error. No particular structure gets preferential treatment; the latter of the two identifiers will be the source of the error. If you re-use a namespace multiple times in your program, this will not result in a duplicate identifier error because all of the individual blocks are logically merged into a single namespace.</p>
-							<p>Another valid use of a duplicate identifier is with interfaces. Once again, the compiler knows that there will be no duplicate identifier at runtime because interfaces are erased during compilation; its identifier will never appear in the JavaScript output. The use of a duplicate identifier for an interface and a variable is a common pattern in the TypeScript library, where the standard types are defined using an interface and then allocated to a variable declaration with a type annotation.</p>
-						<br/>
-					<h5>Type Checking</h5>
-						<br/>
-						<p>Once a schedule of types has been gathered from your program, the TypeScript compiler is able to use this schedule to perform type checking. At its simplest, the compiler is checking that when a function is called that accepts a parameter of type "number"; all calling code passes an argument with a type that is compatible with the "number" type.</p>
-						<p>Type checking is not limited to positive matching, where the supplied type must have the structure of the required type. An increasing number of negative checks are being added to the compiler that enables it to detect a different class of error.</p>
-						<p>For example, the excess property warning will highlight properties that are not anticipated on an object, which is a great way to catch situations where you have mis-typed a property name. This kind of checking may introduce additional errors as you upgrade the version of TypeScript you use in your projects, but if you persevere and review the messages the compiler is sending you, you will eventually find subtle bugs that the compiler has managed to catch for you.</p>
-						<br/>
 					<h5>Ambient Declarations</h5>
 						<br/>
 						<p>Ambient declarations can be used to add type information to existing JavaScript code. Commonly, this is used to add type information for your own existing code, or for a third-party library that you want to consume in your TypeScript program.</p>
@@ -93,6 +49,62 @@
 						<br/>
 				</div>
 			</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+				<div class="card-body" id="card-body">
+						<div class="d-sm-flex justify-content-between align-items-center">
+							<h1 class="header-title mb-0">Type Inference</h1>
+						</div>
+						<div class="market-status-table mt-4">
+							<br/>
+							<p>Type inference is the polar opposite of type erasure. Type inference is the process by which types are determined at compile time in the absence of explicit type annotations.</p>
+							<p>TypeScript performs deep inspections to create a schedule of types in your program and compares assignments, expressions, and operations using this schedule of types. During this process, there are some clever tricks that are employed when a direct type is not available, which allow the type to be found indirectly. One such trick is contextual typing, where TypeScript uses the context of an expression to determine the types.</p>
+							<br/>
+							<h6>a. Best Common Type</h6>
+								<br/>
+									<p>When type information is being inferred, there are a limited number of situations where the best common type must be determined.</p>
+									<p>The process of determining the best common type is not just used for array literal expressions; they also are used to determine any case where multiple values have different types, such as the return type of a function or method that contains multiple return statements.</p>
+									<br/>
+									<p>// number[]<br />let x = [0, 1, null];</p>
+									<p><br />// (string | number)[]<br />let y = [0, 1, null, 'a'];</p>
+								<br/>
+							<h6>b. Contextual Types</h6>
+								<br/>
+								<p>Contextual types are a good example of how advanced type inference can be. Contextual typing occurs when the compiler bases its types on the location of an expression.</p>
+								<p>window.onclick = function(event) {<br />var button = event.button;<br />};</p>
+								<br/>
+							<h6>c. Widened Types</h6>
+								<br/>
+								<p>The term &ldquo;widened type&rdquo; refers to situations in TypeScript where the type of a function call, expression, or assignment is null or undefined.</p>
+								<p>function example() {<br />return null;<br />}<br />var widened = example ();</p>
+								<br/>
+							<h6>When to Annotate</h6>
+								<br/>
+								<p>Because type inference has been a key feature of TypeScript since day one, the discussion on when to make types explicit with type annotations can take place without controversy. This has been a tricky topic for statically typed languages that have later decided to add some level of support for type inference.</p>
+								<p>The final decision about the level of type annotations you add to your program should be made jointly between all team members, but you may wish to use the following suggestions as a starting point for your discussion.</p>
+									<p>&bull; Start by adding no type annotations (full inference.)</p>
+									<p>&bull; Add type annotations where the inferred type would be any.</p>
+									<p>&bull; Add type annotations for public method return types.</p>
+									<p>&bull; Add type annotations for public method parameters.</p>
+								<br/>
+						<h5>Duplicate Identifiers</h5>
+							<br/>
+								<p>Overall, you should do your best to avoid name clashes in your program. TypeScript supplies the tools to make name clashes unnecessary by allowing you to move your program out of the global scope and into modules. However, there are some interesting features around identifiers in TypeScript, including many situations where you are permitted to use the same name within the same scope.</p>
+								<p>In most cases, the use of an existing class or variable name within the same scope will result in a &ldquo;Duplicate identifier&rdquo; error. No particular structure gets preferential treatment; the latter of the two identifiers will be the source of the error. If you re-use a namespace multiple times in your program, this will not result in a duplicate identifier error because all of the individual blocks are logically merged into a single namespace.</p>
+								<p>Another valid use of a duplicate identifier is with interfaces. Once again, the compiler knows that there will be no duplicate identifier at runtime because interfaces are erased during compilation; its identifier will never appear in the JavaScript output. The use of a duplicate identifier for an interface and a variable is a common pattern in the TypeScript library, where the standard types are defined using an interface and then allocated to a variable declaration with a type annotation.</p>
+							<br/>
+						<h5>Type Checking</h5>
+							<br/>
+							<p>Once a schedule of types has been gathered from your program, the TypeScript compiler is able to use this schedule to perform type checking. At its simplest, the compiler is checking that when a function is called that accepts a parameter of type "number"; all calling code passes an argument with a type that is compatible with the "number" type.</p>
+							<p>Type checking is not limited to positive matching, where the supplied type must have the structure of the required type. An increasing number of negative checks are being added to the compiler that enables it to detect a different class of error.</p>
+							<p>For example, the excess property warning will highlight properties that are not anticipated on an object, which is a great way to catch situations where you have mis-typed a property name. This kind of checking may introduce additional errors as you upgrade the version of TypeScript you use in your projects, but if you persevere and review the messages the compiler is sending you, you will eventually find subtle bugs that the compiler has managed to catch for you.</p>
+							<br/>
+						</div>
+				</div>
 		</div>
 	</div>
 </div>
