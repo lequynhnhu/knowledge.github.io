@@ -226,6 +226,7 @@
 						<h6>10.1 Optional Parameters</h6>
 							<br/>
 							<p>function getAverage(a: number, b: number, c?: number): string {</p>
+							<br/>
 						<h6>10.2 Default Parameters</h6>
 							<br/>
 							<p>function concatenate(items: string[], separator = ',', beginAt = 0, endAt = items.length) {</p>
@@ -239,7 +240,18 @@
 							<br/>
 					<h5>11. Overloads</h5>
 						<br/>
-						
+						<p>The actual signature of the function appears last and is hidden by the overloads. This final signature is called an implementation signature. The implementation signature must define parameters and a return value that are compatible with all preceding signatures.</p>
+						<p>As this implies, the return types for each overload can be different and the parameter lists can differ not only in types, but also in number of arguments. If an overload specifies fewer parameters than the implementation signature, the implementation signature would have to make the extra parameters optional, default, or rest parameters.</p>
+						<p>When you call a function that has overloads defined, the compiler constructs a list of signatures and attempts to determine the signature that matches the function call. If there are no matching signatures, the call results in an error. If one or more signature matches, the earliest of the matching signatures (in the order they appear in the file) determines the return type.</p>
+						<p>Overloads introduce a burden to the function as types may need to be tested or converted, and they may cause multiple logical branches within the function. In cases where the types are compatible and no additional code needs to be written within the function, overloads allow a single function to be used in multiple cases.</p>
+						<br/>
+					<h5>12. Overloads</h5>
+						<br/>
+						<p>Specialized overload signatures refer to the ability in TypeScript to create overloads based on string constants. Rather than the overloads being based on different parameters, they are based on the string value of an argument</p>
+						<p>There are some rules to follow when using specialized overload signatures</p>
+							<p>&bull; There must be at least one nonspecialized signature.</p>
+							<p>&bull; Each specialized signature must return a subtype of a nonspecialized signature.</p>
+							<p>&bull; The implementation signature must be compatible with all signatures.</p>
 						<br/>
 				</div>
 			</div>
