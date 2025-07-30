@@ -88,19 +88,36 @@
 					<p>It is important to note that this doesn&rsquo;t make the variable immutable, direct assignments after a constant is declared are not allowed, but the value within the constant can be mutated.</p>
 				<br/>
 				<h5>b. Types</h5>
+					<br/>
 					<p>TypeScript is optionally statically typed; this means that types are checked automatically to prevent accidental assignments of invalid values. It is possible to opt out of this by declaring dynamic variables. Static type checking reduces errors caused by accidental misuse of types.</p>
 				<h5>c. Types Annotations </h5>
+					<br/>
 					<p>Although the TypeScript language service is expert at inferring types automatically, there are times when it can&rsquo;t fathom your intentions. There will also be times where you will wish to make a type explicit for safety or to narrow the type. In these cases, you can use a type annotation to specify the type.</p>
 					<p>// primitive type annotation<br />const name: string = 'Steve';<br />const heightInCentimeters: number = 182.88;<br />const isActive: boolean = true;</p>
 					<p><br />// array type annotation<br />const names: string[] = ['James', 'Nick', 'Rebecca', 'Lily'];</p>
+					<br/>
 				<h5>d. Primitive Types </h5>
-				<p>The primitive types in TypeScript are incredibly basic, but through the tools of the type system you can combine them, widen them, and narrow them to represent the concepts in your program.</p>
-				<p>&bull; string &ndash; a sequence of UTF-16 code units<br />&bull; boolean &ndash; true or false<br />&bull; number &ndash; a double-precision 64-bit floating point value<br />&bull; symbol &ndash; a unique, immutable symbol, substitutable for a string as an object key</p>
-				<p>The type system also contains several types that represent special values:</p>
+					<br/>
+					<p>The primitive types in TypeScript are incredibly basic, but through the tools of the type system you can combine them, widen them, and narrow them to represent the concepts in your program.</p>
+					<p>&bull; string &ndash; a sequence of UTF-16 code units<br />&bull; boolean &ndash; true or false<br />&bull; number &ndash; a double-precision 64-bit floating point value<br />&bull; symbol &ndash; a unique, immutable symbol, substitutable for a string as an object key</p>
+					<br/>
+					<p>The type system also contains several types that represent special values:</p>
 					<p>&bull; The undefined type is the value of a variable that has not been assigned a value.</p>
 					<p>&bull; The null type can be used to represent an intentional absence of an object value. For example, if you had a method that searched an array of objects to find a match, it could return null to indicate that no match was found.</p>
 					<p>&bull; The void type is used to represent cases where there is no value, for example, to show that a function doesn&rsquo;t return anything.</p>
 					<p>&bull; The never type represents an unreachable section of code, for example a function that throws an exception has the return type of never.</p>
+					<br/>
+				<h5>e. Object and Dynamic Types </h5>
+					<br/>
+					<p>Everything that isn&rsquo;t a primitive type in TypeScript is a subclass of the object type. Most of the types in your program are likely to fall within this definition.</p>
+					<p>The final item in our types is the dynamic any type, which can be used to represent literally any type. When using dynamic types, there is no compiler type checking for the type.</p>
+					<p>The any type is also used by the compiler in situations where it cannot infer the type automatically, although you can disallow these implicit any types using a complier flag. You can also use it in cases where you don&rsquo;t want the type to be checked by the compiler, which gives you access to all of the dynamic features of the JavaScript language.</p>
+					<br/>
+				<h5>f. Enumerations </h5>
+					<br/>
+					<p>Enumerations represent a collection of named elements that you can use to avoid littering your program with hard-coded values. By default, enumerations are zero based although you can change this by specifying the first value, in which case numbers will increment from value you set. You can opt to specify values for all identifiers if you wish to.</p>
+					<p><em>The term common root comes from graph theory. In TypeScript, this term relates to a particular location in the tree of modules within your program. Whenever declarations are considered for merging, they must have the same fully qualified name, which means the same name at the same level in the tree.</em></p>
+					<br/>
 				</div>
 		</div>
 	</div>
