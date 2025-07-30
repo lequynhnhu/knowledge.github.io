@@ -148,7 +148,13 @@
 				<h5>14. Type Assertions </h5>
 					<br/>
 					<p>In cases in which TypeScript determines that an assignment is invalid, but you know that you are dealing with a special case, you can override the type using a type assertion. When you use a type assertion, you are taking responsibility from the compiler and must ensure that the assignment is valid. Your program may not work correctly if you make a mistake.</p>
-				
+					<br/>
+				<h5>15. Type Guards </h5>
+					<br/>
+					<p>When dealing with a wide type definition, you may find you need to narrow it in order to use a member that would otherwise be unavailable.</p>
+					<p>Attempting to use the length member from a string or the toFixed method on numbers will result in error unless a type guard is used. A type guard is a statement that results in the type becoming narrower,</p>
+					<p>The standard type guards include typeof and instanceof; but if that doesn&rsquo;t cover your situation, you can write your own custom type guard.</p>
+					<br/>
 				</div>	
 		</div>
 	</div>
