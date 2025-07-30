@@ -50,7 +50,18 @@
 						<h6>c. Widened Types</h6>
 							<br/>
 							<p>The term &ldquo;widened type&rdquo; refers to situations in TypeScript where the type of a function call, expression, or assignment is null or undefined.</p>
-						
+							<p>function example() {<br />return null;<br />}<br />var widened = example ();</p>
+							<br/>
+						<h6>When to Annotate</h6>
+							<br/>
+							<p>Because type inference has been a key feature of TypeScript since day one, the discussion on when to make types explicit with type annotations can take place without controversy. This has been a tricky topic for statically typed languages that have later decided to add some level of support for type inference.</p>
+							<p>The final decision about the level of type annotations you add to your program should be made jointly between all team members, but you may wish to use the following suggestions as a starting point for your discussion.</p>
+								<p>&bull; Start by adding no type annotations (full inference.)</p>
+								<p>&bull; Add type annotations where the inferred type would be any.</p>
+								<p>&bull; Add type annotations for public method return types.</p>
+								<p>&bull; Add type annotations for public method parameters.</p>
+							<br/>
+					
 				</div>
 			</div>
 		</div>
