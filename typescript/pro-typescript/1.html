@@ -89,6 +89,13 @@
 				<br/>
 				<h5>b. Types</h5>
 					<p>TypeScript is optionally statically typed; this means that types are checked automatically to prevent accidental assignments of invalid values. It is possible to opt out of this by declaring dynamic variables. Static type checking reduces errors caused by accidental misuse of types.</p>
+				<h5>c. Types Annotations </h5>
+					<p>Although the TypeScript language service is expert at inferring types automatically, there are times when it can&rsquo;t fathom your intentions. There will also be times where you will wish to make a type explicit for safety or to narrow the type. In these cases, you can use a type annotation to specify the type.</p>
+					<p>// primitive type annotation<br />const name: string = 'Steve';<br />const heightInCentimeters: number = 182.88;<br />const isActive: boolean = true;</p>
+					<p><br />// array type annotation<br />const names: string[] = ['James', 'Nick', 'Rebecca', 'Lily'];</p>
+				<h5>d. Primitive Types </h5>
+				<p>The primitive types in TypeScript are incredibly basic, but through the tools of the type system you can combine them, widen them, and narrow them to represent the concepts in your program.</p>
+				<p>&bull; string &ndash; a sequence of UTF-16 code units<br />&bull; boolean &ndash; true or false<br />&bull; number &ndash; a double-precision 64-bit floating point value<br />&bull; symbol &ndash; a unique, immutable symbol, substitutable for a string as an object key</p>
 			</div>
 		</div>
 	</div>
