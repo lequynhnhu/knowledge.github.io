@@ -41,6 +41,10 @@
 		<h5>d. Scope</h5>
 			<p>In most modern C-like languages, the curly braces create a new context for scope. A variable declared inside a set of curly braces cannot be seen outside of that block. JavaScript has bucked this trend traditionally by being functionally scoped, which means blocks defined by curly braces have no effect on scope.</p>
 			<p>Instead, variables are scoped to the function they are declared in, or the global scope if they are not declared within a function. There can be further complications caused by the accidental omission of the var keyword within a function, thus promoting the variable into the global scope. More complications are caused by variable hoisting, resulting in all variables within a function behaving as if they were declared at the top of the function.</p>
+			<p>The introduction of the const and let variable declarations have gone some way to solving this problem, and if you are starting from a clean sheet you can avoid the older var variable declaration altogether.</p>
 		<p><br/>
+		<h5>e. Lack of Types</h5>
+			<p>The problem with JavaScript isn't that it has no types, because each variable does have a type; it is just that the type can be changed by each assignment. A variable may start off as a string, but an assignment can change it to a number, an object, or even a function. The real problem here is that the development tools cannot be improved beyond a reasonable guess about the type of a variable. If the development tools don’t know the types, the autocompletion and type hinting is often too general to be useful.</p>	
+			<p>By formalizing type information, TypeScript allows development tools to supply specific contextual help that otherwise would not be possible.</p>
 	</div>
 </div>
