@@ -171,7 +171,7 @@
 		<div class="card" id="card">
 			<div class="card-body" id="card-body">
 				<div class="d-sm-flex justify-content-between align-items-center">
-					<h4 class="header-title mb-0">Operators</h4>
+					<h2 class="header-title mb-0">Operators</h2>
 				</div>
 				<div class="market-status-table mt-4">
 					<h5>1. Increment and Decrement</h5>
@@ -220,8 +220,23 @@
 						<br/>
 					<h5>10. Functions</h5>
 						<br/>
-						
+						<p>When the function is called, the type of each argument passed to the function is checked. The types are also known within the function, which allows sensible autocompletion suggestions and type checking inside the function body.</p>
+						<p>You can use the void type to indicate that the function does not return a value.</p>
 						<br/>
+						<h6>10.1 Optional Parameters</h6>
+							<br/>
+							<p>function getAverage(a: number, b: number, c?: number): string {</p>
+						<h6>10.2 Default Parameters</h6>
+							<br/>
+							<p>function concatenate(items: string[], separator = ',', beginAt = 0, endAt = items.length) {</p>
+							<br/>
+						<h6>10.3 Rest Parameters</h6>
+							<br/>
+							<p>Rest parameters allow calling code to specify zero or more arguments of the specified type. For the<br />arguments to be correctly passed, rest parameters must follow these rules</p>
+							<p>&bull; Only one rest parameter is allowed.</p>
+							<p>&bull; The rest parameter must appear last in the parameter list.</p>
+							<p>&bull; The type of a rest parameter must be an array type.</p>
+							<br/>
 				</div>
 			</div>
 		</div>
