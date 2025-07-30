@@ -23,6 +23,18 @@
 						<p>One thing to avoid in a structurally typed language, such as TypeScript, is empty structures. An empty interface or an empty class is essentially a valid supertype of practically everything in your program, which means any object could be substituted for the empty structure at compile time because there is no contract to satisfy during type checking.</p>
 						<p>Structural typing complements the type inference in TypeScript. With these features, you can leave much of the work to the compiler and language service, rather than having to explicitly add type information and class heritage throughout your program.</p>
 						<br/>
+					<h6>Optional Static Types</h6>
+						<br/>
+						<p>When you compile your TypeScript program into plain JavaScript, the generated code is different in two ways: code transformation and type erasure. The code transformation converts language features that are not available in the target JavaScript version into representations that are valid.</p>
+						<p>For example, if you are targeting ECMAScript 5, where classes are not available, all your classes will be converted into immediately invoked function expressions that create appropriate representations using the prototypal inheritance available in ECMAScript 5. Type erasure is</p>
+						<p>Type erasure removes type annotations, custom types, and interfaces. These are only required at design time and at compile time for the purpose of static checking. At runtime types are not checked so the type information is not needed. You shouldn&rsquo;t encounter a problem at runtime because the logical use of types has been checked, except where you have opted out by using the "any" type.</p>
+						<br/>
+					<h6>Type Inference</h6>
+						<br/>
+						<p>Type inference is the polar opposite of type erasure. Type inference is the process by which types are determined at compile time in the absence of explicit type annotations.</p>
+						<p>TypeScript performs deep inspections to create a schedule of types in your program and compares assignments, expressions, and operations using this schedule of types. During this process, there are some clever tricks that are employed when a direct type is not available, which allow the type to be found indirectly. One such trick is contextual typing, where TypeScript uses the context of an expression to determine the types.</p>
+						<br/>
+					
 				</div>
 			</div>
 		</div>
