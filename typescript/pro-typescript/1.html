@@ -3,7 +3,7 @@
 		<div class="card" id="card">
 			<div class="card-body" id="card-body">
 				<div class="d-sm-flex justify-content-between align-items-center">
-					<h4 class="header-title mb-0">TypeScript Components</h4>
+					<h2 class="header-title mb-0">TypeScript Components</h2>
 				</div>
 				<div class="market-status-table mt-4">
 					<p>TypeScript is an application-scale programming language that provides early access to proposed new JavaScript features and powerful additional features like static type checking. You can write TypeScript programs to run in web browsers or on servers and you can reuse code between browser and server applications.</p>
@@ -71,7 +71,7 @@
 		<div class="card" id="card">
 			<div class="card-body" id="card-body">
 				<div class="d-sm-flex justify-content-between align-items-center">
-					<h4 class="header-title mb-0">Language Features</h4>
+					<h2 class="header-title mb-0">Language Features</h2>
 				</div>
 				<p>TypeScript is a superset of JavaScript. That means that the TypeScript language includes the entire JavaScript language plus a collection of useful additional features.</p>
 				<p>One important thing to remember is that all the standard control structures found in JavaScript are immediately available within a TypeScript program. This includes the following:</p>
@@ -84,7 +84,11 @@
 				<p>Variables declared with "const" or "let" are block scoped, whereas variables declared with the older "var" keyword are function scoped. If you omit these keywords, you are implicitly (and perhaps accidentally) declaring the variable in the global scope.</p>
 				<br/>
 				<h5>a. Constants</h5>
-				
+					<p>Constants are variables that follow the scope rules of the let keyword, but that cannot be reassigned. When you declare a variable with the const keyword, you can&rsquo;t later assign a new value to the variable.</p>
+					<p>It is important to note that this doesn&rsquo;t make the variable immutable, direct assignments after a constant is declared are not allowed, but the value within the constant can be mutated.</p>
+				<br/>
+				<h5>b. Types</h5>
+					<p>TypeScript is optionally statically typed; this means that types are checked automatically to prevent accidental assignments of invalid values. It is possible to opt out of this by declaring dynamic variables. Static type checking reduces errors caused by accidental misuse of types.</p>
 			</div>
 		</div>
 	</div>
