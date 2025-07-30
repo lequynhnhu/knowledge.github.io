@@ -17,9 +17,10 @@
 				<li>• Compilation describes the process of taking source code written in one language and converting it into another language.</li>
 				<li>• Transpilation is a specific kind of compilation and describes the process of taking source code written in one language and transforming it into another language with a similar level of abstraction.</li>
 			</ul>
+			<p><br/>
 				<p>So, you might compile a high-level language into an assembly language, but you would transpile TypeScript to JavaScript as they are similarly abstracted.</p>
 				<p>Because JavaScript has a C-like syntax, it looks familiar to most programmers. This is one of JavaScript's key strengths, but it is also the cause of many surprises, especially in the following areas:</p>
-				
+			<p><br/>
 				<p>• Prototypal inheritance</p>
 				<p>• Equality and type juggling</p>
 				<p>• Management of modules</p>
@@ -35,5 +36,11 @@
 			<p>The most common type coercions involve strings, numbers, and Boolean target types. Whenever you attempt to concatenate a value with a string, the value will be converted to a string, if you perform a mathematical operation an attempt will be made to turn the value into a number, and if you use any value in a logical operation there are special rules that determine whether the result will be true or false. When an automatic type conversion occurs, it is commonly referred to as type juggling.</p>
 		
 		<h5>c. Management of Modules</h5>
+			<p>TypeScript makes module loaders the default way of working and allows your modules to be compiled to suit the most prevalent module loading styles without requiring changes to your code.</p>
+		<p><br/>
+		<h5>d. Scope</h5>
+			<p>In most modern C-like languages, the curly braces create a new context for scope. A variable declared inside a set of curly braces cannot be seen outside of that block. JavaScript has bucked this trend traditionally by being functionally scoped, which means blocks defined by curly braces have no effect on scope.</p>
+			<p>Instead, variables are scoped to the function they are declared in, or the global scope if they are not declared within a function. There can be further complications caused by the accidental omission of the var keyword within a function, thus promoting the variable into the global scope. More complications are caused by variable hoisting, resulting in all variables within a function behaving as if they were declared at the top of the function.</p>
+		<p><br/>
 	</div>
 </div>
