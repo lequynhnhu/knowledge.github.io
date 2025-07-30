@@ -162,7 +162,32 @@
     <!-- others plugins -->
     <script src="https://lequynhnhu.github.io/knowledge.github.io/assets/js/plugins.js"></script>
     <script src="https://lequynhnhu.github.io/knowledge.github.io/assets/js/scripts.js"></script>
+    <script>
+	function loadExternalContent(targetSelector, url) {
+    		$(targetSelector).load(url, function(response, status, xhr) {
+        		if (status === "error") {
+            			console.error('Error loading content:', xhr.status, xhr.statusText);
+            			$(targetSelector).html('<p class="error-message">Content failed to load</p>');
+       			 }
+   		 });
+	}
 
+	$(document).ready(function() {
+    		// Handle all links with the .load-content class
+    		$(document).on('click', 'a.load-content', function(e) {
+        		e.preventDefault();
+        		const $link = $(this);
+        		const url = $link.data('url');
+		        const target = $link.data('target');
+
+       			if (url && target) {
+            			loadExternalContent(target, url);
+       			} else {
+            			console.warn('Missing data-url or data-target:', this);
+       			}
+   		 });
+	});
+    </script>
 </body>
 
 </html>
