@@ -83,11 +83,11 @@
 				</p>
 				<p>Variables declared with "const" or "let" are block scoped, whereas variables declared with the older "var" keyword are function scoped. If you omit these keywords, you are implicitly (and perhaps accidentally) declaring the variable in the global scope.</p>
 				<br/>
-				<h5>a. Constants</h5>
+				<h5>1. Constants</h5>
 					<p>Constants are variables that follow the scope rules of the let keyword, but that cannot be reassigned. When you declare a variable with the const keyword, you can&rsquo;t later assign a new value to the variable.</p>
 					<p>It is important to note that this doesn&rsquo;t make the variable immutable, direct assignments after a constant is declared are not allowed, but the value within the constant can be mutated.</p>
 				<br/>
-				<h5>b. Types</h5>
+				<h5>2. Types</h5>
 					<br/>
 					<p>TypeScript is optionally statically typed; this means that types are checked automatically to prevent accidental assignments of invalid values. It is possible to opt out of this by declaring dynamic variables. Static type checking reduces errors caused by accidental misuse of types.</p>
 				<h5>c. Types Annotations </h5>
@@ -96,7 +96,7 @@
 					<p>// primitive type annotation<br />const name: string = 'Steve';<br />const heightInCentimeters: number = 182.88;<br />const isActive: boolean = true;</p>
 					<p><br />// array type annotation<br />const names: string[] = ['James', 'Nick', 'Rebecca', 'Lily'];</p>
 					<br/>
-				<h5>d. Primitive Types </h5>
+				<h5>3. Primitive Types </h5>
 					<br/>
 					<p>The primitive types in TypeScript are incredibly basic, but through the tools of the type system you can combine them, widen them, and narrow them to represent the concepts in your program.</p>
 					<p>&bull; string &ndash; a sequence of UTF-16 code units<br />&bull; boolean &ndash; true or false<br />&bull; number &ndash; a double-precision 64-bit floating point value<br />&bull; symbol &ndash; a unique, immutable symbol, substitutable for a string as an object key</p>
@@ -107,17 +107,27 @@
 					<p>&bull; The void type is used to represent cases where there is no value, for example, to show that a function doesn&rsquo;t return anything.</p>
 					<p>&bull; The never type represents an unreachable section of code, for example a function that throws an exception has the return type of never.</p>
 					<br/>
-				<h5>e. Object and Dynamic Types </h5>
+				<h5>4. Object and Dynamic Types </h5>
 					<br/>
 					<p>Everything that isn&rsquo;t a primitive type in TypeScript is a subclass of the object type. Most of the types in your program are likely to fall within this definition.</p>
 					<p>The final item in our types is the dynamic any type, which can be used to represent literally any type. When using dynamic types, there is no compiler type checking for the type.</p>
 					<p>The any type is also used by the compiler in situations where it cannot infer the type automatically, although you can disallow these implicit any types using a complier flag. You can also use it in cases where you don&rsquo;t want the type to be checked by the compiler, which gives you access to all of the dynamic features of the JavaScript language.</p>
 					<br/>
-				<h5>f. Enumerations </h5>
+				<h5>5. Enumerations </h5>
 					<br/>
 					<p>Enumerations represent a collection of named elements that you can use to avoid littering your program with hard-coded values. By default, enumerations are zero based although you can change this by specifying the first value, in which case numbers will increment from value you set. You can opt to specify values for all identifiers if you wish to.</p>
 					<p><em>The term common root comes from graph theory. In TypeScript, this term relates to a particular location in the tree of modules within your program. Whenever declarations are considered for merging, they must have the same fully qualified name, which means the same name at the same level in the tree.</em></p>
 					<br/>
+				<h5>6. Bit Flags </h5>
+					<br/>
+					<p>Bit flags allow a series of items to be selected or deselected by switching individual bits in a sequence on and off. To ensure that each value in an enumeration relates to a single bit, the numbering must follow the binary sequence whereby each value is a power of two,</p>
+					<br/>
+				<h5>7. Constant Enumerations </h5>
+					<br/>
+				<h5>8. Union Types </h5>
+					<br/>
+					<p>A union type widens the allowable values by specifying that the value can be of more than a single type. Libraries such as jQuery commonly expose functions that allow you to pass either a jQuery object, or a string selector, for example; and union types allow you to limit the possible values to just these two types (rather than resorting to a completely dynamic type).</p>
+					
 				</div>
 		</div>
 	</div>
