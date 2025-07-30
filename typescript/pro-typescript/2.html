@@ -9,12 +9,12 @@
 					<br/>
 					<p>In general, a type system assigns a type to each variable, expression, object, function, class, or module in the system. These types are used alongside a set of rules designed to expose errors in the program. These checks can be performed at compile time (static checking) or at runtime (dynamic checking). Typical rules would include ensuring that the value used in an assignment is the same type as the variable it is being assigned to, or ensuring that a function call supplies arguments of the correct type based on the function signature.</p>
 					<br/>
-					<h6>Optional Static Types</h6>
+					<h5>Optional Static Types</h5>
 						<p>JavaScript is dynamically typed; variables do not have a fixed type, so no type restrictions can be applied to operations. You can assign a value of one type to a variable and later assign a value of a completely different type to the same variable. You can perform an operation with two incompatible values and get unpredictable results. If you call a function, there is nothing to enforce that you pass arguments of the correct type and you can even supply too many or too few arguments.</p>
 						<p>TypeScript provides a system for inferring and specifying types, but allows types to be optional. The optionality is important because it means you can choose when to enforce types and when to allow dynamic types. Unless you opt out of type checking, using the any type, the compiler will attempt to determine the types in your program and will check inferred types as well as the explicit types you specify using type annotations.</p>
 						<p>All the checks are performed at compile time, which is what makes TypeScript statically typed. The compiler is responsible for constructing a schedule of all the types, checking expressions against these types and removing all the type information when it converts the code into valid JavaScript.</p>
 					<br/>
-					<h6>Structural Typing</h6>
+					<h5>Structural Typing</h5>
 						<p>TypeScript has a structural type system; this contrasts with most C-like languages, which are typically nominative. A nominative, or nominal, type system relies on explicitly named annotations to determine types. In a nominal system, a class would only be seen to implement an interface if it was decorated with the name of the interface (i.e., it must explicitly state that it implements the interface). In a structural type system, the explicit decoration is not required and a value is acceptable as long as its structure matches the specification of the required type.</p>
 						<p>A nominal type system is intended to prevent accidental type equivalence &mdash; just because something has the same properties does not mean it is valid &mdash; but as TypeScript is structurally typed accidental type equivalence is possible, and desirable.</p>
 						<p>property with an equivalent type would be acceptable. If you wanted to use custom types for this kind of type safety in TypeScript, you would have to ensure the types were not accidentally equivalent by making them structurally unique. It is possible to do this using private members on a class to make it structurally unmatchable,</p>
@@ -23,18 +23,34 @@
 						<p>One thing to avoid in a structurally typed language, such as TypeScript, is empty structures. An empty interface or an empty class is essentially a valid supertype of practically everything in your program, which means any object could be substituted for the empty structure at compile time because there is no contract to satisfy during type checking.</p>
 						<p>Structural typing complements the type inference in TypeScript. With these features, you can leave much of the work to the compiler and language service, rather than having to explicitly add type information and class heritage throughout your program.</p>
 						<br/>
-					<h6>Optional Static Types</h6>
+					<h5>Optional Static Types</h5>
 						<br/>
 						<p>When you compile your TypeScript program into plain JavaScript, the generated code is different in two ways: code transformation and type erasure. The code transformation converts language features that are not available in the target JavaScript version into representations that are valid.</p>
 						<p>For example, if you are targeting ECMAScript 5, where classes are not available, all your classes will be converted into immediately invoked function expressions that create appropriate representations using the prototypal inheritance available in ECMAScript 5. Type erasure is</p>
 						<p>Type erasure removes type annotations, custom types, and interfaces. These are only required at design time and at compile time for the purpose of static checking. At runtime types are not checked so the type information is not needed. You shouldn&rsquo;t encounter a problem at runtime because the logical use of types has been checked, except where you have opted out by using the "any" type.</p>
 						<br/>
-					<h6>Type Inference</h6>
+					<h5>Type Inference</h5>
 						<br/>
 						<p>Type inference is the polar opposite of type erasure. Type inference is the process by which types are determined at compile time in the absence of explicit type annotations.</p>
 						<p>TypeScript performs deep inspections to create a schedule of types in your program and compares assignments, expressions, and operations using this schedule of types. During this process, there are some clever tricks that are employed when a direct type is not available, which allow the type to be found indirectly. One such trick is contextual typing, where TypeScript uses the context of an expression to determine the types.</p>
 						<br/>
-					
+						<h6>a. Best Common Type</h6>
+							<br/>
+								<p>When type information is being inferred, there are a limited number of situations where the best common type must be determined.</p>
+								<p>The process of determining the best common type is not just used for array literal expressions; they also are used to determine any case where multiple values have different types, such as the return type of a function or method that contains multiple return statements.</p>
+								<br/>
+								<p>// number[]<br />let x = [0, 1, null];</p>
+								<p><br />// (string | number)[]<br />let y = [0, 1, null, 'a'];</p>
+							<br/>
+						<h6>b. Contextual Types</h6>
+							<br/>
+							<p>Contextual types are a good example of how advanced type inference can be. Contextual typing occurs when the compiler bases its types on the location of an expression.</p>
+							<p>window.onclick = function(event) {<br />var button = event.button;<br />};</p>
+							<br/>
+						<h6>c. Widened Types</h6>
+							<br/>
+							<p>The term &ldquo;widened type&rdquo; refers to situations in TypeScript where the type of a function call, expression, or assignment is null or undefined.</p>
+						
 				</div>
 			</div>
 		</div>
