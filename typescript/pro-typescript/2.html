@@ -105,10 +105,15 @@
 				</div>
 				<div class="market-status-table mt-4">
 					<h5>1. Open Recursion</h5>
-					<br/>
-					<p>Open recursion is a combination of recursion and late binding. When a method calls itself within a class, that call can be forwarded to a replacement defined in a subclass.</p>
-					<p>Open recursion is a programming technique where a method or function can call another method or function of the same object (or a related object) through a special reference (typically this or self). In TypeScript, this concept is particularly relevant when working with classes and objects.</p>
-					<br/>
+						<br/>
+						<p>Open recursion is a combination of recursion and late binding. When a method calls itself within a class, that call can be forwarded to a replacement defined in a subclass.</p>
+						<p>Open recursion is a programming technique where a method or function can call another method or function of the same object (or a related object) through a special reference (typically this or self). In TypeScript, this concept is particularly relevant when working with classes and objects.</p>
+						<br/>
+					<h5>2. Delegation</h5>
+						<br/>
+						<p>One of the most important concepts in terms of re-use in your program is delegation. Delegation describes the situation where one part of your program hands over a task to another part. In true delegation, the wrapper passes a reference to itself into the delegate, which allows the delegate to call back into the original wrapper, for example, the wrapper class would call the delegate class, passing the keyword this into the delegate, allowing the delegate to call public methods on the wrapper class. This allows the wrapper class and delegate class to behave as a subclass and superclass.</p>
+						<p>Where the wrapper doesn&rsquo;t pass a reference to itself, the operation is technically known as forwarding rather than delegation. In both delegation and forwarding you may call a method on one class, but that class hands off the processing to another class,</p>
+						<br/>
 				</div>
 			</div>
 		</div>
