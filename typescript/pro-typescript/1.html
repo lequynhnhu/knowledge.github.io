@@ -96,7 +96,12 @@
 				<h5>d. Primitive Types </h5>
 				<p>The primitive types in TypeScript are incredibly basic, but through the tools of the type system you can combine them, widen them, and narrow them to represent the concepts in your program.</p>
 				<p>&bull; string &ndash; a sequence of UTF-16 code units<br />&bull; boolean &ndash; true or false<br />&bull; number &ndash; a double-precision 64-bit floating point value<br />&bull; symbol &ndash; a unique, immutable symbol, substitutable for a string as an object key</p>
-			</div>
+				<p>The type system also contains several types that represent special values:</p>
+					<p>&bull; The undefined type is the value of a variable that has not been assigned a value.</p>
+					<p>&bull; The null type can be used to represent an intentional absence of an object value. For example, if you had a method that searched an array of objects to find a match, it could return null to indicate that no match was found.</p>
+					<p>&bull; The void type is used to represent cases where there is no value, for example, to show that a function doesn&rsquo;t return anything.</p>
+					<p>&bull; The never type represents an unreachable section of code, for example a function that throws an exception has the return type of never.</p>
+				</div>
 		</div>
 	</div>
 </div>
