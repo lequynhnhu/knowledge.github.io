@@ -10,7 +10,14 @@
 					<p>In general, a type system assigns a type to each variable, expression, object, function, class, or module in the system. These types are used alongside a set of rules designed to expose errors in the program. These checks can be performed at compile time (static checking) or at runtime (dynamic checking). Typical rules would include ensuring that the value used in an assignment is the same type as the variable it is being assigned to, or ensuring that a function call supplies arguments of the correct type based on the function signature.</p>
 					<h6>Optional Static Types</h6>
 						<p>JavaScript is dynamically typed; variables do not have a fixed type, so no type restrictions can be applied to operations. You can assign a value of one type to a variable and later assign a value of a completely different type to the same variable. You can perform an operation with two incompatible values and get unpredictable results. If you call a function, there is nothing to enforce that you pass arguments of the correct type and you can even supply too many or too few arguments.</p>
-					
+						<p>TypeScript provides a system for inferring and specifying types, but allows types to be optional. The optionality is important because it means you can choose when to enforce types and when to allow dynamic types. Unless you opt out of type checking, using the any type, the compiler will attempt to determine the types in your program and will check inferred types as well as the explicit types you specify using type annotations.</p>
+						<p>All the checks are performed at compile time, which is what makes TypeScript statically typed. The compiler is responsible for constructing a schedule of all the types, checking expressions against these types and removing all the type information when it converts the code into valid JavaScript.</p>
+					<br/>
+					<h6>Structural Typing</h6>
+						<br/>
+						<p>TypeScript has a structural type system; this contrasts with most C-like languages, which are typically nominative. A nominative, or nominal, type system relies on explicitly named annotations to determine types. In a nominal system, a class would only be seen to implement an interface if it was decorated with the name of the interface (i.e., it must explicitly state that it implements the interface). In a structural type system, the explicit decoration is not required and a value is acceptable as long as its structure matches the specification of the required type.</p>
+						<p>A nominal type system is intended to prevent accidental type equivalence &mdash; just because something has the same properties does not mean it is valid &mdash; but as TypeScript is structurally typed accidental type equivalence is possible, and desirable.</p>
+						<p>property with an equivalent type would be acceptable. If you wanted to use custom types for this kind of type safety in TypeScript, you would have to ensure the types were not accidentally equivalent by making them structurally unique. It is possible to do this using private members on a class to make it structurally unmatchable,</p>
 				</div>
 			</div>
 		</div>
