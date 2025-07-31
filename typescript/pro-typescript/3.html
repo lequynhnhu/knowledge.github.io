@@ -26,7 +26,26 @@
 								<p><strong>Reflows and Frames Per Second</strong></p>						
 									</br>
 									<p>Each time the layout of the web page is changed by JavaScript or CSS, the layout is flagged as being invalid, but isn&rsquo;t immediately updated. The reflow, which recalculates the size and position of all elements in the document, would typically occur just before drawing the page. Additional reflows can be triggered if the JavaScript code requests the size or position of an element when the layout has the invalid flag. This additional reflow is needed to ensure the information supplied for the size or position is up to date.</p>
-								
+								</br>
+							<h2>2. The Interesting Components</h2>
+								</br>
+									<h5>a. The JavaScript Interpreter</h5>
+										</br>
+											<p>The JavaScript interpreter, or JavaScript engine as it is also known, has a lot of work to do. Not only does it parse and execute the JavaScript program; it must manage objects and memory, work the event loop, and handle interactions with APIs such as storage, network, and sensors.</p>
+											</br>
+											<p>One of the things that make JavaScript programming in the browser so interesting (and at times frustrating) is that you will encounter many different JavaScript interpreters. In some rare cases, you may even encounter no interpreter and your program won&rsquo;t run. Having to support many interpreters can increase the amount of testing you need to perform as you will need to check that your program works in each web browser. However, there are upsides to the plethora of interpreters. One of the upsides is that browser vendors all want to be able to claim that their particular implementation of a JavaScript engine is the fastest; and as a result interpreters have become many times faster as they each fight for the top spot.</p>
+											</br>
+											<p>The main things to watch for when relying on these different interpreters to run your program are the following:</p>
+												<p>&bull; They may only support an older version of the ECMAScript standard.</p>
+												<p>&bull; They can implement additional features that are not part of the ECMAScript specification.</p>
+												<p>&bull; They all run different code at different speeds especially on different operating systems.</p>
+											<p>&bull; At some point in time you will encounter an end user who has JavaScript switched off entirely.</p>
+										</br>
+										<h5>b. A Brief History of Networking</h5>
+											</br>
+											
+											</br>
+								</br>
 				</div>
 			</div>
 		</div>
