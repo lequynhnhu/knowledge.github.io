@@ -177,7 +177,7 @@
 									<p>If you are calling several asynchronous operations and are only interested in getting the fastest result, you can use the Promise.race method.</p>
 									<p>Promises offer a superior mechanism for handling asynchronous chains, reducing nesting, and both simplifying and standardizing error handling. There are also some useful standard compositions of promises that allow you to fire off many asynchronous operations and converge on a single then block when the promises are all fulfilled.</p
 									<br/>
-							<h5>1. Events</h5>
+							<h5>2. Events</h5>
 								<br/>
 								<p>Events are a fundamental concept in the JavaScript runtime. Event listeners are commonly attached to user-initiated events such as touch, click, keypress, and other interactions on a web page, but events can also be used as a mechanism for decoupling code that needs to trigger processing and the code that undertakes the work.</p>
 								<p>Events are handled across two distinct phases &mdash; capturing and bubbling.</p>
@@ -210,7 +210,15 @@
 										<p>&bull; Another programmer adds another extension with the same name.</p>
 										<p>&bull; A third-party library or framework adds an extension with the same name.</p>
 										<br/>
-									
+									<p><strong>Extending the Prototype:</strong> Extending objects via the prototype is a technique that can be used on any object in TypeScript, even your own, unless it is sealed. Extending prototypes is a convoluted way to add behavior to objects that are under your control.</p>
+									<p><strong>Sealing Objects: </strong> If you are concerned about your code being extended, you can prevent extensions being made to your instances by using Object.seal.</p>
+										<br/>
+										<p>You can check whether an object is sealed using the Object.isSealed method, passing in the object you want to check.</p>
+										<p>&bull; Object.preventExtensions/Object.isExtensible is a more permissive version of Object.seal, allowing the properties to be deleted and to be added to the prototype.</p>
+										<p>&bull; Object.freeze/Object.isFrozen is a more restrictive alternative to Object.seal that prevents properties from being added or removed and also prevents values being changed.</p>
+									<p><strong>Alternatives to Extending</strong> It would be somewhat irresponsible to advise against extending native objects without presenting an alternative solution to the problem. This section shows an example of the classList property that is available on HTML elements in modern web browsers.</p>
+					
+									<br/>
 								<br/>
 						</div>
 				</div>
