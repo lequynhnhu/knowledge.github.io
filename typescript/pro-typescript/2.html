@@ -131,3 +131,31 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+				<div class="card-body" id="card-body">
+						<div class="d-sm-flex justify-content-between align-items-center">
+							<h1 class="header-title mb-0">Runtime Features</h1>
+						</div>
+						<div class="market-status-table mt-4">
+							<br/>
+							<p>Even an aged browser will give you access to the Document Object Model (DOM), mouse and keyboard events, forms, and navigation. A modern browser will add offline storage, an indexed database, HTTP requests, geolocation, and suite of application programming interfaces (APIs) for device sensors such as light, accelerometer, and proximity.</p>
+							<br/>
+							<p>As well as processing the queue containing all the events, the runtime may have other tasks to perform that need to be processed on the same thread; for example, a browser may need to redraw the screen. If you have a function that takes too long to run, you could affect the redraw speed of the browser. To allow a browser to draw 60 frames per second, you would need to keep the execution of any function to less than 17 ms. Keeping functions fast is very easy in practice, except where you deal with an API with blocking calls, such as localStorage, or if you execute a long-running loop.</p>
+							<br/>
+							<p>One of the most common side effects of the single-threaded approach at runtime is that intervals and timers may appear to take longer than the specified time to execute. This is because they must wait in the queue to be executed.</p>
+							<br/>
+							<h5>1. Scope</h5>
+								<br/>
+								<p>The term scope refers to the set of available identifiers that can be resolved in a given context. In most C-like languages, identifiers are block scoped, meaning they are available within the same set of curly braces that they are defined in. Variables declared within a set of curly braces are not available outside of those braces, but statements within the curly braces can access variables declared outside of the braces.</p>
+								<p>Both let and const are block scoped and will save you from the many pitfalls of function-scoped variables. The const keyword has the additional advantage of preventing reassignment, which means the variable cannot be overwritten (although its value can change).</p>
+								<p>Variable hoisting is a behavior in JavaScript (and by extension, TypeScript) where variable declarations are moved ("hoisted") to the top of their containing scope during the compilation phase, before the code is executed.</p>
+								<br/>
+							<h5>2. Callbacks</h5>
+							<br/>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
