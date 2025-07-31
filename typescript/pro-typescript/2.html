@@ -152,14 +152,14 @@
 								<p>Both let and const are block scoped and will save you from the many pitfalls of function-scoped variables. The const keyword has the additional advantage of preventing reassignment, which means the variable cannot be overwritten (although its value can change).</p>
 								<p>Variable hoisting is a behavior in JavaScript (and by extension, TypeScript) where variable declarations are moved ("hoisted") to the top of their containing scope during the compilation phase, before the code is executed.</p>
 								<br/>
-								<h5>a. Callbacks</h5>
+								<h6>a. Callbacks</h6>
 									<br/>
 									<p>A callback is simply a function that you pass as an argument, and which is called when an operation has completed.</p>
 									<p>Because the request is blocking the main thread for the duration of the request, no other statements can be executed. Blocking the event queue for more than a few milliseconds is undesirable and must be avoided for long operations. Operations involving calls to the file system, hardware devices, or calls across a network connection all have the potential to block your program for unacceptable lengths of time.</p>
 									<br/>
 									<p>Callbacks are very useful for avoiding these blocking requests. When the request is made, a function is passed along with the request. The main thread is then able to process the event queue as normal. When the long-running process ends, the callback function is then called, being passed any relevant arguments. This adds the callback to the event queue, where it is executed in turn.</p>
 									<br/>
-								<h5>b. Passing Functions as Arguments</h5>
+								<h6>b. Passing Functions as Arguments</h6>
 									<br/>
 									<p>Functions are first-class citizens in JavaScript, which means they can be passed as arguments, returned from another function as a return value, assigned to variables, and stored as properties on an object. Passing a function as an argument is the mechanism used to provide callbacks.</p>
 									<p>You can use the ability to pass functions as arguments to create a simple implementation of the observer pattern, storing a collection of subscribers and publishing an event to them all from a single class.</p>
@@ -170,7 +170,13 @@
 									<p>One of the problems associated with the callback pattern is that it isn&rsquo;t possible to handle any exceptions that occur within the asynchronous code. No matter where you insert a try/catch statement, you won&rsquo;t be able to handle the error in this version of the API.</p>
 									<p>To solve the problem of error handling, we will introduce an additional parameter to the callback function. This is a common pattern in programs that use callbacks extensively. By placing the error parameter first, the success condition can have a variable number of parameters without affecting where the calling code should expect to find information about a problem.</p>
 									<br/>
+									<p>An alternative to chaining multiple promises is to aggregate their results with a wrapper promise that is responsible for obtaining the values from the individual sub-promises. There is a mechanism built into promises that allows this to be done with a simple call to "Promise.all".</p>
+									<p>Once all promises have been settled the then block is executed with the results. If there are any errors, the catch block is called immediately; this is a fail-fast mechanism.</p>
+								<h6>a. Fastest Promise</h6>
+									<br/>
+									<p>If you are calling several asynchronous operations and are only interested in getting the fastest result, you can use the Promise.race method.</p>
 									
+									<br/>
 								<br/>
 						</div>
 				</div>
