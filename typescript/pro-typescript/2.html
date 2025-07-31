@@ -198,6 +198,18 @@
 									<br/>
 								<h6>c. Extending Objects</h6>
 								<br/>
+									<p>Almost everything in JavaScript is an object that consists of a set of properties. Each property is a key-value pair with a string key and value of any type, including primitive types, objects, and functions. If the value is a function, it is commonly called a method. Whenever you create a class in TypeScript, it is represented using JavaScript objects, but there are also many built-in objects that you can use.</p>
+									<p>The native objects all remain open, which means you can extend them as easily as you can your own objects. You need to take care when extending a native object for the following reasons:</p>
+										<br/>
+										<p>&bull; If everyone extended native objects, the chances are the extensions would overwrite each other or combine in incompatible ways.</p>
+										<p>&bull; It is possible that the native object definition may later clash with yours, and your implementation will hide the native implementation.</p>
+										<br/>
+									<p>So, although it is possible to extend native objects, in general it is only recommended as a technique to be used as a polyfill, which is a way of adding current features to older runtimes. Although you may decide to live by a less restrictive rule, it is worth writing extensions to native objects in the style of a polyfill so you can at least detect when one of the following happens:</p>
+										<br/>
+										<p>&bull; Native functionality is added with a name that clashes with your extension.</p>
+										<p>&bull; Another programmer adds another extension with the same name.</p>
+										<p>&bull; A third-party library or framework adds an extension with the same name.</p>
+										<br/>
 									
 								<br/>
 						</div>
