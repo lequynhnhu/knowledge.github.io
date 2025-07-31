@@ -177,9 +177,17 @@
 									<p>If you are calling several asynchronous operations and are only interested in getting the fastest result, you can use the Promise.race method.</p>
 									<p>Promises offer a superior mechanism for handling asynchronous chains, reducing nesting, and both simplifying and standardizing error handling. There are also some useful standard compositions of promises that allow you to fire off many asynchronous operations and converge on a single then block when the promises are all fulfilled.</p
 									<br/>
-							<h5>1. Scope</h5>
+							<h5>1. Events</h5>
 								<br/>
-								
+								<p>Events are a fundamental concept in the JavaScript runtime. Event listeners are commonly attached to user-initiated events such as touch, click, keypress, and other interactions on a web page, but events can also be used as a mechanism for decoupling code that needs to trigger processing and the code that undertakes the work.</p>
+								<p>Events are handled across two distinct phases &mdash; capturing and bubbling.</p>
+								<br/>
+								<ol>
+ 								 	<li>During capturing, the event is sent to the topmost elements in the document hierarchy first and then to more deeply nested elements.</li>
+  									<li>2. During bubbling, it is sent to the target element first and then to its ancestors.</li>
+								</ol>
+								<br/>
+								<p>At the risk of overstating the point about running in an event loop on a single thread, it is worth remembering that multiple event listeners attached to the same event will execute sequentially, not in parallel, and a long-running listener may delay the execution of the subsequent listeners attached to the same event. When an event is triggered, each event listener is queued in the same order it is attached; if the first listener takes 2 s to run, the second listener is blocked for at least 2 s and will only execute once it reaches the top of the event queue.</p>
 								<br/>
 						</div>
 				</div>
