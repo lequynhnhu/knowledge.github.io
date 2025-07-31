@@ -6,7 +6,7 @@
 							<h1 class="header-title mb-0">Running TypeScript in a Browser</h1>
 						</div>
 						<div class="market-status-table mt-4">
-                					<h2>1. The Anatomy of a Web Browser</h2>
+                					<h3>1. The Anatomy of a Web Browser</h3>
                							<p>Web browsers are typically made up of the components shown</p>
                   							<p>&bull; Browser engine</p>
                   							<p>&bull; Rendering engine</p>
@@ -27,7 +27,7 @@
 									</br>
 									<p>Each time the layout of the web page is changed by JavaScript or CSS, the layout is flagged as being invalid, but isn&rsquo;t immediately updated. The reflow, which recalculates the size and position of all elements in the document, would typically occur just before drawing the page. Additional reflows can be triggered if the JavaScript code requests the size or position of an element when the layout has the invalid flag. This additional reflow is needed to ensure the information supplied for the size or position is up to date.</p>
 								</br>
-							<h2>2. The Interesting Components</h2>
+							<h3>2. The Interesting Components</h3>
 								</br>
 									<h5>a. The JavaScript Interpreter</h5>
 										</br>
@@ -64,10 +64,10 @@
 												<p>For a long time, the only storage available to a JavaScript program was a few miserly kilobytes in a cookie that could disappear without warning at any time. Many browsers offer a setting that clears all cookies each time the browser is closed. At best, cookies could be used to store a token to keep a user logged in for a time, and this was really its only major usefulness to a web application.</p>
 												<p>The ability to store a reasonable amount of data on the user&rsquo;s machine allows caching of data locally. This can speed up your program and reduce the number of round trips to the server. It also allows your web application to run offline and synchronize with the server the next time a connection is available.</p>
 											</br>
-								<h2>3. The Document Object Model</h2>
+								<h3>3. The Document Object Model</h3>
 								</br>
 									<p>The Document Object Model, or DOM, is a web browser interface for interacting with HTML and XML documents. The interface allows you to find elements, obtain and update information about their contents, and attributes and listen to user events. If you are interacting with a web page from your program, you are using the DOM.</p>
-									
+									<p><strong>Events</strong> <p>There are many different ways of attaching event listeners, with some browsers lagging behind the<br />standards-compliant method of adding listeners. The addEventListener method is the standards-compliant<br />way to add an event listener for a DOM event, although some older browsers still rely on the attachEvent<br />method (which also requires that the event name is prefixed with 'on').</p></p>
 								</br>
 				</div>
 			</div>
