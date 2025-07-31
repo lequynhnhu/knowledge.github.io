@@ -168,6 +168,8 @@
 								<br/>
 									<p>Promises were introduced to reduce several problems caused by callbacks. When using a chain of callbacks, code can become deeply nested and difficult to follow. When error handling is considered, the callbacks often repeat error handling code, further increasing the cognitive overhead of understanding the program.</p>
 									<p>One of the problems associated with the callback pattern is that it isn&rsquo;t possible to handle any exceptions that occur within the asynchronous code. No matter where you insert a try/catch statement, you won&rsquo;t be able to handle the error in this version of the API.</p>
+									<p>To solve the problem of error handling, we will introduce an additional parameter to the callback function. This is a common pattern in programs that use callbacks extensively. By placing the error parameter first, the success condition can have a variable number of parameters without affecting where the calling code should expect to find information about a problem.</p>
+									<br/>
 									
 								<br/>
 						</div>
