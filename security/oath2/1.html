@@ -34,9 +34,20 @@
 						</br>
 						<p style="padding-left: 40px;">4. Authorization server: This is the entity which acts as a security token service to issue OAuth 2.0 access tokens to client applications. In the preceding use case, Facebook itself acts as the authorization server.</p>
 						</br>
-					<h4>a. Grant Types</h4>
-					</br>
-						<h5>1. Authorization Code Grant Type</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">a. Grant Types</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					<h5>1. Authorization Code Grant Type</h5>
 							</br>
 							<p>The resource owner who visits the client application initiates the authorization code grant type. The client application, which must be a registered application at the authorization server, redirects the resource owner to the authorization server to get the approval. The following shows an HTTP request the client application generates while redirecting the user to the authorize endpoint of the authorization server:</p>
 							</br>
@@ -87,10 +98,21 @@
 						</br>
 							<p>To pick the right grant type for those applications, first we need to think how the client application is going to invoke the OAuth secured API: whether it is going to access the API by itself or on behalf of an end user. If the application wants to access the API just being itself, then we should use client credentials grant type and, if not, should use authorization code grant type. Both the implicit and password grant types are now obsolete.</p>
 						</br>
-					<h4>b. OAuth 2.0 Token Types</h4>
-					</br>
-						<p>Neither OAuth 1.0 nor WRAP could support custom token types. OAuth 1.0 always used signature-based tokens, and OAuth WRAP always used bearer tokens over TLS. OAuth 2.0 isn&rsquo;t coupled into any token type. In OAuth 2.0, you can introduce your own token type if needed.</p>
-						<p>OAuth 2.0 has two main token profiles: OAuth 2.0 Bearer Token Profile and OAuth 2.0 MAC Token Profile. The most popular OAuth token profile is Bearer; almost all OAuth 2.0 deployments today are based on the OAuth 2.0 Bearer Token Profile.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">>b. OAuth 2.0 Token Types</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					<p>Neither OAuth 1.0 nor WRAP could support custom token types. OAuth 1.0 always used signature-based tokens, and OAuth WRAP always used bearer tokens over TLS. OAuth 2.0 isn&rsquo;t coupled into any token type. In OAuth 2.0, you can introduce your own token type if needed.</p>
+					<p>OAuth 2.0 has two main token profiles: OAuth 2.0 Bearer Token Profile and OAuth 2.0 MAC Token Profile. The most popular OAuth token profile is Bearer; almost all OAuth 2.0 deployments today are based on the OAuth 2.0 Bearer Token Profile.</p>
 						
 				</div>
 			</div>
