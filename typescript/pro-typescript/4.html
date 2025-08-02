@@ -47,3 +47,53 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">Code Quality Flags</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					<p>The following flags can help you improve the quality of your code and catch loose areas at compile time. If you are writing a new program from scratch, it should be a simple task to switch these on and follow the guidance of the compiler. For an existing program, you may decide to switch these flags on, fix some of the problems the compiler finds, and then switch it back off. This will let you refine your code in many discrete sessions, until you can finally leave them switched on permanently.</p>
+					</br>
+					<h4>1. Defaults</h4>
+					</br>
+					<p>There are many options that are set to the correct option, in terms of code quality, by default. The values for all the following flags are set to false, and ought to be left that way:</p>
+					</br>
+						<p style="padding-left: 40px;">&bull; --allowUnreachableCode</p>
+						<p style="padding-left: 40px;">&bull; --allowUnusedLabels</p>
+						<p style="padding-left: 40px;">&bull; --noImplicitUseStrict</p>
+						<p style="padding-left: 40px;">&bull; --noStrictGenericChecks</p>
+						<p style="padding-left: 40px;">&bull; --suppressExcessPropertyErrors</p>
+						<p style="padding-left: 40px;">&bull; --suppressImplicitAnyIndexErrors</p>
+					</br>
+					<h4>2. Strict Switch</h4>
+					</br>
+						<p>On top of the defaults, you can switch on a strict mode to enable the four most common quality flags:</p>
+							<p style="padding-left: 40px;">&bull; --noImplicitAny: catches cases where a type cannot be inferred, and an annotation is needed</p>
+							<p style="padding-left: 40px;">&bull; --noImplicitThis: catches expressions where the this keyword has an implied any type</p>
+							<p style="padding-left: 40px;">&bull; --alwaysStrict: parses in strict mode and inserts "use strict" statements for each file</p>
+							<p style="padding-left: 40px;">&bull; --strictNullChecks: catches null and undefined values, preventing accidentally unassigned variables and properties</p>
+					</br>
+					<h4>3. Catch Accidental Fallthroughs</h4>
+						</br>
+						<p>The "noFallthroughCasesInSwitch" flag warns you about any cases within a switch statement that are not empty, and are missing the "break" keyword.</p>
+						</br>
+					<h4>4. Catch Missing Return Statements</h4>
+						</br>
+						<p>The "noImplicitReturns" flag warns you about functions or methods that have a code branch that is missing a "return" statement.</p>
+						</br>
+					<h4>5. Unused Local Variables</h4>
+						</br>
+						<p>The "noUnusedLocals" flag warns you when a variable is never used. This helps to identify redundant code that you can delete.</p>
+						</br>
+					<h4>6. Unused Parameters</h4>
+						</br>
+						<p>The "noUnusedParameters" flag highlights function and method parameters that are not used. This flag is trickier than many of the other code quality flags, as there may be cases where you want to ignore a parameter that is passed to a function. You can use this flag until you come across this scenario, and then choose to remove it if causes you problems.</p>
+						</br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
