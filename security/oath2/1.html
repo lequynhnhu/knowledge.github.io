@@ -192,7 +192,9 @@
 					</br>
 					<p>With Pushed Authorization Requests (PAR) draft proposal, this requirement goes a way. PAR defines an endpoint at the authorization server end, where each client can directly push (without going through the browser) all the parameters in a typical OAuth 2.0 authorization request and then use the normal authorization flow via the browser to pass a reference to the pushed request.</p>
 					</br>
-					<p>Following is an example, where the client application pushes<br />authorization request parameters to an endpoint hosted at the authorization server. This<br />push endpoint on the authorization server can be secured either with mutual Transport<br />Layer Security (TLS) or with OAuth 2.0 itself (client credentials) or with any other means<br />as agreed between the client application and the authorization server.</p>
+					<p>Following is an example, where the client application pushes authorization request parameters to an endpoint hosted at the authorization server. This push endpoint on the authorization server can be secured either with mutual Transport Layer Security (TLS) or with OAuth 2.0 itself (client credentials) or with any other means as agreed between the client application and the authorization server.</p>
+					</br>
+					<p>Once the push endpoint at the authorization server receives the preceding request, it has to carry out all the validation checks against the request that it usually performs against a typical authorization request. If it all looks good, the authorization server responds with the following. The value of the request_uri parameter in the response is bound to the client_id in the request and acts as a reference to the authorization request.Following is an example, where the client application pushes authorization request parameters to an endpoint hosted at the authorization server. This push endpoint on the authorization server can be secured either with mutual Transport Layer Security (TLS) or with OAuth 2.0 itself (client credentials) or with any other means as agreed between the client application and the authorization server.</p>
 				</div>
 			</div>
 		</div>
