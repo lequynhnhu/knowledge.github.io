@@ -119,8 +119,8 @@
 										</br>
 										<p><strong>b. IDBRequest Interface</strong></p>
 										</br>
-										<p>The IDBRequest is prevalent in the IndexedDB model. Any request you create against the database supports<br />this interface whether it is indexedDB.open, "objectStore.get", "objectStore.add", or "objectStore.delete".</p>
-										<p>The beauty of this convention is that you can add a listener to any of these operations to handle both<br />success and error events. Within the event handler you can access the original request object, which<br />contains the following information:</p>
+										<p>The IDBRequest is prevalent in the IndexedDB model. Any request you create against the database supports this interface whether it is indexedDB.open, "objectStore.get", "objectStore.add", or "objectStore.delete".</p>
+										<p>The beauty of this convention is that you can add a listener to any of these operations to handle both success and error events. Within the event handler you can access the original request object, which contains the following information:</p>
 											<p style="padding-left: 40px;">&bull; result&mdash;the result of the request, if available.</p>
 											<p style="padding-left: 40px;">&bull; error&mdash;the error message, if available.</p>
 											<p style="padding-left: 40px;">&bull; source&mdash;the index or object store, if applicable to the request.</p>
@@ -132,7 +132,12 @@
 									<p>This section introduced several options for storage within the browser. Although this has involved a great many examples, it really only described the most common aspects of the storage mechanisms that you may use.</p>
 									<p>Whatever storage mechanism you use, you cannot guarantee that the data you store will persist long term. All the storage specifications describe instances where the data may be deleted, including when the user opts to clear it manually. For this reason, any storage supplied by the browser should be treated as potentially volatile.</p>
 									<p>Another consideration when using browser storage is that many users have different devices that they may use to access your browser-based application. Therefore, synchronization with your server will be required if you want their experience to persist across these devices.</p>
-							
+								</br>
+								<h3>f. Geolocation</h3>
+									</br>
+									<p>The geolocation API provides a single mechanism for obtaining the user&rsquo;s location no matter whether the user&rsquo;s device supports location using the global position system or network-based inference to determine the actual location.</p>
+									<p>You can only obtain the user&rsquo;s location if they grant your application permission to access the information, so you will need to supply a fallback mechanism to handle denied requests as well as older browsers and failed lookups. The usual mechanism for obtaining a location when geolocation fails is to allow the user to enter a search term to find their location.</p>
+									
 						</div>
 				</div>
 		</div>
