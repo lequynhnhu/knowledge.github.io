@@ -88,6 +88,7 @@
 							<p>The HTTP request and response occur asynchronously, which means it doesn&rsquo;t block the JavaScript event loop</p>
 							<p><strong>Real-Time Communications</strong></p>
 								<p style="padding-left: 40px;">The next evolution in network communications is real-time peer-to-peer audio and video streaming. The WebRTC specification being drafted by the W3C (2013) allows streaming between browsers without the need for browser plugins or additional installed software. Although the specification currently has limited support, the potential for the technology is incredible. Video and audio calls</p>
+								</br>
 								<p style="padding-left: 40px;">WebRTC is supported in several browsers in an experimental state, with most browsers offering the feature using a prefixed version that is subject to change. To use WebRTC in TypeScript you will need to extend the library definitions to include these transitional browser implementations.</p>
 							</br>
 							<h3>2. Storage</h3>
@@ -114,9 +115,25 @@
 								</br>
 									<p>Although session storage and local storage are simple and convenient ways to store small amounts of data in a key/value store, IndexedDB allows much larger volumes of data to be stored in a structured way that allows fast searches using indexes.</p>
 									<p>IndexedDB is designed to work asynchronously, which means you supply a callback to each method on the API that executes when the operation has completed. A synchronous version of IndexedDB has a specification, but currently no browsers implement this style of the API. It is generally preferable to use asynchronous APIs to avoid blocking the event loop from running on the main thread, so learning to use the asynchronous version of IndexedDB is worth the additional effort.</p>
-									<p><strong>Upgrade Required</strong></p>
-									<p>A database upgrade is determined by comparing the local version number with the version number in your program. If the program version number is larger than the local version number, an onupgradeneeded event is triggered. The event is also fired if there is no local database. You can specify a method to be executed in the event of an upgrade that handles the schema changes and adds any required data.</p>
-									
+										<p><strong>a. Upgrade Required</strong></p>
+										<p>A database upgrade is determined by comparing the local version number with the version number in your program. If the program version number is larger than the local version number, an onupgradeneeded event is triggered. The event is also fired if there is no local database. You can specify a method to be executed in the event of an upgrade that handles the schema changes and adds any required data.</p>
+										</br>
+										<p><strong>b. IDBRequest Interface</strong></p>
+										</br>
+										<p>The IDBRequest is prevalent in the IndexedDB model. Any request you create against the database supports<br />this interface whether it is indexedDB.open, "objectStore.get", "objectStore.add", or "objectStore.delete".</p>
+										<p>The beauty of this convention is that you can add a listener to any of these operations to handle both<br />success and error events. Within the event handler you can access the original request object, which<br />contains the following information:</p>
+											<p style="padding-left: 40px;">&bull; result&mdash;the result of the request, if available.</p>
+											<p style="padding-left: 40px;">&bull; error&mdash;the error message, if available.</p>
+											<p style="padding-left: 40px;">&bull; source&mdash;the index or object store, if applicable to the request.</p>
+											<p style="padding-left: 40px;">&bull; transaction&mdash;the transaction for the request, if the request is within a transaction; you can undo the changes in the transaction by calling transaction.abort().</p>
+											<p style="padding-left: 40px;">&bull; readyState&mdash;either pending or done.</p>
+								</br>
+								<h3>e. Storage Roundup</h3>
+								</br>
+									<p>This section introduced several options for storage within the browser. Although this has involved a great many examples, it really only described the most common aspects of the storage mechanisms that you may use.</p>
+									<p>Whatever storage mechanism you use, you cannot guarantee that the data you store will persist long term. All the storage specifications describe instances where the data may be deleted, including when the user opts to clear it manually. For this reason, any storage supplied by the browser should be treated as potentially volatile.</p>
+									<p>Another consideration when using browser storage is that many users have different devices that they may use to access your browser-based application. Therefore, synchronization with your server will be required if you want their experience to persist across these devices.</p>
+							
 						</div>
 				</div>
 		</div>
