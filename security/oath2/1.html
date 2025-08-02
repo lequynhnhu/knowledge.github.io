@@ -154,3 +154,29 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">JWT Secured Authorization Request (JAR)</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					<p>In an OAuth 2.0 request to the authorize endpoint of the authorization server, all the request parameters flow via the browser as query parameters.</p>
+					<p>There are a couple of issues with this approach. Since these parameters flow via the browser, the end user or anyone on the browser can change the input parameters that could result in some unexpected outcomes at the authorization server. At the same time, since the request is not integrity protected, the authorization server has no means to validate who initiated the request. With JSON Web Token (JWT) secured authorization requests, we can overcome these two issues.</p>
+					</br>
+					<p>The JSON Web Signature (JWS) specification developed under the IETF JOSE working group, represents a message or a payload, which is digitally signed or MACed (when a hashing algorithm is used with HMAC), while the JSON Web Encryption (JWE) specification standardizes a way to represent an encrypted payload.</p>
+					</br>
+					<p>One of the draft proposals1 to the IETF OAuth working group suggests to introduce the ability to send request parameters in a JWT, which allows the request to be signed with JWS and encrypted with JWE so that the integrity, source authentication, and confidentiality properties of the authorization request are preserved. At the time of writing, this proposal is in its very early stage&mdash;and if you are familiar with Security Assertion Markup Language (SAML) Single Sign-On, this is quite analogous to the signed authentication requests in SAML.</p><p>One of the draft proposals1 to the IETF OAuth working group suggests to introduce the ability to send request parameters in a JWT, which allows the request to be signed with JWS and encrypted with JWE so that the integrity, source authentication, and confidentiality properties of the authorization request are preserved. At the time of writing, this proposal is in its very early stage&mdash;and if you are familiar with Security Assertion Markup Language (SAML) Single Sign-On, this is quite analogous to the signed authentication requests in SAML.</p>
+					</br>
+					<p>The draft proposal for JWT authorization request introduces the pass by reference method to overcome some of the limitations in the pass by value method, as listed here:</p>
+						</br>
+							<p>&nbsp;&bull; Many mobile phones in the market as of this writing still do not accept large payloads. The payload restriction is typically either 512 or 1024 ASCII characters.</p>
+							<p>&nbsp;&bull; The maximum URL length supported by older versions of the Internet Explorer is 2083 ASCII characters.</p>
+							<p>&nbsp;&bull; On a slow connection such as a 2G mobile connection, a large URL would cause a slow response. Therefore the use of such is not advisable from the user experience point of view.</p>
+						</br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
