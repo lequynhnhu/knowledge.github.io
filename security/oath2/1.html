@@ -180,3 +180,21 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">Pushed Authorization Requests (PAR)</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					<p>&nbsp; This is another draft proposal being discussed under the IETF OAuth working group at the moment, which complements the JWT Secured Authorization Request (JAR) approach we discussed in the previous section. One issue with JAR is each client has to expose an endpoint directly to the authorization server.</p>
+					</br>
+					<p>With Pushed Authorization Requests (PAR) draft proposal, this requirement goes a way. PAR defines an endpoint at the authorization server end, where each client can directly push (without going through the browser) all the parameters in a typical OAuth 2.0 authorization request and then use the normal authorization flow via the browser to pass a reference to the pushed request.</p>
+					</br>
+					<p>Following is an example, where the client application pushes<br />authorization request parameters to an endpoint hosted at the authorization server. This<br />push endpoint on the authorization server can be secured either with mutual Transport<br />Layer Security (TLS) or with OAuth 2.0 itself (client credentials) or with any other means<br />as agreed between the client application and the authorization server.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
