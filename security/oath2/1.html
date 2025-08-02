@@ -108,11 +108,21 @@
 		<div class="card" id="card">
 			<div class="card-body" id="card-body">
 				<div class="d-sm-flex justify-content-between align-items-center">
-					<h1 class="header-title mb-0">>b. OAuth 2.0 Token Types</h1>
+					<h1 class="header-title mb-0">b. OAuth 2.0 Token Types</h1>
 				</div>
 				<div class="market-status-table mt-4">
 					<p>Neither OAuth 1.0 nor WRAP could support custom token types. OAuth 1.0 always used signature-based tokens, and OAuth WRAP always used bearer tokens over TLS. OAuth 2.0 isn&rsquo;t coupled into any token type. In OAuth 2.0, you can introduce your own token type if needed.</p>
 					<p>OAuth 2.0 has two main token profiles: OAuth 2.0 Bearer Token Profile and OAuth 2.0 MAC Token Profile. The most popular OAuth token profile is Bearer; almost all OAuth 2.0 deployments today are based on the OAuth 2.0 Bearer Token Profile.</p>
+					</br>	
+						<h5>OAuth 2.0 Bearer Token Profile</h5>
+						</br>
+							<p>The OAuth 2.0 Bearer Token Profile was influenced by OAuth WRAP, which only supported bearer tokens. As its name implies, anyone who bears the token can use it&mdash;don&rsquo;t lose it! Bearer tokens must always be used over Transport Layer Security (TLS) to avoid losing them in transit. Once the bearer access token is obtained from the authorization server, the client can use it in three ways to talk to the resource server. These three ways are defined in the RFC 6750.</p>
+							</br>
+							<p>An OAuth 2.0 bearer token can be a reference token or self-contained token. A reference token is an arbitrary string. An attacker can carry out a brute-force attack to guess the token. The authorization server must pick the right length and use other possible measures to prevent brute forcing. A self-contained access token is a JSON Web Token.</p>
+							<p>When the resource server gets an access token, which is a reference token, then to validate the token, it has to talk to the authorization server (or the token issuer). When the access token is a JWT, the resource server can validate the token by itself, by verifying the signature of the JWT.</p>
+							</br>
+							<p>The value of the OAuth bearer token is only meaningful to the authorization server. The client application should not try to interpret what it says. To make the processing logic efficient, the authorization server may include some meaningful but nonconfidential data in the access token. For example, if the authorization server supports multiple domains with multitenancy, it may include the tenant domain in the access token and then base64-encode (see Appendix E) it or simply use a JSON Web Token (JWT).</p>
+							</br>
 						
 				</div>
 			</div>
