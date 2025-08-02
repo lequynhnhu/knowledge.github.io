@@ -111,6 +111,12 @@
 									<p>To protect user privacy, browsers are likely to prevent third-party access to storage. This means that you will only be able to access storage on the same domain as it was stored. Browsers can clear out storage based on user preferences (e.g., every time the browser is closed or when it reaches a certain age) and there will also be options available to the user to view and clear storage as well as white list or blacklist sites. It may even be possible for blacklisted sites to be shared across a community, allowing automatic blocking of storage for a domain based on a number of users blacklisting it.</p>
 									</br>
 								<h3>d. IndexedDB</h3>
+								</br>
+									<p>Although session storage and local storage are simple and convenient ways to store small amounts of data in a key/value store, IndexedDB allows much larger volumes of data to be stored in a structured way that allows fast searches using indexes.</p>
+									<p>IndexedDB is designed to work asynchronously, which means you supply a callback to each method on the API that executes when the operation has completed. A synchronous version of IndexedDB has a specification, but currently no browsers implement this style of the API. It is generally preferable to use asynchronous APIs to avoid blocking the event loop from running on the main thread, so learning to use the asynchronous version of IndexedDB is worth the additional effort.</p>
+									<p><strong>Upgrade Required</strong></p>
+									<p>A database upgrade is determined by comparing the local version number with the version number in your program. If the program version number is larger than the local version number, an onupgradeneeded event is triggered. The event is also fired if there is no local database. You can specify a method to be executed in the event of an upgrade that handles the schema changes and adds any required data.</p>
+									
 						</div>
 				</div>
 		</div>
