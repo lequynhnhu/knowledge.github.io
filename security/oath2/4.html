@@ -155,3 +155,30 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">OAuth 2.0 Token Binding</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					<p>Most of the OAuth 2.0 deployments do rely upon bearer tokens. A bearer token is like &ldquo;cash.&rdquo; If I steal 10 bucks from you, I can use it at a Starbucks to buy a cup of coffee&mdash;no questions asked. I do not need to prove that I own the ten-dollar note. Unlike cash, if I use my credit card, I need to prove the possession. I need to prove I own it. I need to sign to authorize the transaction, and it&rsquo;s validated against the signature on the card. The bearer tokens are like cash&mdash;once stolen, an attacker can use it to impersonate the original owner. Credit cards are like proof of possession (PoP) tokens.</p>
+					</br>
+					<p>OAuth 2.0 recommends using Transport Layer Security (TLS) for all the interactions between the client, authorization server, and resource server. This makes the OAuth 2.0 model quite simple with no complex cryptography involved&mdash;but at the same time, it carries all the risks associated with a bearer token.</p>
+					<p>There is no second level of defense. Also not everyone is fully bought into the idea of using OAuth 2.0 bearer tokens&mdash;just trusting the underlying TLS communication. I&rsquo;ve met several people&mdash;mostly from the financial domain&mdash;who are reluctant to use OAuth 2.0, just because of the bearer tokens.</p>
+					</br>
+					<p>An attacker may attempt to eavesdrop authorization code/access token/refresh token in transit from the authorization server to the client, using any of the following means:</p>
+						<p style="padding-left: 40px;">&bull; Malware installed in the browser (public clients).</p>
+						<p style="padding-left: 40px;">&bull; Browser history (public clients/URI fragments).</p>
+						<p style="padding-left: 40px;">&bull; Intercept the TLS communication between the client and the authorization server or the resource server (exploiting the vulnerabilities in the TLS layer like Heartbleed and Logjam).</p>
+					</br>
+					<h4>1. Understanding Token Binding</h4>
+					</br>
+						
+					</br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
