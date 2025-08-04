@@ -8,62 +8,66 @@
 				<div class="market-status-table mt-4">
 					<p>JavaScript Object Notation (JSON) provides a way of exchanging data in a language-neutral, text-based, and lightweight manner. It was originally derived from the ECMAScript programming language. JSON and XML are the most commonly used data exchange formats for APIs. Observing the trend over the last few years, it&rsquo;s quite obvious that JSON is replacing XML. Most of the APIs out there have support for JSON, and some support both JSON and XML. XML-only APIs are quite rare.</p>
           				<h4>Understanding JSON Web Token (JWT)</h4>
+						</br>
+							<p>Way before JWT, in 2009, Microsoft introduced Simple Web Token (SWT).1 It is neither JSON nor XML. It defined its own token format to carry out a set of HTML form&ndash;encoded name/value pairs. Both JWTs and SWTs define a way to carry claims between applications.</p>
+							<p>In SWT, both the claim names and claim values are strings, while in JWT claim names are strings, but claim values can be any JSON type. Both of these token types offer cryptographic protection for their content: SWTs with HMAC SHA256 and JWTs with a choice of algorithms, including signature, MAC, and encryption algorithms. Even though SWT was developed as a proposal for IETF, it never became an IETF proposed standard.</p>
+						</br>
+						<h5>1. JOSE Header</h5>
+						</br>
+							<p>The preceding JWT has three main elements. Each element is base64url-encoded and separated by a period (.). Let&rsquo;s identify each individual element in the JWT. The first element of the JWT is called the JavaScript Object Signing and Encryption (JOSE) header. The JOSE header lists out the properties related to the cryptographic operations applied on the JWT claims set.</p>
+							</br>
+							<p>Both the alg and kid parameters are not defined in the JWT specification, but in the JSON Web Signature (JWS) specification. The JWT specification is not bound to any specific algorithm. All applicable algorithms are defined under the JSON Web Algorithms (JWA) specification, which is the RFC 7518.</p>
+							<p>Section 3.1 of RFC 7518 defines all possible alg parameter values for a JWS token. The value of the <strong>kid</strong> parameter provides an indication or a hint about the key, which is used to sign the message.</p>
+							</br>
+							<p>Looking at the <strong>kid</strong>, the recipient of the message should know where to look up for the key and find it. The JWT specification only defines two parameters in the JOSE header; the following lists out those:</p>
+							</br>
+								<p style="padding-left: 40px;">&bull;<strong> typ (type)</strong>: The typ parameter is used to define the media type of the complete JWT. A media type is an identifier, which defines the format of the content, transmitted over the Internet. There are two types of components that process a JWT: the JWT implementations and JWT applications. Nimbus2 is a JWT implementation in Java. The Nimbus library knows how to build and parse a JWT. A JWT application can be anything, which uses JWTs internally. A JWT application uses a JWT implementation to build or parse a JWT.</p>
+								<p style="padding-left: 40px;">The typ parameter is just another parameter for the JWT implementation. It will not try to interpret the value of it, but the JWT application would. The typ parameter helps JWT applications to differentiate the content of the JWT when the values that are not JWTs could also be present in an application data structure along with a JWT object. This is an optional parameter, and if present for a JWT, it is recommended to use JWT as the media type.</p>
+								<p style="padding-left: 40px;">&bull;<strong> cty (content type)</strong>: The cty parameter is used to define the structural information about the JWT. It is only recommended to use this parameter in the case of a nested JWT.&nbsp;</p>
+							</br>
+						<h5>2. JWT Claims Set</h5>
+						</br>
+							<p>The second element of the JWT is known as either the JWT payload or the JWT claims set. It is a JSON object, which carries the business data. The following is the base64urlencoded JWT claims set of the preceding JWT</p>
+							<p>To make the JWT claims set readable, we need to base64url-decode it. Whitespaces can be explicitly retained while building the JWT claims set&mdash;no canonicalization is required before base64urlencoding. Canonicalization is the process of converting different forms of a message into a single standard form.</p>
+							</br>
+							<p>The JWT claims set represents a JSON object whose members are the claims asserted by the JWT issuer. Each claim name within a JWT must be unique. If there are duplicate claim names, then the JWT parser could either return a parsing error or just return back the claims set with the very last duplicate claim. JWT specification does not explicitly define what claims are mandatory and what are optional. It&rsquo;s up to each application of JWT to define mandatory and optional claims.</p>
+							</br>
+							<p>The JWT specification defines three classes of claims: registered claims, public claims, and private claims. The registered claims are registered in the Internet Assigned Numbers Authority (IANA) JSON Web Token Claims registry. Even though these claims are treated as registered claims, the JWT specification doesn&rsquo;t mandate their usage. It&rsquo;s totally up to the other specifications which are built on top of JWT to decide which are mandatory and which aren&rsquo;t.</p>
+							</br>
+							<p><strong>&bull; iss (issuer)</strong>: The issuer of the JWT. This is treated as a case-sensitive string value. Ideally, this represents the asserting party of the claims set. If Google issues the JWT, then the value of iss would be accounts.google.com. This is an indication to the receiving party who the issuer of the JWT is.</p>
+							</br>
+							<p><strong>&bull; sub (subject)</strong>: The token issuer or the asserting party issues the JWT for a particular entity, and the claims set embedded into the JWT normally represents this entity, which is identified by the sub parameter. The value of the sub parameter is a case-sensitive string value.</p>
+							</br>
+							<p>&bull; aud (audience): The token issuer issues the JWT to an intended recipient or a list of recipients, which is represented by the aud parameter. The recipient or the recipient list should know how to parse the JWT and validate it. Prior to any validation check, it must first see whether the particular JWT is issued for its use and if not should reject immediately.</p>
+							<p>The value of the aud parameter can be a case-sensitive string value or an array of strings. The token issuer should know, prior to issuing the token, who the intended recipient (or the recipients) of the token is, and the value of the aud parameter must be a pre-agreed value between the token issuer and the recipient. In practice, one can also use a regular expression to validate the audience of the token.</p>
+							</br>
+							<p><strong>&bull; exp (expiration time)</strong>: Each JWT carries an expiration time. The recipient of the JWT token must reject it, if that token has expired. The issuer can decide the value of the expiration time. The JWT specification does not recommend or provide any guidelines on how to decide the best token expiration time. It&rsquo;s a responsibility of the other specifications, which use JWT internally to provide such recommendations.</p>
+							<p>The value of the exp parameter is calculated by adding the expiration time (from the token issued time) in seconds to the time elapsed from 1970-01-01T00:00:00Z UTC to the current time. If the token issuer&rsquo;s clock is out of sync with the recipient&rsquo;s clock (irrespective of their time zone), then the expiration time validation could fail. To fix that, each recipient can add a couple of minutes as the clock skew during the validation process.</p>
+							</br>
+							<p>&bull;<strong> nbf (not before)</strong>: The recipient of the token should reject it, if the value of the nbf parameter is greater than the current time. The JWT is not good enough to use prior to the value indicated in the nbf parameter. The value of the nbf parameter is the number of seconds elapsed from 1970-01-01T00:00:00Z UTC to the not before time.</p>
+							</br>
+							<p>&bull; <strong>iat (issued at)</strong>: The iat parameter in the JWT indicates the issued time of the JWT as calculated by the token issuer. The value of the iat parameter is the number of seconds elapsed from 1970-01-01T00:00:00Z UTC to the current time, when the token is issued.</p>
+							</br>
+							<p><strong>&bull; jti (JWT ID)</strong>: The jti parameter in the JWT is a unique token identifier generated by the token issuer. If the token recipient accepts JWTs from multiple token issuers, then this value may not be unique across all the issuers. In that case, the token recipient can maintain the token uniqueness by maintaining the tokens under the token issuer. The combination of the token issuer identifier + the jti should produce a unique token identifier.</p>
+							<p>&nbsp;</p>
+							</br>
+							<p>The public claims are defined by the other specifications, which are built on top of JWT. To avoid any collisions in such cases, names should either be registered in the IANA JSON Web Token Claims registry or defined in a collision-resistant manner with a proper namespace.</p>
+							<p>The private claims should indeed be private and shared only between a given token issuer and a selected set of recipients. These claims should be used with caution, because there is a chance for collision. If a given recipient accepts tokens from multiple token issuers, then the semantics of the same claim may be different from one issuer to another, if it is a private claim.</p>
+						</br>
+						<h5>3. JWT Signature</h5>
+							</br>
+							<p>The third part of the JWT is the signature, which is also base64url-encoded. The cryptographic parameters related to the signature are defined in the JOSE header.</p>
+							<p>The plaintext JWT doesn&rsquo;t have a signature. It has only two parts. The value of the alg parameter in the JOSE header must be set to none. The following Java code generates a plaintext JWT.</p>
+							<p><em>Many working groups within the IETF work directly with JSON, including the OAuth working group and the System for Cross-domain Identity Management (SCIM) working group. The SCIM working group is building a provisioning standard based on JSON. Outside the IETF, the OASIS XACML working group is working on building a JSON profile for XACML 3.0.</em></p>
+							</br>
+								<p><em>The OpenID Connect specification, which is developed under the OpenID Foundation, is also heavily based on JSON. Due to the rise of standards built around JSON and the heavy usage of JSON for data exchange in APIs, it has become absolutely necessary to define how to secure JSON messages at the message level. The use of Transport Layer Security (TLS) only provides confidentiality and integrity at the transport layer. </em></p>
+								<p><em>The JOSE working group, formed under the IETF, has the goal of standardizing integrity protection and confidentiality as well as the format for keys and algorithm identifiers to support interoperability of security services for protocols that use JSON. JSON Web Signature (RFC 7515), JSON Web Encryption (RFC 7516), JSON Web Key (RFC 7517), and JSON Web Algorithms (RFC 7518) are four IETF proposed standards, which were developed under the JOSE working group.</em></p>
+							</br>
+					<h4>JSON Web Signature (JWS)</h4>
 					</br>
-						<p>Way before JWT, in 2009, Microsoft introduced Simple Web Token (SWT).1 It is neither JSON nor XML. It defined its own token format to carry out a set of HTML form&ndash;encoded name/value pairs. Both JWTs and SWTs define a way to carry claims between applications.</p>
-						<p>In SWT, both the claim names and claim values are strings, while in JWT claim names are strings, but claim values can be any JSON type. Both of these token types offer cryptographic protection for their content: SWTs with HMAC SHA256 and JWTs with a choice of algorithms, including signature, MAC, and encryption algorithms. Even though SWT was developed as a proposal for IETF, it never became an IETF proposed standard.</p>
-					</br>
-					<h5>1. JOSE Header</h5>
-					</br>
-						<p>The preceding JWT has three main elements. Each element is base64url-encoded and separated by a period (.). Let&rsquo;s identify each individual element in the JWT. The first element of the JWT is called the JavaScript Object Signing and Encryption (JOSE) header. The JOSE header lists out the properties related to the cryptographic operations applied on the JWT claims set.</p>
-						</br>
-						<p>Both the alg and kid parameters are not defined in the JWT specification, but in the JSON Web Signature (JWS) specification. The JWT specification is not bound to any specific algorithm. All applicable algorithms are defined under the JSON Web Algorithms (JWA) specification, which is the RFC 7518.</p>
-						<p>Section 3.1 of RFC 7518 defines all possible alg parameter values for a JWS token. The value of the <strong>kid</strong> parameter provides an indication or a hint about the key, which is used to sign the message.</p>
-						</br>
-						<p>Looking at the <strong>kid</strong>, the recipient of the message should know where to look up for the key and find it. The JWT specification only defines two parameters in the JOSE header; the following lists out those:</p>
-						</br>
-							<p style="padding-left: 40px;">&bull;<strong> typ (type)</strong>: The typ parameter is used to define the media type of the complete JWT. A media type is an identifier, which defines the format of the content, transmitted over the Internet. There are two types of components that process a JWT: the JWT implementations and JWT applications. Nimbus2 is a JWT implementation in Java. The Nimbus library knows how to build and parse a JWT. A JWT application can be anything, which uses JWTs internally. A JWT application uses a JWT implementation to build or parse a JWT.</p>
-							<p style="padding-left: 40px;">The typ parameter is just another parameter for the JWT implementation. It will not try to interpret the value of it, but the JWT application would. The typ parameter helps JWT applications to differentiate the content of the JWT when the values that are not JWTs could also be present in an application data structure along with a JWT object. This is an optional parameter, and if present for a JWT, it is recommended to use JWT as the media type.</p>
-							<p style="padding-left: 40px;">&bull;<strong> cty (content type)</strong>: The cty parameter is used to define the structural information about the JWT. It is only recommended to use this parameter in the case of a nested JWT.&nbsp;</p>
-						</br>
-					<h5>2. JWT Claims Set</h5>
-					</br>
-						<p>The second element of the JWT is known as either the JWT payload or the JWT claims set. It is a JSON object, which carries the business data. The following is the base64urlencoded JWT claims set of the preceding JWT</p>
-						<p>To make the JWT claims set readable, we need to base64url-decode it. Whitespaces can be explicitly retained while building the JWT claims set&mdash;no canonicalization is required before base64urlencoding. Canonicalization is the process of converting different forms of a message into a single standard form.</p>
-						</br>
-						<p>The JWT claims set represents a JSON object whose members are the claims asserted by the JWT issuer. Each claim name within a JWT must be unique. If there are duplicate claim names, then the JWT parser could either return a parsing error or just return back the claims set with the very last duplicate claim. JWT specification does not explicitly define what claims are mandatory and what are optional. It&rsquo;s up to each application of JWT to define mandatory and optional claims.</p>
-						</br>
-						<p>The JWT specification defines three classes of claims: registered claims, public claims, and private claims. The registered claims are registered in the Internet Assigned Numbers Authority (IANA) JSON Web Token Claims registry. Even though these claims are treated as registered claims, the JWT specification doesn&rsquo;t mandate their usage. It&rsquo;s totally up to the other specifications which are built on top of JWT to decide which are mandatory and which aren&rsquo;t.</p>
-						</br>
-						<p><strong>&bull; iss (issuer)</strong>: The issuer of the JWT. This is treated as a case-sensitive string value. Ideally, this represents the asserting party of the claims set. If Google issues the JWT, then the value of iss would be accounts.google.com. This is an indication to the receiving party who the issuer of the JWT is.</p>
-						</br>
-						<p><strong>&bull; sub (subject)</strong>: The token issuer or the asserting party issues the JWT for a particular entity, and the claims set embedded into the JWT normally represents this entity, which is identified by the sub parameter. The value of the sub parameter is a case-sensitive string value.</p>
-						</br>
-						<p>&bull; aud (audience): The token issuer issues the JWT to an intended recipient or a list of recipients, which is represented by the aud parameter. The recipient or the recipient list should know how to parse the JWT and validate it. Prior to any validation check, it must first see whether the particular JWT is issued for its use and if not should reject immediately.</p>
-						<p>The value of the aud parameter can be a case-sensitive string value or an array of strings. The token issuer should know, prior to issuing the token, who the intended recipient (or the recipients) of the token is, and the value of the aud parameter must be a pre-agreed value between the token issuer and the recipient. In practice, one can also use a regular expression to validate the audience of the token.</p>
-						</br>
-						<p><strong>&bull; exp (expiration time)</strong>: Each JWT carries an expiration time. The recipient of the JWT token must reject it, if that token has expired. The issuer can decide the value of the expiration time. The JWT specification does not recommend or provide any guidelines on how to decide the best token expiration time. It&rsquo;s a responsibility of the other specifications, which use JWT internally to provide such recommendations.</p>
-						<p>The value of the exp parameter is calculated by adding the expiration time (from the token issued time) in seconds to the time elapsed from 1970-01-01T00:00:00Z UTC to the current time. If the token issuer&rsquo;s clock is out of sync with the recipient&rsquo;s clock (irrespective of their time zone), then the expiration time validation could fail. To fix that, each recipient can add a couple of minutes as the clock skew during the validation process.</p>
-						</br>
-						<p>&bull;<strong> nbf (not before)</strong>: The recipient of the token should reject it, if the value of the nbf parameter is greater than the current time. The JWT is not good enough to use prior to the value indicated in the nbf parameter. The value of the nbf parameter is the number of seconds elapsed from 1970-01-01T00:00:00Z UTC to the not before time.</p>
-						</br>
-						<p>&bull; <strong>iat (issued at)</strong>: The iat parameter in the JWT indicates the issued time of the JWT as calculated by the token issuer. The value of the iat parameter is the number of seconds elapsed from 1970-01-01T00:00:00Z UTC to the current time, when the token is issued.</p>
-						</br>
-						<p><strong>&bull; jti (JWT ID)</strong>: The jti parameter in the JWT is a unique token identifier generated by the token issuer. If the token recipient accepts JWTs from multiple token issuers, then this value may not be unique across all the issuers. In that case, the token recipient can maintain the token uniqueness by maintaining the tokens under the token issuer. The combination of the token issuer identifier + the jti should produce a unique token identifier.</p>
-						<p>&nbsp;</p>
-						</br>
-						<p>The public claims are defined by the other specifications, which are built on top of JWT. To avoid any collisions in such cases, names should either be registered in the IANA JSON Web Token Claims registry or defined in a collision-resistant manner with a proper namespace.</p>
-						<p>The private claims should indeed be private and shared only between a given token issuer and a selected set of recipients. These claims should be used with caution, because there is a chance for collision. If a given recipient accepts tokens from multiple token issuers, then the semantics of the same claim may be different from one issuer to another, if it is a private claim.</p>
-					</br>
-					<h5>3. JWT Signature</h5>
-						</br>
-						<p>The third part of the JWT is the signature, which is also base64url-encoded. The cryptographic parameters related to the signature are defined in the JOSE header.</p>
-						<p>The plaintext JWT doesn&rsquo;t have a signature. It has only two parts. The value of the alg parameter in the JOSE header must be set to none. The following Java code generates a plaintext JWT.</p>
-						<p><em>Many working groups within the IETF work directly with JSON, including the OAuth working group and the System for Cross-domain Identity Management (SCIM) working group. The SCIM working group is building a provisioning standard based on JSON. Outside the IETF, the OASIS XACML working group is working on building a JSON profile for XACML 3.0.</em></p>
-						</br>
-							<p><em>The OpenID Connect specification, which is developed under the OpenID Foundation, is also heavily based on JSON. Due to the rise of standards built around JSON and the heavy usage of JSON for data exchange in APIs, it has become absolutely necessary to define how to secure JSON messages at the message level. The use of Transport Layer Security (TLS) only provides confidentiality and integrity at the transport layer. </em></p>
-							<p><em>The JOSE working group, formed under the IETF, has the goal of standardizing integrity protection and confidentiality as well as the format for keys and algorithm identifiers to support interoperability of security services for protocols that use JSON. JSON Web Signature (RFC 7515), JSON Web Encryption (RFC 7516), JSON Web Key (RFC 7517), and JSON Web Algorithms (RFC 7518) are four IETF proposed standards, which were developed under the JOSE working group.</em></p>
-						</br>
+						<p>The JSON Web Signature (JWS) specification, developed under the IETF JOSE working group, represents a message or a payload, which is digitally signed or MACed (when a hashing algorithm is used with HMAC). A signed message can be serialized in two ways by following the JWS specification: the JWS compact serialization and the JWS JSON serialization.</p>
 						
+					</br>
 				</div>
 			</div>
 		</div>
