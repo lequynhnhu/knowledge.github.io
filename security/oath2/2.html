@@ -47,6 +47,16 @@
 							<p>An API gateway is a policy enforcement point (PEP), which centrally enforces authentication, authorization, and throttling policies. In a public-facing API deployment, an API gateway is not just sufficient. We also need a web application firewall (WAF) sitting in front of the API gateway</p>
 							<p>The primary role of a WAF is to protect your API deployment from distributed denial of service (DDoS) attacks&mdash;do threat detection and message validation against OpenAPI Specification (OAS) along with known threats identified by Open Web Application Security Project (OWASP). Gartner (one of the leading analyst firms) predicts that by 2020, more than 50% of public-facing web applications will be protected by cloud-based WAF service platforms such Akamai, Imperva, Cloudflare, Amazon Web Services, and so on.</p>
 						</br>
+						<h3>Summary</h3>
+						</br>
+							<p style="padding-left: 40px;">&bull; OAuth 2.0 is the de facto standard for securing APIs.</p>
+							<p style="padding-left: 40px;">&bull; The API gateway is the most common pattern in securing APIs in a production deployment. In other words, it&rsquo;s the entry point to your API deployment.</p>
+							<p style="padding-left: 40px;">&bull; There are many open source and proprietary products out there, which implement the API gateway pattern, which we commonly identify as API gateways.</p>
+							<p style="padding-left: 40px;">&bull; An OAuth 2.0 bearer token can be a reference token or self-contained token. A reference token is an arbitrary string. An attacker can carry out a brute-force attack to guess the token. The authorization server must pick the right length and use other possible measures to prevent brute forcing.</p>
+							<p style="padding-left: 40px;">&bull; When the resource server gets an access token, which is a reference token, then to validate the token, it has to talk to the authorization server (or the token issuer). When the access token is a JWT, the resource server can validate the token by itself, by verifying the signature of the JWT.</p>
+							<p style="padding-left: 40px;">&bull; Zuul is an API gateway that provides dynamic routing, monitoring, resiliency, security, and more. It is acting as the front door to Netflix&rsquo;s server infrastructure, handling traffic from all Netflix users around the world.</p>
+							<p style="padding-left: 40px;">&bull; In a public-facing API deployment, an API gateway is not just sufficient. We also need a web application firewall (WAF) sitting in front of the API gateway.</p>
+						</br>
 				</div>
 			</div>
 		</div>
