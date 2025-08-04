@@ -74,6 +74,10 @@
 					</br>
 					<h3>1. From OpenID to OIDC</h3>
 						</br>
+							<p>OpenID and OAuth 1.0 address two different concerns. OpenID is about authentication, whereas OAuth 1.0 is about delegated authorization. As both of these standards were gaining popularity in their respective domains, there was an interest in combining them, so that it would be possible to authenticate a user and also get a token to access resources on his or her behalf in a single step.</p>
+							<p>How many profiles do you maintain today at different web sites? Perhaps you have one on Yahoo!, one on Facebook, one on Google, and so on. Each time you update your mobile number or home address, either you have to update all your profiles or you risk outdating most of your profiles. OpenID solves the problem of scattered profiles on different websites. With OpenID, you maintain your profile only at your OpenID provider, and all the other sites become OpenID relying parties. These relying parties communicate with your OpenID provider to obtain your information.</p>
+							</br>
+							<p>Each time you try to log in to a relying party website, you&rsquo;re redirected to your OpenID provider. At the OpenID provider, you have to authenticate and approve the request from the relying party for your attributes. Upon approval, you&rsquo;re redirected back to the relying party with the requested attributes. This goes beyond simple attribute sharing to facilitate decentralized SSO.</p>
 							
 						</br>
 				</div>
