@@ -297,7 +297,7 @@
 							</br>
 								<p>The base64url-encoded value of the JWE Authentication Tag is the final element of the JWE token. The value of the authentication tag is produced during the AEAD encryption process, along with the ciphertext. The authentication tag ensures the integrity of the ciphertext and the Additional Authenticated Data (AAD).</p>
 							</br>
-							<h5>1.6. The Process of Encryption (Compact Serialization)</h5>h5>
+							<h5>1.6. The Process of Encryption (Compact Serialization)</h5>
 							</br>
 								<ol>
   									<li>Figure out the key management mode by the algorithm used to determine the Content Encryption Key (CEK) value. This algorithm is defined by the alg parameter in the JOSE header. There is only one alg parameter per JWE token.</li>
@@ -362,7 +362,49 @@
 						</br>
 							<p>This carries the same meaning as explained under JWE compact serialization previously in this chapter. The ciphertext parameter in the JWE token carries the base64url-encoded value of the JWE ciphertext.</p>
 						</br>
+						<h5>2.6. JWE Authentication Tag</h5>
+						</br>
+							<p>This carries the same meaning as explained under JWE compact serialization previously in this chapter. The tag parameter in the JWE token carries the base64url-encoded value of the JWE Authentication Tag, which is an outcome of the encryption process using an AEAD algorithm.</p>
+						</br>
 					</br>
+					<h5>The Process of Encryption (JSON Serialization)</h5>
+					</br>
+						<ol>
+ 							<li>Figure out the key management mode by the algorithm used to determine the Content Encryption Key (CEK) value. This algorithm is defined by the alg parameter in the JOSE header. Under JWE JSON serialization, the JOSE header is built by the union of all the parameters defined under the JWE Protected Header, JWE Shared Unprotected Header, and Per-Recipient Unprotected Header. Once included in the Per-Recipient Unprotected Header, the alg parameter can be defined per recipient.</li>
+							</br>
+  							<li>Compute the CEK and calculate the JWE Encrypted Key based on the key management mode, picked in step 1. The CEK is later used to encrypt the JSON payload.</li>
+							</br>
+  							<li>&nbsp;Compute the base64url-encoded value of the JWE Encrypted Key, which is produced by step 2. Once again, this is computed per recipient, and the resultant value is included in the Per-Recipient Unprotected Header parameter, encryptedkey.</li>
+							</br>
+  							<li>Perform steps 1&ndash;3 for each recipient of the JWE token. Each iteration will produce an element in the recipients JSON array of the JWE token.</li>
+							</br>
+							<p>5. Generate a random value for the JWE Initialization Vector. Irrespective of the serialization technique, the JWE token carries the value of the base64url-encoded value of the JWE Initialization Vector.</p>
+							</br>
+							<p>6. If token compression is needed, the JSON payload in plaintext must be compressed following the compression algorithm defined under the zip header parameter. The value of the zip header parameter can be defined either in the JWE Protected Header or JWE Shared Unprotected Header.</p>
+							</br>
+							<p>7. Construct the JSON representation of the JWE Protected Header, JWE Shared Unprotected Header, and Per-Recipient Unprotected Headers.</p>
+							</br>
+							<p>8. Compute the base64url-encoded value of the JWE Protected Header with UTF-8 encoding. This value is represented by the protected element in the serialized JWE token. The JWE Protected Header is optional, and if present there can be only one header. If no JWE header is present, then the value of the protected element will be empty.</p>
+							</br>
+							<p>9. Generate a value for the Additional Authenticated Data (AAD) and compute the base64url-encoded value of it. This is an optional step, and if it&rsquo;s there, then the base64url-encoded AAD value will be used as an input parameter to encrypt the JSON payload, as in step 10.</p>
+							</br>
+							<p>10. To encrypt the JSON payload, we need the CEK (which we already have), the JWE Initialization Vector (which we already have), and the Additional Authenticated Data (AAD). Compute ASCII value of the encoded JWE Protected Header (step 8) and use it as the AAD. In case step 9 is done and then the value of AAD is computed as ASCII(encoded JWE Protected Header. BASE64URLENCODE( AAD)).</p>
+							</br>
+							<p>11. Encrypt the compressed JSON payload (from step 6) using the CEK, the JWE Initialization Vector, and the Additional Authenticated Data (AAD from step 10), following the content encryption algorithm defined by the enc header parameter.</p>
+							</br>
+							<p>12. The algorithm defined by the enc header parameter is an AEAD algorithm, and after the encryption process, it produces the ciphertext and the Authentication Tag.</p>
+							</br>
+							<p>13. Compute the base64url-encoded value of the ciphertext, which is produced by step 12.</p>
+							</br>
+							<p>14. Compute the base64url-encoded value of the Authentication Tag, which is produced by step 12.</p>
+						</ol>
+						</br>
+						<p><strong>Nested JWTs</strong></p>
+						</br>
+						<p>Both in a JWS token and a JWE token, the payload can be of any content. It can be JSON, XML, or anything. In a Nested JWT, the payload must be a JWT itself. In other words, a JWT, which is enclosed in another JWS or JWE token, builds a Nested JWT. A Nested JWT is used to perform nested signing and encryption.</p>
+						</br>
+					</br>
+					
 				</div>
 			</div>
 		</div>
