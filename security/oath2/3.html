@@ -114,7 +114,7 @@
 								<p>The JWS payload is the message that needs to be signed. The message can be anything&mdash; need not be a JSON payload. If it is a JSON payload, then it could contain whitespaces and/or line breaks before or after any JSON value. The second element of the serialized JWS token carries the base64url-encoded value of the JWS payload.</p>
 								<p><strong>JWS Signature</strong> The JWS signature is the digital signature or the MAC, which is calculated over the JWS payload and the JOSE header. The third element of the serialized JWS token carries the base64url-encoded value of the JWS signature.</p>
 								</br>
-								<p><strong>JWS Signature</strong></p>
+								<p><strong>The Process of Signing (Compact Serialization)</strong></p>
 								</br>
 									<ol>
   										<li>Build a JSON object including all the header parameters, which express the cryptographic properties of the JWS token&mdash;this is known as the JOSE header. As discussed before in this chapter, under the section &ldquo;JOSE Header,&rdquo; the token issuer should advertise in the JOSE header the public key corresponding to the key used to sign the message. This can be expressed via any of these header parameters: jku, jwk, kid, x5u, x5c, x5t, and x5t#s256.</li>
@@ -129,6 +129,58 @@
 									<p style="padding-left: 40px;">BASE64URL(JWS Payload).</p>
 									<p style="padding-left: 40px;">BASE64URL(JWS Signature)</p>
 							</br>
+							<h5>2. JWS JSON Serialization</h5>
+							</br>
+								<p>In contrast to the JWS compact serialization, the JWS JSON serialization can produce multiple signatures over the same JWS payload along with different JOSE header parameters. The ultimate serialized form under JWS JSON serialization wraps the signed payload in a JSON object, with all related metadata. This JSON object includes two top-level elements, payload and signatures, and three subelements under the signatures element: protected, header, and signature.</p>
+								</br>
+								<h6>2.1 JWS Payload</h6>
+								<p>The payload top-level element of the JSON object includes the base64url-encoded value of the complete JWS payload. The JWS payload necessarily need not be a JSON payload, it can be of any content type. The payload is a required element in the serialized JWS token.</p>
+								</br>
+								<h6>2.2 JWS Protected Header</h6>
+								</br>
+									<p>The JWS Protected Header is a JSON object that includes the header parameters that have to be integrity protected by the signing or MAC algorithm. The protected parameter in the serialized JSON form represents the base64url-encoded value of the JWS Protected Header.</p>
+									<p>The protected is not a top-level element of the serialized JWS token. It is used to define elements in the signatures JSON array and includes the base64url-encoded header elements, which should be signed.</p>
+									<p>If you base64url-decode the value of the first protected element in the preceding code snippet, you will see {"alg":"RS256"}. The protected parameter must be present, if there are any protected header parameters. There is one protected element for each entry of the signatures JSON array.</p>
+								</br>
+								<h6>2.3 JWS Unprotected Header</h6>
+								</br>
+									<p>The JWS Unprotected Header is a JSON object that includes the header parameters that are not integrity protected by the signing or MAC algorithm. The header parameter in the serialized JSON form represents the base64url-encoded value of the JWS Unprotected Header.</p>
+									<p>The header is not a top-level parameter of the JSON object. It is used to define elements in the signatures JSON array. The header parameter includes unprotected header elements related to the corresponding signature, and these elements are not signed.</p>
+									<p>Combining both the protected headers and unprotected headers ultimately derives the JOSE header corresponding to the signature. In the preceding code snippet, the complete JOSE header corresponding to the first entry in the signatures JSON array would be <em>{"alg":"RS256", "kid":"2010-12-29"}</em>.</p>
+									<p>The header element is represented as a JSON object and must be present if there are any unprotected header parameters. There is one header element for each entry of the signatures JSON array.</p>
+								</br>
+								<h6>2.4 JWS Signature</h6>
+								</br>
+									<p>The signatures parameter of the JSON object includes an array of JSON objects, where each element includes a signature or MAC (over the JWS payload and JWS protected header) and the associated metadata. This is a required parameter.</p>
+									</br>
+									<p><strong>Note</strong> Even though JSON serialization provides a way to selectively sign JOSE header parameters, it does not provide a direct way to selectively sign the parameters in the JWS payload. Both forms of serialization mentioned in the JWS specification sign the complete JWS payload. There is a workaround for this using JSON serialization. You can replicate the payload parameters that need to be signed selectively in the JOSE header. Then with JSON serialization, header parameters can be selectively signed.</p>
+									</br>
+								<h6>2.5 The Process of Signing (JSON Serialization)</h6>
+								</br>
+									<ol>
+  										<li>Construct the payload or the content to be signed&mdash;this is known as the JWS payload. The payload is not necessarily JSON&mdash;it can be any content. The payload element in the serialized JWS token carries the base64url-encoded value of the content.</li>
+  										<li>&nbsp;Decide how many signatures you would need against the payload and for each case which header parameters must be signed and which are not.</li>
+  										<li>Build a JSON object including all the header parameters that are to be integrity protected or to be signed. In other words, construct the JWS Protected Header for each signature. The base64urlencoded value of the UTF-8 encoded JWS Protected Header will produce the value of the protected subelement inside the signatures top-level element of the serialized JWS token.</li>
+  										<li>Build a JSON object including all the header parameters that need not be integrity protected or not be signed. In other words, construct the JWS Unprotected Header for each signature. This will produce the header subelement inside the signatures top-level element of the serialized JWS token.</li>
+  										<li>Both the JWS Protected Header and the JWS Unprotected Header express the cryptographic properties of the corresponding signature (there can be more than one signature element)&mdash; this is known as the JOSE header. As discussed before in this chapter, under the section &ldquo;JOSE Header,&rdquo; the token issuer should advertise in the JOSE header the public key corresponding to the key used to sign the message. This can be expressed via any of these header parameters: jku, jwk, kid, x5u, x5c, x5t, and x5t#s256.</li>
+  										<li>Build the message to compute the digital signature or the MAC against each entry in the signatures JSON array of the serialized JWS token. The message is constructed as ASCII(BASE64URL-ENCODE( UTF8(JWS Protected Header)). BASE64URLENCODE( JWS Payload)).</li>
+  										<li>Compute the signature over the message constructed in step 6, following the signature algorithm defined by the header parameter alg. This parameter can be either inside the JWS Protected Header or the JWS Unprotected Header. The message is signed using the private key corresponding to the public key advertised in the header.</li>
+  										<li>Compute the base64url-encoded value of the JWS signature produced in step 7, which will produce the value of the signature subelement inside the signatures top-level element of the serialized JWS token.</li>
+  										<li>Once all the signatures are computed, the signatures top-level element can be constructed and will complete the JWS JSON serialization.</li>
+									</ol>
+									</br>
+									<p><strong>Note</strong> The XML Signature specification by W3C only talks about signing an XML payload. If you have to sign any content, then first you need to embed that within an XML payload and then sign. In contrast, the JWS specification is not just limited to JSON. You can sign any content with JWS without wrapping it inside a JSON payload.</p>
+								</br>
+							</br>
+						<h4>Summary</h4>
+						</br>
+							<p>&bull; JSON has already become the de facto message exchange format for APIs.</p>
+							<p>&bull; Understanding JSON security plays a key role in securing APIs.</p>
+							<p>&bull; JSON Web Token (JWT) defines a container to transport data between interested parties in a cryptographically safe manner. It became an IETF standard in May 2015 with the RFC 7519.</p>
+							<p>&bull; Both JWS (JSON Web Signature) and JWE (JSON Web Encryption) standards are built on top of JWT.</p>
+							<p>&bull; There are two types of serialization techniques defined by the JWS specification: compact serialization and JSON serialization.</p>
+							<p>&bull; The JWS specification is not just limited to JSON. You can sign any content with JWS without wrapping it inside a JSON payload.</p>
+						</br>
 					</br>
 				</div>
 			</div>
