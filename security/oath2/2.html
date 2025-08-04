@@ -89,8 +89,22 @@
 						</br>
 					<h3>2. Understanding OpenID Connect</h3>
 					</br>
-						
+						<p>OpenID Connect was built on top of OAuth 2.0. It introduces an identity layer on top of OAuth 2.0. This identity layer is abstracted into an ID token, which is JSON Web Token (JWT), and we talk about JWT. An OAuth 2.0 authorization server that supports OpenID Connect returns an ID token along with the access token.</p>
+						<p>OpenID Connect is a profile built on top of OAuth 2.0. OAuth talks about access delegation, while OpenID Connect talks about authentication. In other words, OpenID Connect builds an identity layer on top of OAuth 2.0.</p>
+						</br>
+						<p>Authentication is the act of confirming the truth of an attribute of a datum or entity. If I say I am Peter, I need to prove that. I can prove that with something I know, something I have, or with something I am. Once proven who I claim I am, then the system can trust me. Sometimes systems do not just want to identify end users just by the name.</p>
+						<p>Name could help to identify uniquely but how about other attributes? Before you get through the border control, you need to identify yourself&mdash;by name, by picture, and also by fingerprints and eye retina. Those are validated in real time against the data from the VISA office, which issued the VISA for you. That check will make sure it&rsquo;s the same person who claimed to have the VISA that enters into the country.</p>
+						</br>
+						<p>That is proving your identity. Proving your identity is authentication. Authorization is about what you can do or your capabilities.</p>
+						<p>You could prove your identity at the border control by name, by picture, and also by fingerprints and eye retina&mdash;but it's your visa that decides what you can do. To enter into the country, you need to have a valid visa that has not expired. A valid visa is not a part of your identity, but a part of what you can do. What you can do inside the country depends on the visa type. What you do with a B1 or B2 visa differs from what you can do with an L1 or L2 visa. That is authorization.</p>
+						</br>
+						<p>OAuth 2.0 is about authorization&mdash;not about authentication. With OAuth 2.0, the client does not know about the end user. It simply gets an access token to access a resource on behalf of the user. With OpenID Connect, the client will get an ID token along with the access token.</p>
+						<p>ID token is a representation of the end user&rsquo;s identity. What does it mean by securing an API with OpenID Connect? Or is it totally meaningless? OpenID Connect is at the application level or at the client level&mdash;not at the API level or at the resource server level.</p>
+						<p>OpenID Connect helps client or the application to find out who the end user is, but for the API that is meaningless. The only thing API expects is the access token. If the resource owner or the API wants to find who the end user is, it has to query the authorization server or rely on a self-contained access token (which is a JWT).</p>
+						</br>
+					<h3>3. Anatomy of the ID Token</h3>
 					</br>
+						
 				</div>
 			</div>
 		</div>
