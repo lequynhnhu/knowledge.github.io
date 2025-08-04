@@ -6,7 +6,16 @@
 					<h1 class="header-title mb-0">Message-Level Security with JSON Web Signature</h1>
 				</div>
 				<div class="market-status-table mt-4">
-          <h4></h4>
+					<p>JavaScript Object Notation (JSON) provides a way of exchanging data in a language-neutral, text-based, and lightweight manner. It was originally derived from the ECMAScript programming language. JSON and XML are the most commonly used data exchange formats for APIs. Observing the trend over the last few years, it&rsquo;s quite obvious that JSON is replacing XML. Most of the APIs out there have support for JSON, and some support both JSON and XML. XML-only APIs are quite rare.</p>
+          				<h4>Understanding JSON Web Token (JWT)</h4>
+					</br>
+						<p>Way before JWT, in 2009, Microsoft introduced Simple Web Token (SWT).1 It is neither JSON nor XML. It defined its own token format to carry out a set of HTML form&ndash;encoded name/value pairs. Both JWTs and SWTs define a way to carry claims between applications.</p>
+						<p>In SWT, both the claim names and claim values are strings, while in JWT claim names are strings, but claim values can be any JSON type. Both of these token types offer cryptographic protection for their content: SWTs with HMAC SHA256 and JWTs with a choice of algorithms, including signature, MAC, and encryption algorithms. Even though SWT was developed as a proposal for IETF, it never became an IETF proposed standard.</p>
+					</br>
+					<h5>1. JOSE Header</h5>
+					</br>
+						<p>The preceding JWT has three main elements. Each element is base64url-encoded and separated by a period (.). Let&rsquo;s identify each individual element in the JWT. The first element of the JWT is called the JavaScript Object Signing and Encryption (JOSE) header. The JOSE header lists out the properties related to the cryptographic operations applied on the JWT claims set.</p>
+						
 				</div>
 			</div>
 		</div>
