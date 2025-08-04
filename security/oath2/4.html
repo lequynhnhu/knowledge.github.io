@@ -131,6 +131,16 @@
 						<p>Based on the policies of the authorization server, it can decide whether it should proceed with the registration or not. Even if it decides to go ahead with the registration, the authorization server need not accept all the suggested parameters from the client. For example, the client may suggest using both authorization_code and implicit as grant types, but the authorization server can decide what to allow. The same is true for the token_endpoint_auth_method: the authorization server can decide what to support.</p>
 						</br>
 					</br>
+					<h4>6. Token Revocation Profile</h4>
+					</br>
+						<p>Two parties can perform OAuth token revocation. The resource owner should be able to revoke an access token issued to a client, and the client should be able to revoke an access token or a refresh token it has acquired. The Token Revocation OAuth 2.0 profile3 addresses the latter. It introduces a standard token-revoke endpoint at the authorization server end. To revoke an access token or a refresh token, the client must notify the revoke endpoint.</p>
+						</br>
+						<p>The client must initiate the token revocation request. The client can authenticate to the authorization server via HTTP Basic authentication (with its client ID and client secret), with mutual TLS or with any other authentication mechanism proposed by the authorization server and then talk to the revoke endpoint. The request should consist of either the access token or the refresh token and then a token_type_hint that informs the authorization server about the type of the token (access_token or refresh_token).</p>
+						</br>
+						<p>In response to this request, the authorization server first must validate the client credentials and then proceed with the token revocation. If the token is a refresh token, the authorization server must invalidate all the access tokens issued for the authorization grant associated with that refresh token.</p>
+						<p>If it&rsquo;s an access token, it&rsquo;s up to the authorization server to decide whether to revoke the refresh token or not. In most cases, it&rsquo;s ideal to revoke the refresh token, too. Once the token revocation is completed successfully, the authorization server must send an HTTP 200 status code back to the client.</p>
+						</br>
+					</br>
 				</div>
 			</div>
 		</div>
