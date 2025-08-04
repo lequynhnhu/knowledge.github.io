@@ -192,6 +192,37 @@
 						<p>A WebFinger endpoint can accept many other discovery requests for different services. If it finds a matching entry, the following response is returned to the OpenID Connect relying party.</p>
 						</br>
 						<p>Neither the WebFinger nor the OpenID Connect Discovery specification mandates the use of the email address as the resource or the end user identifier. It must be a URI that conforms to the URI definition in RFC 3986, which can be used to derive the WebFinger endpoint. If the resource identifier is an email address, then it must be prefixed with acct.</p>
+						<p>Once the endpoint of the identity provider is discovered, that concludes the role of WebFinger. Yet you don&rsquo;t have enough data to initiate an OpenID Connect authentication request with the corresponding identity provider. You can find more information about the identity provider by talking to its metadata endpoint, which must be a well-known endpoint (steps 4 and 5).</p>
+						<p>After that, for the client application to talk to the authorization server, it must be a registered client application. The client application can talk to the client registration endpoint of the authorization server (steps 6 and 7) to register itself&mdash;and then can access the authorize and token endpoints (steps 8 and 9).</p>
+						</br>
+						<p>Both the WebFinger and OpenID Connect Discovery specifications use the Defining Well-Known URIs (http://tools.ietf.org/html/rfc5785) specification to define endpoint locations. The RFC 5785 specification introduces a path prefix called "/.well-known/" to identify well-known locations. Most of the time, these locations are metadata endpoints or policy endpoints.</p>
+						<p>The WebFinger specification has the well-known endpoint "/.well-known/" webfinger. The OpenID Connect Discovery specification has the well-known endpoint for OpenID provider configuration metadata, "/.well-known/openidconfiguration".</p>
+						</br>
+					<h3>9. OpenID Connect Identity Provider Metadata</h3>
+					</br>
+						<p>An OpenID Connect identity provider, which supports metadata discovery, should host its configuration at the endpoint "/.well-known/openid-configuration". In most cases, this is a nonsecured endpoint, which can be accessed by anyone.</p>
+						</br>
+						<p>If the endpoint of the discovered identity provider is <em>https://auth. server.com</em>, then the OpenID provider metadata should be available at <em>https://auth.server.com/.well-known/openid-configuration</em>. If the endpoint is <em>https://auth.server.com/openid</em>, then the metadata endpoint is <em>https://auth.server.com/openid/.well-known/openid-configuration</em>.</p>
+						</br>
+					<h3>10. Dynamic Client Registration</h3>
+						</br>
+						<p>Once the OpenID provider endpoint is discovered via WebFinger (and all the metadata related to it through OpenID Connect Discovery), the OpenID Connect relying party still needs to have a client ID and a client secret (not under the implicit grant type) registered at the OpenID provider to initiate the authorization grant request or the OpenID Connect authentication request. The OpenID Connect Dynamic Client Registration specification2 facilitates a mechanism to register dynamically OpenID Connect relying parties at the OpenID provider.</p>
+						</br>
+						<p>The response from the OpenID provider metadata endpoint includes the endpoint for client registration under the parameter registration_endpoint. To support dynamic client registrations, this endpoint should accept open registration requests, with no authentication requirements.</p>
+						</br>
+						<p>To fight against denial of service (DoS) attacks, the endpoint can be protected with rate limits or with a web application firewall (WAF). To initiate client registration, the OpenID relying party sends an HTTP POST message to the registration endpoint with its own metadata.</p>
+						<p>Once the OpenID Connect relying party obtains a client ID and a client secret, it concludes the OpenID Connect Discovery phase. The relying party can now initiate the OpenID Connect authentication request.</p>
+						</br>
+					<h3>11. OpenID Connect for Securing APIs</h3>
+						</br>
+						<p>So far, you have seen a detailed discussion about OpenID Connect. But in reality, how will it help you in securing APIs? The end users can use OpenID Connect to authenticate into web applications, mobile applications, and much more.</p>
+						<p>Nonetheless, why would you need OpenID Connect to secure a headless API? At the end of the day, all the APIs are secured with OAuth 2.0, and you need to present an access token to talk to the API. The API (or the policy enforcement component) validates the access token by talking to the authorization server. Why would you need to pass an ID token to an API?</p>
+						</br>
+						<p>OAuth is about delegated authorization, whereas OpenID Connect is about authentication. An ID token is an assertion about your identity, that is, a proof of your identity. It can be used to authenticate into an API. As of this writing, no HTTP binding is defined for JWT.</p>
+						</br>
+						<p>The following example suggests passing the JWT assertion (or the ID token) to a protected API as an access token in the HTTP Authorization header. The ID token, or the signed JWT, is base64-url-encoded in three parts. Each part is separated by a dot (.).</p>
+						<p>The first part up to the first dot is the JWT header. The second part is the JWT body. The third part is the signature. Once the JWT is obtained by the client application, it can place it in the HTTP Authorization header in the manner shown here:</p>
+						</br>
 						
 				</div>
 			</div>
