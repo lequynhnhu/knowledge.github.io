@@ -118,12 +118,18 @@
 								</br>
 									<ol>
   										<li>Build a JSON object including all the header parameters, which express the cryptographic properties of the JWS token&mdash;this is known as the JOSE header. As discussed before in this chapter, under the section &ldquo;JOSE Header,&rdquo; the token issuer should advertise in the JOSE header the public key corresponding to the key used to sign the message. This can be expressed via any of these header parameters: jku, jwk, kid, x5u, x5c, x5t, and x5t#s256.</li>
+										</br>
   										<li>Compute the base64url-encoded value against the UTF-8 encoded JOSE header from step 1 to produce the first element of the JWS token.</li>
+										</br>
   										<li>Construct the payload or the content to be signed&mdash;this is known as the JWS payload. The payload is not necessarily JSON&mdash;it can be any content.</li>
+										</br>
  										<li>&nbsp;Compute the base64url-encoded value of the JWS payload from step 3 to produce the second element of the JWS token.</li>
+										</br>
   										<li>Build the message to compute the digital signature or the MAC. The message is constructed as ASCII(BASE64URLENCODE( UTF8(JOSE Header)) . BASE64URL-ENCODE(JWS Payload)).</li>
+										</br>
   										<li>Compute the signature over the message constructed in step 5, following the signature algorithm defined by the JOSE header parameter alg. The message is signed using the private key corresponding to the public key advertised in the JOSE header.</li>
- 										 <li>Compute the base64url-encoded value of the JWS signature produced in step 6, which is the third element of the serialized JWS token. 8. Now we have all the elements to build the JWS token in the following manner. The line breaks are introduced only for clarity.</li>
+										</br>
+ 										<li>Compute the base64url-encoded value of the JWS signature produced in step 6, which is the third element of the serialized JWS token. 8. Now we have all the elements to build the JWS token in the following manner. The line breaks are introduced only for clarity.</li>
 									</ol>
 									<p style="padding-left: 40px;">BASE64URL(UTF8(JWS Protected Header)).</p>
 									<p style="padding-left: 40px;">BASE64URL(JWS Payload).</p>
