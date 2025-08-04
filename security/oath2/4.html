@@ -139,7 +139,16 @@
 						</br>
 						<p>In response to this request, the authorization server first must validate the client credentials and then proceed with the token revocation. If the token is a refresh token, the authorization server must invalidate all the access tokens issued for the authorization grant associated with that refresh token.</p>
 						<p>If it&rsquo;s an access token, it&rsquo;s up to the authorization server to decide whether to revoke the refresh token or not. In most cases, it&rsquo;s ideal to revoke the refresh token, too. Once the token revocation is completed successfully, the authorization server must send an HTTP 200 status code back to the client.</p>
-						</br>
+					</br>
+					<h4>7. Summary</h4>
+					</br>
+						<p>&bull; The OAuth 2.0 profiles built on top of the core framework build a security ecosystem to make OAuth 2.0 ready for enterprise grade deployments.</p>
+						<p>&bull; OAuth 2.0 introduced two extension points via grant types and token types.</p>
+						<p>&bull; The Token Introspection profile for OAuth 2.0 introduces a standard API at the authorization server, allowing the resource server to talk to it and retrieve token metadata.</p>
+						<p>&bull; According to the OAuth Chain Grant Type profile, the API hosted in the first resource server must talk to the authorization server and exchange the OAuth access token it received from the client for a new one that can be used to talk to another API hosted in a second resource server.</p>
+						<p>&bull; The OAuth 2.0 Token Exchange is a draft proposal discussed under the IETF working group at the moment, which solves a similar problem as the Chain Grant Type proposal with some improvements.</p>
+						<p>&bull; The aim of the Dynamic Client Registration OAuth 2.0 profile is to expose an endpoint for client registration in a standard manner to facilitate on-the-fly registrations.</p>
+						<p>&bull; The Token Revocation OAuth 2.0 profile introduces a standard token-revoke endpoint at the authorization server to revoke an access token or a refresh token by the client.</p>
 					</br>
 				</div>
 			</div>
