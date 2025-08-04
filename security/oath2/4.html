@@ -94,7 +94,42 @@
 					</br>
 						<p>According to the OAuth 2.0 core specification, all OAuth clients must be registered with the OAuth authorization server and obtain a client identifier before any interactions. The aim of the Dynamic Client Registration OAuth 2.0 profile2 is to expose an endpoint for client registration in a standard manner to facilitate on-the-fly registrations.</p>
 						</br>
-						
+						<p>The dynamic registration endpoint exposed by the authorization server can be secured or not. If it&rsquo;s secured, it can be secured with OAuth, HTTP Basic authentication, Mutual Transport Layer Security (mTLS), or any other security protocol as desired by the authorization server.</p>
+						</br>
+						<p>The Dynamic Client Registration profile doesn&rsquo;t enforce any authentication protocols over the registration endpoint, but it must be secured with TLS. If the authorization server decides that it should allow the endpoint to be public and let anyone be registered, it can do so.</p>
+						</br>
+						<p><strong>&bull; redirect_uris</strong>: An array of URIs under the control of the client. The user is redirected to one of these redirect_uris after the authorization grant. These redirect URIs must be over Transport Layer Security (TLS).</p>
+						</br>
+						<p><strong>&bull; token_endpoint_auth_method:</strong> The supported authentication scheme when talking to the token endpoint. If the value is client_ secret_basic, the client sends its client ID and the client secret in the HTTP Basic Authorization header. If it&rsquo;s client_secret_post, the client ID and the client secret are in the HTTP POST body.</p>
+						<p>If the value is none, the client doesn&rsquo;t want to authenticate, which means it&rsquo;s a public client (as in the case of the OAuth implicit grant type or when you use authorization code grant type with a single-page application). Even though this RFC only supports three client authentication methods, the other OAuth profiles can introduce their own.</p>
+						<p>For example, OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens, a draft RFC which is being discussed under the IETF OAuth working group at the moment, introduces a new authentication method called tls_client_auth. This indicates that client authentication to the token endpoint happens with mutual TLS.</p>
+						</br>
+						<p><strong>&bull; grant_types:</strong> An array of grant types supported by the client. It is always better to limit your client application only to use the grant types it needs and no more. For example, if your client application is a single-page application, then you must only use authorization_ code grant type.</p>
+						</br>
+						<p><strong> &bull; response_types:</strong> An array of expected response types from the authorization server. In most of the cases, there is a correlation between the grant_types and response_types&mdash;and if you pick something inconsistent, the authorization server will reject the registration request.</p>
+						</br>
+						<p><strong>&bull; client_name:</strong> A human-readable name that represents the client application. The authorization server will display the client name to the end users during the login flow. This must be informative enough so that the end users will be able to figure out the client application, during the login flow.</p>
+						</br>
+						<p><strong>&bull; client_uri:</strong> A URL that points to the client application. The authorization server will display this URL to the end users, during the login flow in a clickable manner.</p>
+						</br>
+						<p><strong>&bull; logo_uri:</strong> A URL pointing to the logo of the client application. The authorization server will display the logo to the end users, during the login flow.</p>
+						</br>
+						<p><strong>&bull; scope:</strong> A string containing a space-separated list of scope values where the client intends to request from the authorization server. &bull; contacts: A list of representatives from the client application end.</p>
+						</br>
+						<p><strong>&bull; tos_uri:</strong> A URL pointing to the terms of service document of the client application. The authorization server will display this link to the end users, during the login flow.</p>
+						</br>
+						<p><strong>&bull; policy_uri:</strong> A URL pointing to the privacy policy document of the client application. The authorization server will display this link to the end users, during the login flow.</p>
+						</br>
+						<p><strong>&bull; jwks_uri:</strong> Points to the endpoint, which carries the JSON Web Key (JWK) Set document with the client&rsquo;s public key. Authorization server uses this public key to validate the signature of any of the requests signed by the client application. If the client application cannot host its public key via an endpoint, it can share the JWKS document under the parameter jwks instead of jwks_uri. Both the parameters must not be present in a single request.</p>
+						</br>
+						<p><strong>&bull; software_id:</strong> This is similar to client_id, but there is a major difference. The client_id is generated by the authorization server and mostly used to identify the application. But the client_id can change during the lifetime of an application. In contrast, the software_id is unique to the application across its lifecycle and uniquely represents all the metadata associated with it throughout the application lifecycle.</p>
+						</br>
+						<p><strong>&bull; software_version:</strong> The version of the client application, identified by the software_id.</p>
+						</br>
+						<p><strong>&bull; software_statement:</strong> This is a special parameter in the registration request, which carries a JSON Web Token (JWT). This JWT includes all the metadata defined earlier with respect to the client. In case the same parameter is defined in JWT and also in the request outside the software_statement parameter, then the parameter within the software_statement will take the precedence.</p>
+						</br>
+						<p>Based on the policies of the authorization server, it can decide whether it should proceed with the registration or not. Even if it decides to go ahead with the registration, the authorization server need not accept all the suggested parameters from the client. For example, the client may suggest using both authorization_code and implicit as grant types, but the authorization server can decide what to allow. The same is true for the token_endpoint_auth_method: the authorization server can decide what to support.</p>
+						</br>
 					</br>
 				</div>
 			</div>
