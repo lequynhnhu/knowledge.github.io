@@ -145,7 +145,16 @@
 					</br>
 						<p>OpenID Connect defines two ways to request user attributes. The client application can either use the initial OpenID Connect authentication request to request attributes or else later talk to a UserInfo endpoint hosted by the authorization server. If it uses the initial authentication request, then the client application must include the requested claims in the claims parameter as a JSON message.</p>
 						</br>
-						
+						<p>The OpenID Connect core specification defines 20 standard user claims. These identifiers should be understood by all of the authorization servers and client applications that support OpenID Connect.</p>
+						<p>The other approach to request user attributes is via the UserInfo endpoint. The UserInfo endpoint is an OAuth 2.0-protected resource on the authorization server. Any request to this endpoint must carry a valid OAuth 2.0 token. Once again, there are two ways to get user attributes from the UserInfo endpoint. The first approach is to use the OAuth access token. With this approach, the client must specify the corresponding attribute scope in the authorization grant request.</p>
+						<p>The OpenID Connect specification defines four scope values to request attributes: profile, email, address, and phone. If the scope value is set to profile, that implies that the client requests access to a set of attributes, which includes name, family_name, given_name, middle_name, nickname, preferred_username, profile, picture, website, gender, birthdate, zoneinfo, locale, and updated_at.</p>
+						</br>
+						<p>The UserInfo endpoint must support both HTTP GET and POST. All communication with the UserInfo endpoint must be over Transport Layer Security (TLS).</p>
+						</br>
+						<p>Signing or encrypting the response message from the UserInfo endpoint isn&rsquo;t a requirement. If it&rsquo;s signed or encrypted, then the response should be wrapped in a JWT, and the Content-Type of the response should be set to application/jwt.</p>
+					</br>
+					 <h3>6. OpenID Connect Flows</h3>
+					
 				</div>
 			</div>
 		</div>
