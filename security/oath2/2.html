@@ -118,6 +118,33 @@
 							<p style="padding-left: 40px;">&bull; azp: Stands for authorized party. It&rsquo;s needed when there is one audience (aud) and its value is different from the OAuth client ID. The value of azp must be set to the OAuth client ID. This is an optional parameter.</p>
 						</br>
 						<p>The authorization server must sign the ID token, as defined in JSON Web Signature (JWS) specification. Optionally, it can also be encrypted. Token encryption should follow the rules defined in the JSON Web Encryption (JWE) specification. If the ID token is encrypted, it must be signed first and then encrypted. This is because signing the encrypted text is questionable in many legal entities.</p>
+						</br>
+					<h3>4. OpenID Connect Request</h3>
+						</br>
+							<p>The ID token is the heart of OpenID Connect, but that isn&rsquo;t the only place where it deviates from OAuth 2.0. OpenID Connect introduced some optional parameters to the OAuth 2.0 authorization grant request.</p>
+							</br>
+							<p>&bull; response_mode: Determines how the authorization server sends back the parameters in the response. This is different from the "response_ type" parameter, defined in the OAuth 2.0 core specification. With the "response_type" parameter in the request, the client indicates whether it expects a code or a token. In the case of an authorization code grant type, the value of response_type is set to code, whereas with an implicit grant type, the value of "response_type" is set to token. The "response_mode" parameter addresses a different concern. If the value of response_mode is set to query, the response parameters are sent back to the client as query parameters appended to the "redirect_ uri"; and if the value is set to fragment, then the response parameters are appended to the "redirect_uri" as a URI fragment.</p>
+							</br>
+							<p>&bull; nonce: Mitigates replay attacks. The authorization server must reject any request if it finds two requests with the same nonce value. If a nonce is present in the authorization grant request, then the authorization server must include the same value in the ID token. The client application must validate the value of the nonce once it receives the ID token from the authorization server.</p>
+							</br>
+							<p>&bull; display: Indicates how the client application expects the authorization server to display the login page and the user consent page. Possible values are "page", "popup", "touch", and "wap".</p>
+							</br>
+							<p>&bull; prompt: Indicates whether to display the login or the user consent page at the authorization server. If the value is none, then neither the login page nor the user consent page should be presented to the user. In other words, it expects the user to have an authenticated session at the authorization server and a preconfigured user consent. If the value is login, the authorization server must reauthenticate the user. If the value is consent, the authorization server must display the user consent page to the end user. The select_account option can be used if the user has multiple accounts on the authorization server. The authorization server must then give the user an option to select from which account he or she requires attributes.</p>
+							</br>
+							<p>&bull; max_age: In the ID token there is a parameter that indicates the time of user authentication "(auth_time)". The max_age parameter asks the authorization server to compare that value with "max_age". If it&rsquo;s less than the gap between the current time and "max_age" (current timemax_ age), the authorization server must reauthenticate the user. When the client includes the max_age parameter in the request, the authorization server must include the "auth_time" parameter in the ID token.</p>
+							</br>
+							<p>&bull; ui_locales: Expresses the end user&rsquo;s preferred language for the user interface.</p>
+							<p>&bull; id_token_hint: An ID token itself. This could be an ID token previously obtained by the client application. If the token is encrypted, it has to be decrypted first and then encrypted back by the public key of the authorization server and then placed into the authentication request. If the value of the parameter prompt is set to none, then the "id_token_hin"t could be present in the request, but it isn&rsquo;t a requirement.</p>
+							</br>
+							<p>&bull; login_hint: This is an indication of the login identifier that the end user may use at the authorization server. For example, if the client application already knows the email address or phone number of the end user, this could be set as the value of the "login_hint". This helps provide a better user experience.</p>
+							</br>
+							<p>&bull; acr_values: Stands for authentication context reference values. It includes a space-separated set of values that indicates the level of authentication required at the authorization server. The authorization server may or may not respect these values.</p>
+						</br>
+							<p>All OpenID Connect authentication requests must have a scope parameter with the value openid.</p>
+					 <h3>5. Requesting User Attributes</h3>
+					</br>
+						<p>OpenID Connect defines two ways to request user attributes. The client application can either use the initial OpenID Connect authentication request to request attributes or else later talk to a UserInfo endpoint hosted by the authorization server. If it uses the initial authentication request, then the client application must include the requested claims in the claims parameter as a JSON message.</p>
+						</br>
 						
 				</div>
 			</div>
