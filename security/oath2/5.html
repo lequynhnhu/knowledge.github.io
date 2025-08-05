@@ -134,6 +134,35 @@
 					</br>
 					<h4>1. Identity Provider Mix-Up</h4>
 					</br>
+						<p>Even though OAuth 2.0 is about access delegation, still people work around it to make it work for login. That&rsquo;s how login with Facebook works. Then again, the OpenID Connect, which is built on top of OAuth 2.0, is the right way of using OAuth 2.0 for authentication.</p>
+						<p>A recent research done by one of the leading vendors in the Identity and Access Management domain confirmed that most of the new development happened over the past few years at the enterprise level picked OAuth 2.0/OpenID Connect over SAML 2.0.</p>
+						<p>Let&rsquo;s try to understand how identity provider mix-up works</p>
+						</br>
+						<p>1. This attack happens with an OAuth 2.0 client application, which provides multiple identity provider (IdP) options for login. Let&rsquo;s say foo.idp and evil.idp. We assume that the client application does not know that evil.idp is evil. Also it can be a case where evil. idp is a genuine identity provider, which could possibly be under an attack itself.</p>
+						</br>
+						<p>2. The victim picks foo.idp from the browser and the attacker intercepts the request and changes the selection to evil.idp. Here we assume the communication between the browser and the client application is not protected with Transport Layer Security (TLS). The OAuth 2.0 specification does not talk about it, and it&rsquo;s purely up to the web application developers.</p>
+						<p>Since there is no confidential data passed in this flow, most of the time the web application developers may not worry about using TLS. At the same time, there were few vulnerabilities discovered over the past on TLS implementations (mostly openssl). So, the attacker could possibly use such vulnerabilities to intercept the communication between the browser and the client application (web server), even if TLS is used.</p>
+						</br>
+						<p>3. Since the attacker changed the identity provider selection of the user, the client application thinks it&rsquo;s evil.idp (even though the user picked foo.idp) and redirects the user to evil.idp. The client application only gets the modified request from the attacker, who intercepted the communication.</p>
+						</br>
+						<p>4. The attacker intercepts the redirection and modifies the redirection to go to the foo.idp. The way redirection works is the web server (in this case, the client application) sends back a response to the browser with a 302 status code&mdash;and with an HTTP Location header.</p>
+						<p>If the communication between the browser and the client application is not on TLS, then this response is not protected, even if the HTTP Location header contains an HTTPS URL. Since we assumed already, the communication between the browser and the client application can be intercepted by the attacker, then the attacker can modify the Location header in the response to go to the foo.idp&mdash;which is the original selection&mdash;and no surprise to the user.</p>
+						<p>5. The client application gets either the code or the token (based on the grant type) and now will talk to the evil.idp to validate it. The authorization server (or the identity provider) will send back the authorization code (if the code grant type is used) to the callback URL, which is under the client application.</p>
+						<p>Just looking at the authorization code, the client application cannot decide to which identity provider the code belongs to. So we assume it tracks the identity provider by some session variable&mdash;so as per step 3, the client application thinks it&rsquo;s the evil.idp and talks to the evil.idp to validate the token.</p>
+						</br>
+						<p>6. The evil.idp gets hold of the user&rsquo;s access token or the authorization code from the foo.idp. If it&rsquo;s the implicit grant type, then it would be the access token, otherwise the authorization code. In mobile apps, most of the time, people used to embed the same client id and the client secret into all the instances&mdash;so an attacker having root access to his own phone can figure it out what the keys are and then, with the authorization code, can get the access token.</p>
+						</br>
+						<p><em>There is no record that the preceding attack is being carried out in practice&mdash;but at the same time, we cannot totally rule it out. There are a couple of options to prevent such attacks, and our recommendation is to use the option 1 as it is quite straightforward and solves the problem without much hassle.</em></p>
+						</br>
+						<p>1. Have separate callback URLs by each identity provider. With this the client application knows to which identity provider the response belongs to. The legitimate identity provider will always respect the callback URL associated with the client application and will use that. The client application will also attach the value of the callback URL to the browser session and, once the user got redirected back, will see whether it&rsquo;s on the right place (or the right callback URL) by matching with the value of the callback URL from the browser session.</p>
+						<p>2. Follow the mitigation steps defined in the IETF draft specification: OAuth 2.0 IdP Mix-Up Mitigation <em>(https://tools.ietf. org/html/draft-ietf-oauth-mix-up-mitigation-01)</em>. This specification proposes to send a set of mitigation data from the authorization server back to the client, along with the authorization response.</p>
+						<p>The mitigation data provided by the authorization server to the client includes an issuer identifier, which is used to identify the authorization server, and a client id, which is used to verify that the response is from the correct authorization server and is intended for the given client.</p>
+						<p>This way the OAuth 2.0 client can verify from which authorization server it got the response back and based on that identify the token endpoint or the endpoint to validate the token.</p>
+					</br>
+					<h4>2. Cross-Site Request Forgery (CSRF)</h4>
+					</br>
+						<p>In general, Cross-Site Request Forgery (CSRF) attack forces a logged-in victim&rsquo;s browser to send a forged HTTP request, including the victim&rsquo;s session cookie and any other automatically included authentication information to a vulnerable web application. Such an attack allows the attacker to force a victim&rsquo;s browser to generate requests, where the vulnerable application thinks are legitimate requests from the victim.</p>
+						
 					</br>
 				</div>
 			</div>
