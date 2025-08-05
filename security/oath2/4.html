@@ -414,6 +414,17 @@
 						</br>
 						<p>&bull; The application server, which hosts the API, validates the access token by talking to the OAuth authorization server, which issued the access token (step 6).</p>
 						</br>
+					<h4>8. JWT Client Authentication</h4>
+					</br>
+						<p>The OAuth 2.0 core specification does not define a concrete way to authenticate OAuth clients to the OAuth authorization server. Mostly it&rsquo;s the HTTP Basic authentication with client_id and the client_secret. The RFC 7523 defines a way to authenticate OAuth clients with a JWT.</p>
+						<p>The JWT client authentication is not just limited to a particular grant type; it can be used with any OAuth grant types. That&rsquo;s another beauty in OAuth 2.0&mdash;the OAuth grant types are decoupled from the client authentication.</p>
+						</br>
+							<p><strong>&bull; client_assertion_type:</strong> This is a required parameter, which defines the format of the assertion, as understood by the OAuth authorization server. The value of client_assertion_type is an absolute URI. For JWT client authentication, this parameter must carry the value urn:ietf:params:oauth:client-assertion-type: jwt-bearer.</p>
+							</br>
+							<p><strong>&bull; client_assertion:</strong> This is a required parameter, which carries the token. For example, in the case of JWT client authentication, the client_assertion parameter will carry the base64url-encoded JWT, and it must only contain a single JWT. If there are multiple JWTs in the assertion, then the authorization server will reject the grant request.</p>
+							</br>
+							<p><strong>&bull; client_id:</strong> This is an optional parameter. Ideally, the client_id must be present inside the client_assertion itself. If this parameter carries a value, it must match the value of the client_id inside the client_assertion. Having the client_id parameter in the request itself could be useful, as the authorization server does not need to parse the assertion first to identify the client.</p>
+						</br>
 					</br>
 				</div>
 			</div>
