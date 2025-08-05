@@ -1,1 +1,19 @@
-
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">Direct Authentication with the Trusted Subsystem</h1>
+				</div>
+				<div class="market-status-table mt-4">
+            <p>Suppose a medium-scale enterprise has a number of APIs. Company employees are allowed to access these APIs via a web application while they&rsquo;re behind the company firewall. All user data are stored in Microsoft Active Directory (AD), and the web application is connected directly to the Active Directory to authenticate users. The web application passes the logged-in user&rsquo;s identifier to the back-end APIs to retrieve data related to the user.</p>
+<p>The problem is straightforward. You need to use some kind of direct authentication pattern. User authentication happens at the front-end web application, and once the user is authenticated, the web application needs to access the back-end APIs. The catch here is that the web application passes the logged-in user&rsquo;s identifier to the APIs. That implies the web application needs to invoke APIs in a user-aware manner.</p>
+<p>Since both the web application and the APIs are in the same trust domain, we only authenticate the end user at the web application, and the back-end APIs trust whatever data passed on to those from the web application. This is called the trusted subsystem pattern.</p>
+<p>The web application acts as a trusted subsystem. In such case, the best way to secure APIs is through mutual Transport Layer Security (mTLS). All the requests generated from the web application are secured with mTLS, and no one but the web application can access the APIs.</p>
+<p>Some do resist using TLS due to the overhead it adds and rely on building a controlled environment, where security between the web application and the container that hosts APIs is governed at the network level. Network-level security must provide the assurance that no component other than the web application server can talk to the container that hosts the APIs.</p>
+<p>This is called the trust-the-network pattern, and over the time, this has become an antipattern. The opposite of the trust-the-network pattern is zero-trust network. With the zero-trust network pattern, we do not trust the network. When we do not trust the network, we need to make sure we have enforced security checks as much as closer to the resource (or in our case, the APIs). The use of mTLS to secure the APIs is the most ideal solution here.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
