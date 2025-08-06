@@ -167,7 +167,7 @@
 					<h4>2. Cross-Site Request Forgery (CSRF)</h4>
 					</br>
 						<p>In general, Cross-Site Request Forgery (CSRF) attack forces a logged-in victim&rsquo;s browser to send a forged HTTP request, including the victim&rsquo;s session cookie and any other automatically included authentication information to a vulnerable web application. Such an attack allows the attacker to force a victim&rsquo;s browser to generate requests, where the vulnerable application thinks are legitimate requests from the victim.</p>
-						<ol>
+						<ul>
   							<li>The attacker tries to log in to the target web site (OAuth 2.0 client) with his account at the corresponding identity provider. Here we assume the attacker has a valid account at the identity provider, trusted by the corresponding OAuth 2.0 client application.</li>
 							</br>
  							<li>The attacker blocks the redirection to the target web site and captures the authorization code. The target web site never sees the code. In OAuth 2.0, the authorization code is only good enough for one-time use. In case the OAuth 2.0 client application sees it and then exchanges it to an access token, then it&rsquo;s no more valid&mdash;so the attacker has to make sure that the authorization code never reaches the client application. Since the authorization code flows through the attacker&rsquo;s browser to the client, it can be easily blocked.</li>
@@ -178,12 +178,15 @@
 							</br>
   							<li>The attacker too logs in to the target web site with his/her valid credentials and uses victim&rsquo;s credit card to purchase goods.</li>
 							</br>
-						</ol>
+						</ul>
 						</br>
 						<p>The preceding attack can be mitigated by following these best practices:</p>
 							<p style="padding-left: 40px;">&bull; Use a short-lived authorization code. Making the authorization code expires soon gives very little time for the attacker to plant an attack. For example, the authorization code issued by LinkedIn expires in 30 seconds. Ideally, the lifetime of the authorization code should be in seconds.</p>
+							</br>
 							<p style="padding-left: 40px;">&bull; Use the state parameter as defined in the OAuth 2.0 specification. This is one of the key parameters to use to mitigate CSRF attacks in general. The client application has to generate a random number (or a string) and passes it to the authorization server along with the grant request. Further, the client application has to add the generated value of the state to the current user session (browser session) before redirecting the user to the authorization server. According to the OAuth 2.0 specification, the authorization server has to return back the same state value with the authorization code to the redirect_uri (to the client application).</p>
+							</br>
 							<p style="padding-left: 40px;">The client must validate the state value returned from the authorization server with the value stored in the user&rsquo;s current session&mdash;if it mismatches, it rejects moving forward. Going back to the attack, when the user clicks the crafted link sent to the victim by the attacker, it won&rsquo;t carry the same state value generated before and attached to the victim&rsquo;s session (or most probably victim&rsquo;s session has no state value), or the attacker does not know how to generate the exact same state value. So, the attack won&rsquo;t be successful, and the client application will reject the request.</p>
+							</br>
 							<p style="padding-left: 40px;">&bull; Use PKCE (Proof Key for Code Exchange). PKCE (RFC 7636) was introduced to protect OAuth 2.0 client applications from the authorization code interception attack, mostly targeting native mobile apps. The use of PKCE will also protect users from CSRF attacks, once the code_verifier is attached to the user&rsquo;s browser session.</p>
 						</br>
 					<h4>3. Token Reuse</h4>
