@@ -149,6 +149,7 @@
 						</br>
 						<p>4. The attacker intercepts the redirection and modifies the redirection to go to the foo.idp. The way redirection works is the web server (in this case, the client application) sends back a response to the browser with a 302 status code&mdash;and with an HTTP Location header.</p>
 						<p>If the communication between the browser and the client application is not on TLS, then this response is not protected, even if the HTTP Location header contains an HTTPS URL. Since we assumed already, the communication between the browser and the client application can be intercepted by the attacker, then the attacker can modify the Location header in the response to go to the foo.idp&mdash;which is the original selection&mdash;and no surprise to the user.</p>
+						</br>
 						<p>5. The client application gets either the code or the token (based on the grant type) and now will talk to the evil.idp to validate it. The authorization server (or the identity provider) will send back the authorization code (if the code grant type is used) to the callback URL, which is under the client application.</p>
 						<p>Just looking at the authorization code, the client application cannot decide to which identity provider the code belongs to. So we assume it tracks the identity provider by some session variable&mdash;so as per step 3, the client application thinks it&rsquo;s the evil.idp and talks to the evil.idp to validate the token.</p>
 						</br>
@@ -157,7 +158,9 @@
 						<p><em>There is no record that the preceding attack is being carried out in practice&mdash;but at the same time, we cannot totally rule it out. There are a couple of options to prevent such attacks, and our recommendation is to use the option 1 as it is quite straightforward and solves the problem without much hassle.</em></p>
 						</br>
 						<p>1. Have separate callback URLs by each identity provider. With this the client application knows to which identity provider the response belongs to. The legitimate identity provider will always respect the callback URL associated with the client application and will use that. The client application will also attach the value of the callback URL to the browser session and, once the user got redirected back, will see whether it&rsquo;s on the right place (or the right callback URL) by matching with the value of the callback URL from the browser session.</p>
+						</br>
 						<p>2. Follow the mitigation steps defined in the IETF draft specification: OAuth 2.0 IdP Mix-Up Mitigation <em>(https://tools.ietf. org/html/draft-ietf-oauth-mix-up-mitigation-01)</em>. This specification proposes to send a set of mitigation data from the authorization server back to the client, along with the authorization response.</p>
+						</br>
 						<p>The mitigation data provided by the authorization server to the client includes an issuer identifier, which is used to identify the authorization server, and a client id, which is used to verify that the response is from the correct authorization server and is intended for the given client.</p>
 						<p>This way the OAuth 2.0 client can verify from which authorization server it got the response back and based on that identify the token endpoint or the endpoint to validate the token.</p>
 					</br>
