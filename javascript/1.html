@@ -48,7 +48,18 @@
 						<p>&nbsp;</p>
 						<p>Similarly, if something goes wrong, you get back an HTTP response code, the best-known of which is the 404 Not Found response code.</p>
 						<p>&nbsp;</p>
-					
+						<p><strong>5.</strong> The web browser processes the returned request. Assuming that the returned response is HTML, the browser starts to parse the HTML code and builds in memory the Document Object Model (DOM), which is an internal representation of the page. During this processing, the browser likely sees other resources that it needs to display the page properly (such as CSS, JavaScript, and images).</p>
+						<p>&nbsp;</p>
+						<p><strong>6.</strong> The web browser requests any additional resources it needs. Google keeps its web page fairly lean; at this writing, only 16 other resources are needed. Each of these resources is requested in a similar manner, following steps 1&ndash;6, and yes, that includes this step, because those resources may in turn request other resources.</p>
+						<p>&nbsp;</p>
+						<p>The average website isn&rsquo;t as lean as Google and needs 75 resources,3 often from many domains, so steps 1&ndash;6 must be repeated for all of them. This situation is one of the key things that makes web browsing slow and one of the key reasons for HTTP/2, the main purpose of which is to make requesting these additional resources more efficient,</p>
+						<p><strong>7.</strong> When the browser has enough of the critical resources, it starts to render the page onscreen. Choosing when to start rendering the page is a challenging task and not as simple as it sounds. If the web browser waits until all resources are downloaded, it would take a long time to show web pages, and the web would be an even slower, more frustrating place.</p>
+						<p>&nbsp;</p>
+						<p>But if the web browser starts to render the page too soon, you end up with the page jumping around as more content downloads, which is irritating if you&rsquo;re in the middle of reading an article when the page jumps down.</p>
+						<p>&nbsp;</p>
+						<p>A firm understanding of the technologies that make up the web&mdash;especially HTTP and HTML/CSS/JavaScript&mdash;can help website owners reduce these annoying jumps while pages are being loaded, but far too many sites don&rsquo;t optimize their pages effectively to prevent these jumps.</p>
+						</br>
+						
 					</br>
 				</div>
 			</div>
