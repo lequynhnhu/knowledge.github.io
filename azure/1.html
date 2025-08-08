@@ -140,6 +140,19 @@
   							<li>You can organize specialized workloads to scale beyond the limits of an existing subscription.</li>
   							<li>By using subscriptions, you can manage and track costs for your organizational structure.</li>
 						</ul>
+						<p><strong>Group subscriptions together under management groups</strong>. Group together subscriptions that have the same set of policies and Azure role assignments to inherit these settings from the same management group.</p>
+						<p>&nbsp;</p>
+						<p><strong>Consider a dedicated shared services subscription</strong>. Use a shared services subscription to ensure all common network resources are billed together and isolated from other workloads. Examples of shared services subscriptions include Azure ExpressRoute and Virtual WAN.</p>
+						<p>&nbsp;</p>
+						<p><strong>Consider subscription scale limits</strong>. Subscriptions serve as a scale unit for component workloads. Large, specialized workloads like high-performance computing, IoT, and SAP are all better suited to use separate subscriptions.</p>
+						<p>&nbsp;</p>
+						<p><strong>Consider administrative management</strong>. Subscriptions provide a management boundary, which allows for a clear separation of concerns.</p>
+						<p>&nbsp;</p>
+						<p><strong>Consider how to assign Azure policies</strong>. Both management groups and subscriptions serve as a boundary for the assignment of Azure policies.&nbsp;</p>
+						<p>&nbsp;</p>
+						<p><strong>Consider network topologies</strong>. Virtual networks can't be shared across subscriptions. Resources can connect across subscriptions with different technologies, such as virtual network peering or Virtual Private Networks (VPNs).</p>
+						<p>&nbsp;</p>
+						<p><strong>Consider making subscription owners aware of their roles and responsibilities</strong>. Conduct a quarterly or biannual access review by using Microsoft Entra Privileged Identity Management.</p>
 					</br>
 				</div>
 			</div>
