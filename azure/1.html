@@ -16,6 +16,10 @@
 						<h4>1. Management groups</h4>
 						</br>
 							<p>Are containers that help you manage access, policy, and compliance across multiple subscriptions. You can use management groups to:</p>
+							<p>If your organization has many Azure subscriptions, you might need a way to efficiently manage access, policies, and compliance for those subscriptions. Management groups provide a governance scope above subscriptions. When you organize subscriptions into management groups, the governance conditions that you apply cascade by inheritance to all associated subscriptions.</p>
+							<p>Management groups give you enterprise-grade management at scale, no matter what type of subscriptions you might have. However, all subscriptions within a single management group must trust the same Microsoft Entra tenant.</p>
+							<p>For example, you can apply a policy to a management group that limits the regions available for virtual machine (VM) creation. This policy would be applied to all nested management groups, subscriptions, and resources to allow VM creation only in authorized regions.</p>
+							</br>
 							<ul>
  								 <li>
     								<p>Limit the regions where virtual machines can be created, across subscriptions.</p>
