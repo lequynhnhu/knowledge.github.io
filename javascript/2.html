@@ -100,6 +100,20 @@
   						<li>Finally, the client acknowledges the server sequence numbers with an ACK message.</li>
 					</ol>
 					</br>
+					<p>In addition, TCP starts cautiously, with a small number of packets sent before acknowledgement. The congestion window (CWND) gradually increases over time as the connection is shown to be able to handle larger sizes without losing packets. The size of the TCP congestion window is controlled by the TCP slow-start algorithm.</p>
+					<p>As TCP is a guaranteed protocol that doesn&rsquo;t want to overload the network, TCP packets in the CWND must be acknowledged before more packets can be sent, using increments of the sequence numbers set up in the three-way handshake. Therefore, with a small CWND, it may take several TCP acknowledgements to send the full HTTP request messages.</p>
+					<p>HTTP responses, which are often much larger than HTTP requests, also suffer from the same congestion window constraints. As the TCP connection is used more, it increases the CWND and gets more efficient, but it always starts artificially throttled, even on the fastest, highest-bandwidth networks.</p>
+					<p>Finally, even without any issues with TCP setup and slow start, using multiple independent connections can result in bandwidth issues. If all the bandwidth is used, for example, the result can be TCP timeouts and retransmissions on other connections. There&rsquo;s no concept of prioritization between the traffic on those independent connections to use the available bandwidth in the most efficient manner.</p>
+					<p>&nbsp;</p>
+					<p>When the TCP connection has been made, secure websites require the setup of HTTPS. This setup can be minimized on subsequent connections by reusing many of the parameters used in the main connection rather than starting from scratch, but the process still takes further network trips, and, therefore, time.</p>
+					<p>&nbsp;</p>
+					<p>Therefore, it&rsquo;s inefficient, at a TCP and HTTPS level, to open multiple connections, even if doing so is a good optimization at an HTTP level. The solution for the latency problems of HTTP/1.1 requires multiple extra requests and responses; therefore, the solution is prone to the very latency problems it&rsquo;s supposed to resolve!</p>
+					<p>&nbsp;</p>
+					<p>Additionally, by the time these additional TCP connections have reached optimal TCP efficiency, it&rsquo;s likely that the bulk of the web page will have loaded and the additional connections are no longer required. Even browsing to subsequent pages may not require many resources if the common elements are cached.</p>
+					<p>&nbsp;</p>
+					<p>The other common optimization technique is to make fewer requests, which involves reducing unnecessary requests (such as by caching assets in the browser) or requesting the same amount of data over fewer HTTP requests.</p>
+					<p>&nbsp;</p>
+					
 					</br>
 				</div>
 			</div>
