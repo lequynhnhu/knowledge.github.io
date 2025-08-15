@@ -113,7 +113,16 @@
 					<p>&nbsp;</p>
 					<p>The other common optimization technique is to make fewer requests, which involves reducing unnecessary requests (such as by caching assets in the browser) or requesting the same amount of data over fewer HTTP requests.</p>
 					<p>&nbsp;</p>
-					
+					<p>For images, this bundling technique is known as spriting. If you have a lot of social media icons on your website, for example, you could use one file for each icon. But this method would lead to a lot of inefficient HTTP queuing, as the images will be small, so a relatively large proportion of the time needed to fetch them will be spent on the overheads of downloading them. Instead, you can bundle them into one large image file and then use CSS to pull out sections of the image to effectively re-create the individual images.</p>
+					<p>&nbsp;</p>
+					<p>For CSS and JavaScript, many websites concatenate multiple files so that fewer files are produced, though with the same amount of code in the combined files. This concatenation is often done while minimizing the CSS or JavaScript to remove whitespace, comments, and other unnecessary elements. Both of these methods produce performance benefits but require effort to set up.</p>
+					<p>&nbsp;</p>
+					<p>Other techniques involve inlining the resources into other files. Critical CSS is often included directly in the HTML with &lt;style&gt; tags, for example. Or images can be included in CSS as inline Scalable Vector Graphic (SVG) instructions or base 64-encoded binary files, which saves additional HTTP requests.</p>
+					<p>&nbsp;</p>
+					<p>The main downside to this solution is the complexity it introduces. Creating image sprites takes effort; it&rsquo;s easier to serve images as separate files. Not all websites use a build step in which optimizations such as concatenating CSS files can be automated. If you use a Content Management System (CMS) for your website, it may not automatically concatenate JavaScript, or sprite images.</p>
+					<p>&nbsp;</p>
+					<p>Another downside is the waste in these files. Some pages may be downloading large sprite image files and using only one or two of those images. It&rsquo;s complicated to track how much of your sprite file is still used and when to trim it. You also have to rewrite all your CSS to load the images correctly from the right locations in the new sprite file. Similarly, JavaScript can become bloated and much larger than it needs to be if you concatenate too much and download a huge file even when you need only to use a small amount of it.</p>
+					<p>&nbsp;</p>
 					</br>
 				</div>
 			</div>
