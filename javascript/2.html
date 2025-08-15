@@ -14,7 +14,11 @@
 					</br>
 					<p>Initially, HTTP was a single request-and-response protocol. A client opens the connection, requests a resource, gets the response, and the connection is closed. As the web became more media-rich, this closing of the connection proved to be wasteful. Displaying a single page required several HTTP resources, so closing the connection only to reopen it caused unnecessary delays. By specifying the value Keep-Alive in this header, the client is asking the server to keep the connection open to allow the sending of additional requests:</p>
 					</br>
-					
+					<p>It can be more complicated to know when the response is complete when you use persistent connections; the connection closing is a pretty good sign that the server has finished sending for a nonpersistent connection! Instead, the Content-Length HTTP header must be used to define the length of the response body, and when the entire body has been received, the client is free to send another request.</p>
+					</br>
+					<p>An HTTP connection can be closed at any point by either the client or the server. Closing may occur accidentally (perhaps due to network connectivity errors) or deliberately (if, for example, a connection isn&rsquo;t used for a while and a server decides to close the connection to regain some resources for other connections). Therefore, even with persistent connections, both clients and servers should monitor the connections and be able to handle unexpectedly closed connections. The situation becomes more complicated with certain requests.</p>
+										
+					</br>					
 				</div>
 			</div>
 		</div>
