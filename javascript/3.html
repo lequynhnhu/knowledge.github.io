@@ -6,6 +6,16 @@
 					<h1 class="header-title mb-0">HTTP/2 support on the browser side</h1>
 				</div>
 				<div class="market-status-table mt-4">
+					<p>Using HTTP/2 only through HTTPS means that it&rsquo;s less likely there will be compatibility issues. Many HTTP-aware pieces of infrastructure on the internet wouldn&rsquo;t know how to handle HTTP/2 messages until they&rsquo;re upgraded. By wrapping the messages in HTTPS, you hide the HTTP messages themselves and therefore prevent compatibility issues.</p>
+					</br>
+					<p>The second reason is more ideological in nature. Many browser vendors (and others, including me) strongly believe in moving away from unencrypted HTTP and further believe that all websites should move to HTTPS. Therefore, newer features are often restricted to HTTPS as a form of encouraging that move.</p>
+					</br>
+					<p>HTTPS adds security, privacy, and integrity to communications with websites. These features are no longer important only for e-commerce sites, where payment details need to be protected, but should be important for all sites.Search terms and the pages you&rsquo;re looking at contain personal data that could be sensitive.</p>
+					</br>
+					<p>A sign-up form asking for your email address to register interest is collecting private information, so it should be secured. Although intercepting and altering data may sound unlikely for a blog, for example, data providers such as mobile operators and airplane Wi-Fi operators regularly inject advertisements if users are browsing the internet through them and HTTPS isn&rsquo;t used on the site to prevent this situation. More malicious parties can inject more dangerous content, such as crypto-currency mining JavaScript code or malware.</p>
+					</br>
+					<p>To be able to use HTTP/2, both the browser and the server must support HTTP/2. If users use a proxy that effectively breaks the HTTP connection in two, however, that might prevent the use of HTTP/2 if the proxy doesn&rsquo;t support HTTP/2.</p>
+					</br>
 					
 				</div>
 			</div>
