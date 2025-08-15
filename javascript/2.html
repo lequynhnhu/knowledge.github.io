@@ -43,6 +43,11 @@
   						<li>Authentication&mdash;The server is the one you intended to talk to.</li>
 					</ul>
 					</br>
+					<p>HTTPS works by using public key encryption, which allows servers to provide public keys in the form of digital certificates when users first connect. Your browser encrypts messages by using this public key, which only the server can decrypt, as only it has the corresponding private key. This system allows you to communicate securely with a website without having to know a shared secret key in advance, which is crucial for a system like the internet, where new websites and users come and go every second of every day.</p>
+					</br>
+					<p>The digital certificates are issued, and digitally signed, by various certificate authorities (CAs) trusted by the browser, which is why it&rsquo;s possible to authenticate that the public key is for the server you&rsquo;re connecting to. One big problem with HTTPS is that it indicates only that you&rsquo;re connecting to that server&mdash;not that the server is trustworthy.</p>
+					<p>Fake phishing sites can be set up easily with HTTPS for a different but similar domain . HTTPS sites are usually shown with a green padlock in web browsers, which many users take to mean safe, but it merely means securely encrypted.</p>
+					</br>
 					
 					</br>
 				</div>
