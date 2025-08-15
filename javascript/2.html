@@ -76,6 +76,20 @@
 					<p>&nbsp;</p>
 					<p>HTTP/1.1 isn&rsquo;t an efficient protocol because it blocks on a send and waits for a response. It is, in effect, synchronous; you can&rsquo;t move on to another HTTP request until the current request is finished. If the network or the server is slow, HTTP performs worse. As HTTP is intended primarily to request resources from a server that&rsquo;s often far from the client, network slowness is a fact of life for HTTP.</p>
 					<p>&nbsp;</p>
+					<p>Over time, various tips, tricks, and hacks have been created to overcome the performance limitations of HTTP/1.1, which fall into the following two categories:</p>
+						<ul>
+  							<li>Use multiple HTTP connections.</li>
+  							<li>Make fewer but potentially larger HTTP requests.</li>
+						</ul>
+					<p>Other performance techniques, which have less to do with the HTTP protocol, involve ensuring that the user is requesting the resources in the optimal manner (such as requesting critical CSS first), reducing the amount downloaded (compression and responsive images), and reducing the work on the browser (more efficient CSS or JavaScript).</p>
+					</br>
+					<p>One of the easiest ways to get around the blocking issue of HTTP/1.1 is to open more connections, allowing parallelization to have multiple HTTP requests on the go. Additionally, unlike with pipelining, no HOL blocking occurs, as each HTTP connection works independently of the others. Most browsers open six connections per domain for this reason.</p>
+					<p>To increase this limit of six further, many websites serve static assets such as images, CSS, and JavaScript from subdomains (such as static.example.com), allowing web browsers to open a further six connections for each new domain.</p>
+					<p>This technique is known as domain sharding (not to be confused with database sharding by those readers who come from a nonweb background, though the performance reasons are similar). Domain sharding can also be handy for reasons other than increasing parallelization, such as reducing HTTP headers such as cookies.</p>
+					<p>Often, these shared domains are hosted on the same server. Sharing the same resources but using different domain names fools the browser into thinking that the server is separate.</p>
+					</br>
+					
+					</br>
 				</div>
 			</div>
 		</div>
