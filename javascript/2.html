@@ -48,6 +48,14 @@
 					<p>The digital certificates are issued, and digitally signed, by various certificate authorities (CAs) trusted by the browser, which is why it&rsquo;s possible to authenticate that the public key is for the server you&rsquo;re connecting to. One big problem with HTTPS is that it indicates only that you&rsquo;re connecting to that server&mdash;not that the server is trustworthy.</p>
 					<p>Fake phishing sites can be set up easily with HTTPS for a different but similar domain . HTTPS sites are usually shown with a green padlock in web browsers, which many users take to mean safe, but it merely means securely encrypted.</p>
 					</br>
+					<p>HTTPS is built around HTTP and is almost seamless to the HTTP protocol itself. It&rsquo;s hosted on a different port by default (port 443 as opposed to port 80 for standard HTTP), and it has a different URL scheme (https:// as opposed to http://), but it doesn&rsquo;t fundamentally alter the way HTTP is used in terms of syntax or message format except for the encryption and decryption itself.</p>
+					<p>&nbsp;</p>
+					<p>When the client connects to an HTTPS server, it goes through a negotiation stage (or TLS handshake). In this process, the server provides the public key, client and server agree on the encryption methods to use, and then client and server negotiate a shared encryption key to use in the future.</p>
+					<p>&nbsp;</p>
+					<p>Public key cryptography is slow, so public encryption keys are used only to negotiate a shared secret, which is used to encrypt future messages with better performance.</p>
+					<p>&nbsp;</p>
+					<p>After the HTTPS session is set up, standard HTTP messages are exchanged. The client and server encrypt these messages before sending and decrypt upon receipt, but to the average web developer or server manager, there&rsquo;s no difference between HTTPS and HTTP after it&rsquo;s configured. Everything happens transparently unless you&rsquo;re looking at the raw messages sent across the network. HTTPS wraps up standard HTTP requests and responses rather than replacing them with another protocol.</p>
+					<p>&nbsp;</p>
 					
 					</br>
 				</div>
