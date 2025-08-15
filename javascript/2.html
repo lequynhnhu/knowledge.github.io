@@ -74,7 +74,8 @@
 					<p>&nbsp;</p>
 					<p>Although the increase in download speeds has been impressive, the need for faster speeds has outpaced this increase. Broadband speeds will probably continue to increase for some time, but other limitations can&rsquo;t be fixed as easily. As you shall see, latency is a key factor in browsing the web, and latency is fundamentally limited by the speed of light&mdash;a universal constant that physics says can&rsquo;t increase.</p>
 					<p>&nbsp;</p>
-					
+					<p>HTTP/1.1 isn&rsquo;t an efficient protocol because it blocks on a send and waits for a response. It is, in effect, synchronous; you can&rsquo;t move on to another HTTP request until the current request is finished. If the network or the server is slow, HTTP performs worse. As HTTP is intended primarily to request resources from a server that&rsquo;s often far from the client, network slowness is a fact of life for HTTP.</p>
+					<p>&nbsp;</p>
 				</div>
 			</div>
 		</div>
