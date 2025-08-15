@@ -139,8 +139,17 @@
 					<p>&nbsp;</p>
 					<p>HTTP responses are also growing, and with security HTTP headers such as Content-Security-Policy producing extremely large HTTP headers, the deficiencies of the text-based protocol are becoming more apparent. With many websites being made up of 100 resources or more, large HTTP headers can add tens or hundreds of kilobytes of data transferred.</p>
 					<p>&nbsp;</p>
-					
+					<h4>HTTP/2</h4>
+					<p>There are two reasons why HTTP/2 may make little difference to some existing websites. The first reason is that the websites may be so tuned, using the workarounds discussed in section 2.2, that they see little slowness due to the problems inherent in HTTP/1. But even well-tuned sites still suffer some performance drawbacks from these techniques, not to mention the significant effort needed to use and maintain these performance techniques.</p>
+					<p>&nbsp;</p>
+					<p>In theory, HTTP/2 allows every website to be even better than a domain-sharded, concatenated website making great use of sprites and inline CSS, JavaScript, and images with zero effort as long as the server supports HTTP/2!</p>
+					<p>&nbsp;</p>
+					<p>The other reason why HTTP/2 may not improve sites is if other performance problems far eclipse the issues due to HTTP/1. Many websites have massive printquality images, which take a long time to download.</p>
+					<p>&nbsp;</p>
+					<p>Other websites load far too much JavaScript, which takes time to download and process (HTTP/2 won&rsquo;t help). Websites that are slow even after loading or that suffer from jank (when the browser struggles to keep up with the user&rsquo;s scrolling around the website) aren&rsquo;t improved by HTTP/2, which looks only at the networking side of performance.</p>
+					<p>&nbsp;</p>
 					</br>
+					
 				</div>
 			</div>
 		</div>
