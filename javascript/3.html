@@ -16,6 +16,18 @@
 					</br>
 					<p>To be able to use HTTP/2, both the browser and the server must support HTTP/2. If users use a proxy that effectively breaks the HTTP connection in two, however, that might prevent the use of HTTP/2 if the proxy doesn&rsquo;t support HTTP/2.</p>
 					</br>
+					<p>In many corporate environments, it&rsquo;s common to use a proxy and restrict direct internet access. This allows scanning for threats, and prevents access to certain sites (such as personal email accounts). Similarly, for the home user, many antivirus products create a proxy through which web traffic flows for scanning purposes.</p>
+					<p>&nbsp;</p>
+					<p>For HTTPS traffic (as required by HTTP/2 for all web browsers), this situation is a problem, as these proxies can&rsquo;t read this encrypted traffic. Therefore, when you use a proxy that needs to read HTTPS traffic, your browser is configured to create one HTTPS connection to the proxy, and the proxy creates a separate HTTPS connection to the real website. So your web browser is making an HTTPS connection only to the proxy and sends a fake HTTPS certificate to the browser, pretending to be the real site.</p>
+					<p>&nbsp;</p>
+					<p>Normally, this condition would be a big warning sign in browsers, as part of the point of HTTPS is to validate the authenticity of the HTTPS certificate issuer. Installing these proxies, however, involves setting up the proxy software as a recognized certificate issuer on that computer, so the web browser will accept these fake certificates.</p>
+					</br>
+					<p>Splitting the traffic into two parts allows the proxy to read the traffic, but, unfortunately, your browser is no longer connecting directly to the website, so your ability to use HTTP/2 depends on whether the proxy supports HTTP/2. If the proxy doesn&rsquo;t support HTTP/2, it effectively downgrades your connection to HTTP/1.1. In addition to not benefiting from HTTP/2, you may be confused about why the downgrade is happening when both browser and server seem to support HTTP/2.</p>
+					<p>&nbsp;</p>
+					<p>Many people in the security industry think that intercepting proxies cause more problems than they solve, because browser makers generally are strong and proactive about ensuring good HTTPS connections, and breaking this connection in two means that the browser can no longer verify the final connection. Regardless, proxies are being used and need to be considered in trying to understand HTTP/2 support.</p>
+					<p>&nbsp;</p>
+					<p>On the positive side, intercepting proxies usually are used in home or corporate environments where the connection is typically fast anyway and HTTP/2 is less beneficial. It&rsquo;s much rarer to intercept mobile traffic this way, and low-latency networks (such as mobile) are some of the primary beneficiaries of improvements in HTTP/2.</p>
+					<p>&nbsp;</p>
 					
 				</div>
 			</div>
