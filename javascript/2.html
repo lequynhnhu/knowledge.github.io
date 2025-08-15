@@ -123,6 +123,23 @@
 					<p>&nbsp;</p>
 					<p>Another downside is the waste in these files. Some pages may be downloading large sprite image files and using only one or two of those images. It&rsquo;s complicated to track how much of your sprite file is still used and when to trim it. You also have to rewrite all your CSS to load the images correctly from the right locations in the new sprite file. Similarly, JavaScript can become bloated and much larger than it needs to be if you concatenate too much and download a huge file even when you need only to use a small amount of it.</p>
 					<p>&nbsp;</p>
+					<p>The final issue is caching. If you cache your sprite image for a long time (so that site visitors don&rsquo;t download it too often) but then need to add an image, you have to make the browsers download the whole file again, even though the visitor may not need this image. You can use various techniques such as adding a version number to the filename or using a query parameter,10 but these techniques are still wasteful. Similarly, on the CSS or JavaScript side, a single code change requires the whole concatenated file to be redownloaded.</p>
+					</br>
+					<h4>Other issues with HTTP/1.1</h4>
+					</br>
+					<p>HTTP/1.1 is a simple text-based protocol. This simplicity introduces problems. Although the bodies of HTTP messages can contain binary data (such as images in whatever format the client and server can agree on), the requests and the headers themselves must still be in text.</p>
+					<p>&nbsp;</p>
+					<p>Text format is great for humans but isn&rsquo;t optimal for machines. Processing HTTP text messages can be complex and error-prone, which introduces security issues. Several attacks on HTTP have been based on injecting newline characters into HTTP headers.</p>
+					<p>&nbsp;</p>
+					<p>The other issue with HTTP being a text format is that HTTP messages are larger than they need to be, due to not encoding data efficiently (such as representing the Date header as a number versus full human-readable text) and repeating headers. Again, for the initial use case of the web with single requests, this situation wasn&rsquo;t much of a problem, but the increasing number of requests makes this situation quite inefficient.</p>
+					<p>&nbsp;</p>
+					<p>The use of HTTP headers has grown, which leads to a lot of repetition. Cookies, for example, are sent with every HTTP request to the domain, even if only the main page request requires cookies. Usually, static resources such as images, CSS, and JavaScript don&rsquo;t need cookies.</p>
+					<p>&nbsp;</p>
+					<p>Domain sharding, as described earlier in this chapter, was brought in to allow extra connections, but it was also used to create so-called cookieless domains that wouldn&rsquo;t need cookies sent to them for performance and security reasons.</p>
+					<p>&nbsp;</p>
+					<p>HTTP responses are also growing, and with security HTTP headers such as Content-Security-Policy producing extremely large HTTP headers, the deficiencies of the text-based protocol are becoming more apparent. With many websites being made up of 100 resources or more, large HTTP headers can add tens or hundreds of kilobytes of data transferred.</p>
+					<p>&nbsp;</p>
+					
 					</br>
 				</div>
 			</div>
