@@ -8,7 +8,14 @@
 				<div class="market-status-table mt-4">
 					<p>The word function in programming languages is commonly used as a synonym for method, particularly a static method; this is in addition to it being used for mathematical function, one without side effects.</p>
 					</br>
+					<p>We&rsquo;ll note that the whole point of a programming language is to manipulate values, which, following historical programming-language tradition, are therefore called first-class values (or citizens, in the terminology borrowed from the 1960s civil rights movement in the United States). Other structures in our programming languages, which perhaps help us express the structure of values but which can&rsquo;t be passed around during program execution, are second-class citizens.</p>
+					<p>&nbsp;</p>
+					<p>Values as listed previously are first-class Java citizens, but various other Java concepts, such as methods and classes, exemplify second-class citizens. Methods are fine when used to define classes, which in turn may be instantiated to produce values, but neither are values themselves. So does this matter? Yes, it turns out that being able to pass methods around at run-time, and hence making them first-class citizens, is very useful in programming, and so the Java 8 designers added this ability to Java.</p>
+					<p>&nbsp;</p>
+					<p>Incidentally, you might wonder whether making other second-class citizens such as classes into first-class-citizen values might also be a good idea. Various languages such as Smalltalk and JavaScript have explored this route.</p>
 					</br>
+					<p>The first new Java 8 feature we introduce is that of method references. Suppose you want to filter all the hidden files in a directory. You need to start writing a method that given a File will tell you whether it&rsquo;s hidden or not.</p>
+					
 				</div>
 			</div>
 		</div>
