@@ -13,8 +13,11 @@
 						<p>The handshake involves four sets of messages:</p>
 							<ul>
   								<li>The client sends a ClientHello message detailing its cryptographic capabilities. This message is sent unencrypted because the encryption method hasn&rsquo;t been agreed on yet.</li>
+								</br>
   								<li>The server sends a similar ServerHello message back, choosing the HTTPS protocol (such as TLSv1.2) based on what it knows the client supports. It also sends the cipher it will use for this connection (such as ECDHE-RSA-AES128- GCM-SHA256), again by choosing one based on those advertised in the Client- Hello message and on what it supports itself. Then it provides the server HTTPS certificate (ServerCertificate). The secret key details depend on the cipher selected (ServerKeyExchange) and whether a client HTTPS certificate is needed (CertificateRequest, not needed for most websites). Finally, the server says that it&rsquo;s done (ServerHelloDone).</li>
+								</br>
   								<li>The client verifies the server certificate and sends a client certificate if requested (ClientCertificate, not needed for most sites). Then it sends its secret key details (ClientKeyExchange). These details are sent encrypted by the public key in the server certificate so that only the server can decrypt the message with the private key. If client certificates are being used, a CertificateVerify message is sent, signed with the private key, to prove ownership of the client certificate. The client uses the ServerKeyExchange and ClientKeyExchange details to define an encrypted symmetric key and sends a ChangeCipherSpec message to inform the client that encryption is beginning; then it sends an encrypted Finished message.</li>
+								</br>
   								<li>The server also switches to an encrypted connection (ChangeCipherSpec) and sends an encrypted Finished message.</li>
 							</ul>
 						</br>
