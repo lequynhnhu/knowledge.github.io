@@ -194,3 +194,32 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">How an HTTP/2 connection is established</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					<p>Given that HTTP/2 is so different from HTTP/1 at a connection level, both the client web browser and the server need to be able to talk and understand HTTP/2 to be able to use it. As two independent parties are involved, there needs to be a process in which each party can say that it&rsquo;s willing and able to use HTTP/2.</p>
+					<p>&nbsp;</p>
+					<p>The move to HTTPS was the last similar change, which was made possible with a new URL scheme (https://) and was served over a different default port (443 for HTTPS as opposed to 80 for HTTP). This change allowed a clear separation of the protocols, and, therefore, a clear indication of which protocol to use to communicate.</p>
+					<p>&nbsp;</p>
+					<p>There are several downsides to moving to a new scheme, port, or both, however, including</p>
+						<ul>
+  							<li>Until adoption is near universal, the default needs to remain the existing http:// (or https:// if it ever becomes the default, as many people hope). Therefore, adding a new scheme, as HTTPS did, would require a redirect to use HTTP/2, which would introduce slowness&mdash;the very thing that HTTP/2 was supposed to solve!</li>
+  							<li>Sites have to change links to the new scheme. Although internal links could be fixed with relative links on the website itself (/images/image.png rather than https://example.com/images/image.png, for example), external links would need to include the full URL, including the scheme. The adoption of HTTPS has often been complicated, in part, by the need for sites to change every URL to the new scheme.</li>
+  							<li>Compatibility issues occur with existing network infrastructure (such as firewalls blocking any new nonstandard ports).</li>
+						</ul>
+					</br>
+					<p><strong>Using HTTPS negotiation</strong></p>
+					<p>&nbsp;</p>
+					<p>HTTPS connections go through a protocol-negotiation stage to set up the connection, as they need to agree on the SSL/TLS protocol, cipher, and various other settings to use before the connection is established and HTTP messages are exchanged. </p>
+					<p>This stage is flexible, allowing new HTTPS protocols and ciphers to be introduced and used only when both client and server agree to use them. HTTP/2 support can be part of that HTTPS handshake, saving any upgrade redirection that would need to have been done at connection establishment and before the first HTTP message was sent.</p>
+					</br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
