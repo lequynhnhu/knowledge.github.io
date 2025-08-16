@@ -144,3 +144,53 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">Stream prioritization and flow control</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					<p>Before HTTP/2, HTTP was a single request-and-response protocol, so there was no need for prioritization within the protocol. The client (typically, the web browser) decided the priority outside of HTTP by deciding what order to send the messages in, using the limited number of HTTP/1 connections (typically, six).</p>
+					<p>&nbsp;</p>
+					<p>This prioritization usually required requesting critical resources (HTML, render blocking CSS, and critical JavaScript) first and requesting non-blocking items (such as images and asynchronous JavaScript) later. Requests were queued, awaiting a free HTTP/1 connection, and the queuing, managed by the browser, decided the priority.</p>
+					<p>&nbsp;</p>
+					<p>HTTP/2 now has a much higher limit on the number of requests in flight at any time (typically, 100 active streams by default in many implementations), so many requests no longer need to be queued by the browser and can be sent immediately. This fact could lead to bandwidth being wasted on lower-priority resources (such as images) and therefore cause the page to appear to load slower over HTTP/2.</p>
+					<p>&nbsp;</p>
+					<p>Stream prioritization is needed so that the most critical resources can be sent with higher priority. Stream prioritization is implemented by the server sending more frames for higher-priority requests than for lower-priority requests when a queue of frames is waiting to be sent. Stream prioritization also allows greater control than under HTTP/1, in which the separate connections are independent. In HTTP/1, other than not using a connection, it wasn&rsquo;t possible to prioritize certain connections.</p>
+					<p>&nbsp;</p>
+					<p>If you have five critical resources and a sixth noncritical one, under HTTP/1, all the resources can be sent with the same priority on the six separate connections, or the first five can be sent while the sixth is held back. Under HTTP/2, all six requests can be sent with the appropriate priority, and this priority is used to decide how much resource to allocate to sending each response.</p>
+					<p>&nbsp;</p>
+					<p>Flow control is another necessary consequence of using multiple streams over the same connection. If the receiver is unable to process the incoming messages as fast as the sender is sending, a backlog exists, which must be buffered and eventually leads to packets being dropped and needing to be resent.</p>
+					<p>&nbsp;</p>
+					<p>TCP allows the connection to be throttled back in such a scenario at a connection level, but HTTP/2 requires it to happen at a stream level. Take the example of a web page with a live video on it. If the video is paused by the user, it may be prudent to pause the download for that HTTP/2 stream only, but to allow any other resources used by the website to continue to download at full capacity through other streams.</p>
+				</br>
+					<h4>Header compression</h4>
+					</br>
+						<p>Header compression HTTP headers are used to send additional information about requests and responses from client to server, and vice versa. There&rsquo;s a lot of repetition in these headers, as they&rsquo;re often sent identically for every resource.</p>
+						</br>
+						<ul>
+ 							<li>Cookie&mdash;Cookies are sent with every request to that domain (except for uncredentialed requests that Amazon uses [see chapter 2], but these are somewhat specialized and not the norm). Cookie headers can get particularly large and often are needed only for the HTML document resources, but get sent for every request.</li>
+  							<li>User-Agent&mdash;This header typically states the web browser being used. It never changes during the session, but it is still sent with every request.</li>
+  							<li>Host&mdash;This header is used to fully qualify the request URL and is always the same for each request to the same host.</li>
+  							<li>Accept&mdash;This header defines the format of the response it expects (acceptable image formats that the browser knows how to display, and so on). Because the formats that a browser supports typically don&rsquo;t change without a browser upgrade, this header changes per request type (image, document, font, and so on), but is the same for each instance of these types.</li>
+  							<li>Accept-Encoding&mdash;This header defines the compression formats (typically, gzip, deflate, and increasingly br for browsers that accept the newer brotli compression). Similar to the Accept header, this header doesn&rsquo;t change throughout the session.</li>
+						</ul>
+						</br>
+						<p>These response headers can be duplicated and are wasteful. Some specialized response headers (such as Content Security Policy headers) can be large and similarly repetitious&mdash; especially bad for smaller requests, in which the HTTP headers will be proportionally larger parts of the download.</p>
+						<p>&nbsp;</p>
+						<p>HTTP/1 allows compressing HTTP bodies (hence, the Accept-Encoding header mentioned earlier), but not compressing HTTP headers. HTTP/2 brings in the concept of header compression, it uses a technique other than body compression to allow cross-request compression and prevent some security issues with the algorithms used for HTTP body compression.</p>
+						</br>
+					<h4>Server push</h4>
+					</br>
+						<p>Another important difference between HTTP/1 and HTTP/2 is that HTTP/2 adds the concept of server push, which allows the server to respond to a request with more than one response. Under HTTP/1, when the home page is returned, the browser must read it and then request the other resources (such as CSS and JavaScript) before it starts rendering the page. With HTTP/2 server push, those resources can be sent with the initial response and should be available when the browser looks to use them.</p>
+						<p>&nbsp;</p>
+						<p>HTTP/2 server push is a new concept in HTTP, but if care isn&rsquo;t taken, it can easily cause wasted bandwidth, when resources that a browser doesn&rsquo;t need are pushed anyway, particularly if the resources being pushed were sent with a previous request and are already available in the browser cache. Deciding when and how to push is key to making the most of this feature.</p>
+						<p>&nbsp;</p>
+					</br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
