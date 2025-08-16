@@ -72,6 +72,11 @@
 					</br>
 					<p>Despite adding extra infrastructure to your setup, using a CDN may be considerably faster than connecting directly, because the local server can handle some of the connection setup requests for the client (such as the initial TCP connection and HTTPS negotiation). The benefit of having these client setup requests handled by a server closer to the users outweighs the negatives of having an additional server hop involved in the requests. Also, responses can be cached at each CDN server so that additional requests are served directly by the local server and not by the origin server, saving time for the user and load and bandwidth for the origin server.</p>
 					</br>
+					<p>A CDN can handle the HTTPS requirements necessary for HTTP/2. But if HTTPS isn&rsquo;t implemented at the origin server, web traffic will be encrypted only for some of its journey across the internet. Although many of the reasons to use HTTPS are to mitigate risks at the client side (connecting to an unknown Wi-Fi network, for example, involves risks that only HTTPS can mitigate), it&rsquo;s still preferred to use HTTPS for the full end-to-end connection.</p>
+					</br>
+					<p>Many people say that it&rsquo;s disingenuous to offload HTTPS at a CDN while talking HTTP for the rest of the journey through the internet, because your website visitors won&rsquo;t know that their passwords are potentially traveling across the website unsecured. But if it isn&rsquo;t easy to get the strict HTTPS setup required for HTTP/2 on your server (such as ALPN support), at least you can let the CDN handle this process and revert to an older HTTPS configuration over HTTP/1.1 for the connection to the origin server.</p>
+					</br>
+					
 				</div>
 			</div>
 		</div>
