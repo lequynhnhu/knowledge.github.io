@@ -100,6 +100,26 @@
   						<li>Server push</li>
 					</ul>
 					</br>
+					<p>These concepts are fundamental, breaking changes to the protocol in that they aren&rsquo;t backward-compatible; although an HTTP/1.0 web server could understand HTTP/1.1 messages and ignore the extra functionality that the later version introduced, this isn&rsquo;t true for HTTP/2 messages, which have a different structure and format. For this reason, HTTP/2 was viewed as being a major version upgrade.</p>
+					<p>&nbsp;</p>
+					<p>Most of these differences deal with how HTTP/2 is sent on the wire between client and server. At a higher level than most web developers will deal with (the HTTP semantics),2 HTTP/2 acts a lot like HTTP/1. It has the same methods (GET, POST, PUT, and so on); it uses the same URLs, the same response status codes (200, 404, 301, 302), and the same HTTP headers (mostly). HTTP/2 is a more efficient way to make those same HTTP requests.</p>
+					<p>&nbsp;</p>
+					<p>In many ways, HTTP/2 is like HTTPS in that it effectively wraps standard HTTP messages in a special format before sending and unwraps them after receiving. Therefore, although the client (web browser) and server (web server) need to know the exact details to send messages back and forth, higher-level applications don&rsquo;t need to treat these versions too differently, because the underlying concepts of HTTP that they use are similar.</p>
+					<p>&nbsp;</p>
+					<p>Unlike HTTPS, however, HTTP/2 should lead to different ways of developing websites. In the same way that a strong understanding of HTTP/1 led to the web optimizations discussed in chapter 2, a strong understanding of HTTP/2 leads to different optimizations that can make web developers better and help make websites faster. Therefore, it&rsquo;s important to understand these core differences.</p>
+					</br>
+						<h4>Binary rather than textual</h4>
+						</br>
+						<p>One of the main differences between HTTP/1 and HTTP/2 is that HTTP/2 is a binary, packet-based protocol, whereas HTTP/1 is entirely text-based. Text-based protocols are easy for humans to understand but more difficult for computers to parse. This situation was acceptable for the simple request-and-response protocol that HTTP started out as, but is increasingly limiting the use of the protocol for the modern internet.</p>
+						<p>With the text-based protocol, requests need to be sent and responses received in full before another request can be processed. On the whole, HTTP worked this way for the past 20 years, though small enhancements were made. HTTP/1.0 introduced binary HTTP bodies, for example, where images and other media could be sent in response, and HTTP/1.1 introduced pipelining and chunked encoding.</p>
+						<p>&nbsp;</p>
+						<p>Chunked encoding allowed part of the message body to be sent first, with the rest to follow as it became available. The HTTP body is split into chunks, and the client receiving the chunked response (or the server receiving the chunked request) could start processing the message before it was fully received. This technique is often used when the length of data that&rsquo;s generated dynamically isn&rsquo;t known in advance.</p>
+						<p>&nbsp;</p>
+						<p>Both chunked encoding and pipelining have head-of-line (HOL) blocking issues whereby the message at the top of the queue prevents subsequent responses from being sent, not to mention the fact that pipelining was not well supported in the real world.</p>
+						<p>&nbsp;</p>
+						<p>HTTP/2 moves to a full binary protocol, in which HTTP messages are split and sent in clearly defined frames. All HTTP/2 messages effectively use chunked encoding as standard, and this doesn&rsquo;t need to be set explicitly. In fact, the HTTP/2 specification states</p>
+						<p>&nbsp;</p>
+						<p>These frames are similar to the TCP packets that underlie most HTTP connections. When all the frames are received, the full HTTP message can be reconstructed. Despite being like TCP in many ways, HTTP/2 is still usually layered on top of TCP rather than replacing it. An underlying protocol such as TCP is used to guarantee that the messages arrive, and in order, without needing to add such handling to the HTTP/2 protocol.</p>
 					</br>
 				</div>
 			</div>
