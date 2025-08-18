@@ -1,4 +1,4 @@
-<div class="row mt-5 mb-5">
+	<div class="row mt-5 mb-5">
 	<div class="col-12">
 		<div class="card" id="card">
 			<div class="card-body" id="card-body">
@@ -108,8 +108,15 @@
 						</br>
 					<p>If a lambda could access the local variable directly and the lambda were used in a thread, then the thread using the lambda could try to access the variable after the thread that allocated the variable had deallocated it. Hence, Java implements access to a free local variable as access to a copy of it rather than access to the original variable. This makes no difference if the local variable is assigned to only once&mdash;hence the restriction.</p>
 					</br>
-					
+					<p><strong>Closure</strong></p>
 					</br>
+					<p>You may have heard of the term closure and may be wondering whether lambdas meet the definition of a closure (not to be confused with the Clojure programming language). To put it scientifically, a closure is an instance of a function that can reference nonlocal variables of that function with no restrictions.</p>
+					<p>&nbsp;</p>
+					<p>For example, a closure could be passed as argument to another function. It could also access and modify variables defined outside its scope. Now Java 8 lambdas and anonymous classes do something similar to closures: they can be passed as argument to methods and can access variables outside their scope. But they have a restriction: they can&rsquo;t modify the content of local variables of a method in which the lambda is defined.</p>
+					<p>&nbsp;</p>
+					<p> Those variables have to be implicitly final. It helps to think that lambdas close over values rather than variables. As explained previously, this restriction exists because local variables live on the stack and are implicitly confined to the thread they&rsquo;re in. Allowing capture of mutable local variables opens new thread-unsafe possibilities, which are undesirable (instance variables are fine because they live on the heap, which is shared across threads).</p>
+					</br>
+					
 				</div>
 			</div>
 		</div>
