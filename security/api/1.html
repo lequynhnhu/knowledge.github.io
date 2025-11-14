@@ -95,6 +95,12 @@
 					<p>For the exact same reason, some enterprises follow the strategy where all of the communication channels open to the public are over HTTPS, while the communication between internal servers are over plain HTTP.</p>
 					<p>The other option is to use optimized hardware to carry out the encryption/ decryption process in the TLS communication. Doing encryption/decryption process at the dedicated hardware level is far more cost-effective than doing the same at the application level, in terms of performance.</p>
 					</br>
+					<p>Even with TLS, the message is only protected while it is in transit. As soon as the message leaves the transport channel, it&rsquo;s in cleartext. In other words, the protection provided by TLS is point to point. When you log in to your banking web site from the browser, your credentials are only secured from your browser to the web server at your bank.</p>
+					<p>If the web server talks to a Lightweight Directory Access Protocol (LDAP) server to validate the credentials, once again if this channel is not explicitly protected, then the credentials will be passed in cleartext. If anyone logs all the in and out messages to and from the bank&rsquo;s web server, then your credentials will be logged in plaintext.</p>
+					<p>In a highly secured environment, this may not be acceptable. Using message-level security over transport-level security is the solution. With message-level security, as its name implies, the message is protected by itself and does not rely on the underlying transport for security.</p>
+					<p>Since this has no dependency on the transport channel, the message will be still protected, even after it leaves the transport. This once again comes at a high performance cost. Using message-level protection is much costlier than simply using TLS.</p>
+					<p>There is no clear-cut definition on making a choice between the security and the performance. Always there is a compromise, and the decision has to be taken based on the context.</p>
+					</br>
 					
 				</div>
 			</div>
