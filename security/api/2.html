@@ -33,6 +33,8 @@
 						<p>The token endpoint in most of the cases is a secured endpoint. The client application can generate the token request along with the corresponding client_id and the client_secret, which will go in the HTTP Authorization header.</p>
 						<p>In most of the cases, the token endpoint is secured with HTTP Basic authentication, but it is not a must. For stronger security, one may use mutual TLS as well, and if you are using the authorization code grant type from a single-page app or a mobile app, then you may not use any credentials at all.</p>
 						</br>
+						<p>the authorization code returned from the authorization server acts as an intermediate code. This code is used to map the end user or resource owner to the OAuth client. The OAuth client may authenticate itself to the token endpoint of the authorization server. The authorization server should check whether the code is issued to the authenticated OAuth client prior to exchanging it for an access token.</p>
+						</br>
 						
 				</div>
 			</div>
