@@ -118,7 +118,13 @@
 					<p>Confidentiality, integrity, and availability (CIA), widely known as the triad of information security, are three key factors used in benchmarking information systems security. This is also known as CIA triad or AIC triad. The CIA triad helps in both designing a security model and assessing the strength of an existing security model.</p>
 					</br>
 					<h5>Confidentiality</h5>
-					
+					<p>Confidentiality attribute of the CIA triad worries about how to protect data from unintended recipients, both at rest and in transit. You achieve confidentiality by protecting transport channels and storage with encryption. For APIs, where the transport channel is HTTP (most of the time), you can use Transport Layer Security (TLS), which is in fact known as HTTPS. For storage, you can use disk-level encryption or application-level encryption.</p>
+					</br>
+					<p>Channel encryption or transport-level encryption only protects a message while it&rsquo;s in transit. As soon as the message leaves the transport channel, it&rsquo;s no more secure. In other words, transport-level encryption only provides point-to-point protection and truncates from where the connection ends.</p>
+					</br>
+					<p>In contrast, there is message-level encryption, which happens at the application level and has no dependency on the transport channel. In other words, with message-level encryption, the application itself has to worry about how to encrypt the message, prior to sending it over the wire, and it&rsquo;s also known as end-to-end encryption. If you secure data with message-level encryption, then you can use even an insecure channel (like HTTP) to transport the message.</p>
+					</br>
+										
 				</div>
 			</div>
 		</div>
