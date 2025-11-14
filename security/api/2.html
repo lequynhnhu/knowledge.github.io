@@ -43,6 +43,9 @@
 							<p>The JavaScript client initiates the implicit grant flow by redirecting the user to the authorization server. The <em>response_type</em> parameter in the request indicates to the authorization server that the client expects a token, not a code.</p>
 							<p>The implicit grant type doesn&rsquo;t require the authorization server to authenticate the JavaScript client; it only has to send the <em>client_id</em> in the request.</p>
 							<p>This is for logging and auditing purposes and also to find out the corresponding <em>redirect_uri</em>. The <em>redirect_uri</em> in the request is optional; if it&rsquo;s present, it must match what is provided at the client registration:</p>
+							</br>
+							<p>Unlike the authorization code grant type, the implicit grant type client receives the access token in the response to the grant request. When we have something in the URI fragment of a URL, the browser never sends it to the back end. It only stays on the browser. So when authorization server sends a redirect to the callback URL of the client application, the request first comes to the browser, and the browser does an HTTP GET to the web server that hosts the client application.</p>
+							</br>
 							
 						</br>
 				</div>
