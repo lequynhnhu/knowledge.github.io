@@ -46,6 +46,9 @@
 							</br>
 							<p>Unlike the authorization code grant type, the implicit grant type client receives the access token in the response to the grant request. When we have something in the URI fragment of a URL, the browser never sends it to the back end. It only stays on the browser. So when authorization server sends a redirect to the callback URL of the client application, the request first comes to the browser, and the browser does an HTTP GET to the web server that hosts the client application.</p>
 							</br>
+							<p>But in that HTTP GET, you will not find the URI fragment, and the web server will never see it. To process the access token that comes in the URI fragment, as a response to HTTP GET from the browser, the web server of the client application will return back an HTML page with a JavaScript, which knows how to extract the access_token from the URI fragment, which still remains in the browser address bar. In general this is how single-page applications work.</p>
+							</br>
+							<p>he authorization server must treat the authorization code, access token, refresh token, and client secret key as sensitive data. They should never be sent over HTTP&mdash;the authorization server must use Transport Layer Security (TLS). These tokens should be stored securely, possibly by encrypting or hashing them.</p>
 							
 						</br>
 				</div>
