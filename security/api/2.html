@@ -67,7 +67,8 @@
 							</br>
 						<h5>1.5 Refresh Grant Type</h5>
 						</br>
-							
+							<p>Although it&rsquo;s not the case with the implicit grant type and the client credentials grant type, with the other two grant types, the OAuth access token comes with a refresh token. This refresh token can be used to extend the validity of the access token without the involvement of the resource owner.</p>
+							<p>The refresh token has a much longer lifetime than the access token. If the lifetime of the refresh token expires, then the client must initiate the OAuth token flow from the start and get a new access token and refresh token. The authorization server also has the option to return a new refresh token each time the client refreshes the access token. In such cases, the client has to discard the previously obtained refresh token and begin using the new one.</p>
 						</br>
 				</div>
 			</div>
