@@ -90,6 +90,11 @@
 					<p>None of these are harmful&mdash;but, then again, if an attacker can fool you to install a malware as a browser plugin, it could easily bypass all your browser-level security protections, even the TLS, to get hold of your Facebook, Google, Amazon, or any other web site credentials.</p>
 					<p>It&rsquo;s not just about an attacker installing a plugin into the user&rsquo;s browser, but also when there are many extensions installed in your browser, each one of them expands the attack surface. Attackers need not write new plugins; rather they can exploit security vulnerability in an already installed plugin.</p>
 					</br>
+					<p>The use of TLS for transport-level security is another good example. TLS provides protection for data in transit. When you pass your login credentials to Amazon or eBay, those are passed over a secured communication channel, or HTTP over TLS, which is in fact the HTTPS.</p>
+					<p>No one in the middle will be able to see the data passed from your browser to the web server (assuming there is no room for a man-in-the-middle attack). But this comes at a cost. TLS adds more overhead over the plain HTTP communication channel, which would simply slow down things a bit.</p>
+					<p>For the exact same reason, some enterprises follow the strategy where all of the communication channels open to the public are over HTTPS, while the communication between internal servers are over plain HTTP.</p>
+					<p>The other option is to use optimized hardware to carry out the encryption/ decryption process in the TLS communication. Doing encryption/decryption process at the dedicated hardware level is far more cost-effective than doing the same at the application level, in terms of performance.</p>
+					</br>
 					
 				</div>
 			</div>
