@@ -56,6 +56,13 @@
 						<p>Each microservice would be a smart endpoint, which exactly knows how to process an incoming request and generate the response. The communication channels between microservices act as dumb pipes. This is similar to the Unix pipes and filters architecture.</p>
 					</br>
 					<h5>Decentralized governance:</h5>
+						<p>Most of the SOA deployments follow the concept of centralized governance. The design time governance and the runtime governance are managed and enforced centrally. The design time governance will look into the aspects such as whether the services passed all the unit tests, integration tests, and coding conventions, secured with accepted security policies and many more, before promoting from the developer phase to the QA (quality assurance) phase.</p>
+						<p>With the microservices-based architecture, each service is designed with its own autonomy and highly decoupled from each other. The team behind each microservice can follow their own standards, tools, and protocols. This makes a decentralized governance model more meaningful for microservices architecture.</p>
+					</br>
+					<h5>Decentralized data management:</h5>
+					<p>In a monolithic application, all the components in it talk to a single database. With the microservices design, where each distinguished functional component is developed into a microservice, based on their business capabilities, will have its own database so each such service can scale end to end without having any dependency on other microservices. This approach can easily add overhead in distributed transaction management, as data resides in multiple heterogeneous database management systems.</p>
+					</br>
+					<h5>Infrastructure automation:</h5>
 					
 				</div>
 			</div>
