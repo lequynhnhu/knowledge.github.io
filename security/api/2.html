@@ -39,6 +39,10 @@
 							</br>
 						<h5>1.2 Implicit Grant Type</h5>
 						</br>
+							<p>The implicit grant type to acquire an access token is mostly used by JavaScript clients running in the web browser. Even for JavaScript clients now, we do not recommend using implicit grant type, rather use authorization code grant type with no client authentication.</p>
+							<p>The JavaScript client initiates the implicit grant flow by redirecting the user to the authorization server. The <em>response_type</em> parameter in the request indicates to the authorization server that the client expects a token, not a code.</p>
+							<p>The implicit grant type doesn&rsquo;t require the authorization server to authenticate the JavaScript client; it only has to send the <em>client_id</em> in the request.</p>
+							<p>This is for logging and auditing purposes and also to find out the corresponding <em>redirect_uri</em>. The <em>redirect_uri</em> in the request is optional; if it&rsquo;s present, it must match what is provided at the client registration:</p>
 							
 						</br>
 				</div>
