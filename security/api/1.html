@@ -15,8 +15,8 @@
 					<p>Platform-neutral means that a technology, product, or service is designed to work consistently across different operating systems, hardware architectures, or software environments without requiring significant changes.</p>
 					<p>An unmanaged API has its own deficiencies, as listed here:</p>
 					<ul>
-						<li>No restriction on the number of API calls by time. Anyone can invoke the API any number of times, which could possibly cause the server hosting the API to starve all its resources.</li>
-						<li>API versions are not managed properly. Introduction of a new API could possibly break all the existing consumers of the old API.</li>
+						<li>•No restriction on the number of API calls by time. Anyone can invoke the API any number of times, which could possibly cause the server hosting the API to starve all its resources.</li>
+						<li>•API versions are not managed properly. Introduction of a new API could possibly break all the existing consumers of the old API.</li>
 					</ul>
 					</br>
 					<p>Describing a SOAP-based web service is standardized through the Web Service Definition Language (WSDL) specification. WSDL describes what operations are exposed through the web service and how to reach them.</p>
@@ -128,7 +128,7 @@
 						<p>In TLS bridging, the initial connection truncates from the proxy server, and a new connection to the gateway (or the server) is established from there. That means the data is in cleartext while inside the proxy server.</p>
 						<p>Any intruder who can plant malware in the proxy server can intercept traffic that passes through. With TLS tunneling, the proxy server facilitates creating a direct channel between the client machine and the gateway (or the server). The data flow through this channel is invisible to the proxy server.</p>										
 					</br>
-					<h5>Confidentiality</h5>
+					<h5>Integrity</h5>
 						</br>
 						<p>Integrity is a guarantee of data&rsquo;s correctness and trustworthiness and the ability to detect any unauthorized modifications. It ensures that data is protected from unauthorized or unintentional alteration, modification, or deletion. The way to achieve integrity is twofold: preventive measures and detective measures. Both measures have to take care of data in transit as well as data at rest.</p>
 						</br>
@@ -136,11 +136,28 @@
 						<p>TLS itself has a way of detecting data modifications. It sends a message authentication code in each message from the first handshake, which can be verified by the receiving party to make sure the data has not been modified while in transit.</p>
 						<p>If you use message-level encryption to prevent data alteration, then to detect any modification in the message at the recipient, the sender has to sign the message, and with the public key of the sender, the recipient can verify the signature.</p>
 					</br>
-					<h5>Confidentiality</h5>
+					<h5>Availability</h5>
 						<p>Making a system available for legitimate users to access all the time is the ultimate goal of any system design. Security isn&rsquo;t the only aspect to look into, but it plays a major role in keeping the system up and running.</p>
 						<p>The goal of the security design should be to make the system highly available by protecting it from illegal access attempts. Doing so is extremely challenging. Attacks, especially on a public API, can vary from an attacker planting malware in the system to a highly organized distributed denial of service (DDoS) attack.</p>
 						</br>
 						<p>DDoS attacks are hard to eliminate fully, but with a careful design, they can be minimized to reduce their impact. In most cases, DDoS attacks must be detected at the network perimeter level&mdash;so, the application code doesn&rsquo;t need to worry too much. But vulnerabilities in the application code can be exploited to bring a system down.&nbsp;</p>
+						</br>
+						<p>Eight types of DoS attacks that can be carried out against SOAP-based APIs with XML payloads:</p>
+						<p>&bull; <strong>Coercive parsing attack:</strong> The attacker sends an XML document with a deeply nested XML structure. When a DOM-based parser processes the XML document, an out-of-memory exception or a high CPU load can occur.</p>
+							<p>&nbsp;</p>
+							<p>&bull; <strong>SOAP array attack:</strong> Forces the attacked web service to declare a very large SOAP array. This can exhaust the web service&rsquo;s memory.</p>
+							<p>&nbsp;</p>
+							<p>&bull; <strong>XML element count attack:</strong> Attacks the server by sending a SOAP message with a high number of non-nested elements.</p>
+							<p>&nbsp;</p>
+							<p>&bull; <strong>XML attribute count attack:</strong> Attacks the server by sending a SOAP message with a high attribute count.</p>
+							<p>&nbsp;</p>
+							<p>&bull;<strong> XML entity expansion attack:</strong> Causes a system failure by forcing the server to recursively resolve entities defined in a document type definition (DTD). This attack is also known as an XML bomb or a billion laughs attack.</p>
+							<p>&nbsp;</p>
+							<p>&bull; <strong>XML external entity DoS attack:</strong> Causes a system failure by forcing the server to resolve a large external entity defined in a DTD. If an attacker is able to execute the external entity attack, an additional attack surface may appear.</p>
+							<p>&nbsp;</p>
+							<p>&bull; <strong>XML overlong name attack:</strong> Injects overlong XML nodes in the XML document. Overlong nodes can be overlong element names, attribute names, attribute values, or namespace definitions.</p>
+							<p>&nbsp;</p>
+							<p>&bull; <strong>Hash collision attack (HashDoS):</strong> Different keys result in the same bucket assignments, causing a collision. A collision leads to resource-intensive computations in the bucket. When a weak hash function is used, an attacker can intentionally create hash collisions that lead to a system failure.</p>
 						</br>
 						
 				</div>
