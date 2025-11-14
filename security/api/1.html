@@ -124,7 +124,11 @@
 					</br>
 					<p>In contrast, there is message-level encryption, which happens at the application level and has no dependency on the transport channel. In other words, with message-level encryption, the application itself has to worry about how to encrypt the message, prior to sending it over the wire, and it&rsquo;s also known as end-to-end encryption. If you secure data with message-level encryption, then you can use even an insecure channel (like HTTP) to transport the message.</p>
 					</br>
-										
+					<p>A TLS connection, when going through a proxy, from the client to the server can be established in two ways: either with TLS bridging or with TLS tunneling. Almost all proxy servers support both modes. For a highly secured deployment, TLS tunneling is recommended.</p>
+					<p>In TLS bridging, the initial connection truncates from the proxy server, and a new connection to the gateway (or the server) is established from there. That means the data is in cleartext while inside the proxy server.</p>
+					<p>Any intruder who can plant malware in the proxy server can intercept traffic that passes through. With TLS tunneling, the proxy server facilitates creating a direct channel between the client machine and the gateway (or the server). The data flow through this channel is invisible to the proxy server.</p>										
+					</br>
+					
 				</div>
 			</div>
 		</div>
