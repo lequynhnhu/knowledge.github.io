@@ -29,7 +29,16 @@
 					<h5>2. TLS Extension for Token Binding Protocol Negotiation</h5>
 					</br>
 						<p>To bind security tokens to the TLS connection, the client and the server need to first agree upon the token binding protocol version and the parameters (signature algorithm, length) related to the token binding key.</p>
+						<p>&nbsp;</p>
 						<p>The token binding protocol version reflects the protocol version defined by the Token Binding Protocol (RFC 8471)&mdash;and the key parameters are defined by the same specification itself.</p>
+						<p>&nbsp;</p>
+						<p>The client uses the Token Binding TLS extension to indicate the highest supported token binding protocol version and key parameters. This happens with the Client Hello message in the TLS handshake. To support the token binding specification, both the client and the server should support the token binding protocol negotiation extension.</p>
+						<p>&nbsp;</p>
+						<p>The server uses the Token Binding TLS extension to indicate the support for the token binding protocol and to select the protocol version and key parameters. The server that supports token binding and receives a Client Hello message containing the Token Binding extension will include the Token Binding extension in the Server Hello if the required conditions are satisfied.</p>
+						<p>&nbsp;</p>
+						<p>If the Token Binding extension is included in the Server Hello and the client supports the token binding protocol version selected by the server, it means that the version and key parameters have been negotiated between the client and the server and shall be definitive for the TLS connection. If the client does not support the token binding protocol version selected by the server, then the connection proceeds without token binding.</p>
+						<p>&nbsp;</p>
+						
 				</div>
 			</div>
 		</div>
