@@ -38,7 +38,14 @@
 						<p>&nbsp;</p>
 						<p>If the Token Binding extension is included in the Server Hello and the client supports the token binding protocol version selected by the server, it means that the version and key parameters have been negotiated between the client and the server and shall be definitive for the TLS connection. If the client does not support the token binding protocol version selected by the server, then the connection proceeds without token binding.</p>
 						<p>&nbsp;</p>
-						
+						<p>Every time a new TLS connection is negotiated (TLS handshake) between the client and the server, a token binding negotiation happens too. Even though the negotiation happens repeatedly by the TLS connection, the token bindings are long-lived; they encompass multiple TLS connections and TLS sessions between a given client and server.</p>
+						</br>
+						<h6>Key Generation</h6>
+						</br>
+							<p>The Token Binding Protocol specification (RFC 8471) defines the parameters related to key generation. These are the ones agreed upon during the negotiation phase.</p>
+							<p>&nbsp;</p>
+							
+						</br>
 				</div>
 			</div>
 		</div>
