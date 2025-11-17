@@ -139,6 +139,20 @@
 					<p>Would OAuth 2.0 work? To access an API secured with OAuth, the client must present an access token issued by the owner of the API or issued by an entity that your API trusts. Users from external parties have to authenticate first with the OAuth authorization server that the API trusts and then obtain an access token. Ideally, the authorization server the API trusts is from the same domain as the API.</p>
 					</br>
 					<p>Neither the authorization code grant type nor the implicit grant type mandates how to authenticate users at the authorization server. It&rsquo;s up to the authorization server to decide. If the user is local to the authorization server, then it can use a username and password or any other direct authentication protocol. If the user is from an external entity, then you have to use some kind of brokered authentication.</p>					
+					</br>
+						<h5>1. Brokered Authentication</h5>
+						</br>
+						<p>With brokered authentication, at the time of authentication, the local authorization server (running in the same domain as the API) does not need to trust each and every individual user from external parties. Instead, it can trust a broker from a given partner domain. Each partner should have a trust broker whose responsibility is to authenticate its own users (possibly through direct authentication) and then pass the authentication decision back to the local OAuth authorization server in a reliable and trusted manner. In practice, an identity provider running in the user&rsquo;s (in our case, the partner employees&rsquo;) home domain plays the role of a trust broker.</p>
+						</br>
+						<p>The trust relationship between the brokers from partners and the local OAuth authorization server (or between two federation domains) must be established out of band. In other words, it has to be established with a prior agreement between two parties. In most scenarios, trust between different entities is established through X.509 certificates. Let&rsquo;s walk through a sample brokered authentication use case.</p>
+						</br>
+						<p>Going back to OAuth principles, you need to deal with four entities in a federation scenario: the resource owner, the resource server, the authorization server, and the client application. All these entities can reside in the same domain or in different ones.</p>
+						</br>
+						<p>Let&rsquo;s start with the simplest scenario first. The resource owner (user), resource server (API gateway), and authorization server are in a single domain, and the client application (web app) is in a different domain.</p>
+						<p>For example, you&rsquo;re an employee of Foo Inc. and want to access a web application hosted by Bar Inc. Once you log in to a web application at Bar Inc., it needs to access an API hosted in Foo Inc. on your behalf. Using OAuth terminology, you&rsquo;re the resource owner, and the API is hosted in the resource server. Both you and API are from the Foo domain. The web application hosted by Bar Inc. is the OAuth client application.</p>
+						</br>
+						
+					</br>					
 				</div>
 			</div>
 		</div>
