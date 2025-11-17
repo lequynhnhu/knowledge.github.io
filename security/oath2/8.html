@@ -175,6 +175,16 @@
 						</br>
 						<p>5. The attacker too logs in to the target web site with his/her valid credentials and uses victim&rsquo;s credit card to purchase goods.</p>
 						</br>
+						<p><em>The preceding attack can be mitigated by following these best practices:</em></p>
+						</br>
+						<p>&bull; Use a short-lived authorization code. Making the authorization code expires soon gives very little time for the attacker to plant an attack. For example, the authorization code issued by LinkedIn expires in 30 seconds. Ideally, the lifetime of the authorization code should be in seconds.</p>
+						</br>
+						<p>&bull; Use the state parameter as defined in the OAuth 2.0 specification. This is one of the key parameters to use to mitigate CSRF attacks in general. The client application has to generate a random number (or a string) and passes it to the authorization server along with the grant request. Further, the client application has to add the generated value of the state to the current user session (browser session) before redirecting the user to the authorization server.</p>
+						<p>According to the OAuth 2.0 specification, the authorization server has to return back the same state value with the authorization code to the redirect_uri (to the client application). The client must validate the state value returned from the authorization server with the value stored in the user&rsquo;s current session&mdash;if it mismatches, it rejects moving forward.</p>
+						<p>Going back to the attack, when the user clicks the crafted link sent to the victim by the attacker, it won&rsquo;t carry the same state value generated before and attached to the victim&rsquo;s session (or most probably victim&rsquo;s session has no state value), or the attacker does not know how to generate the exact same state value. So, the attack won&rsquo;t be successful, and the client application will reject the request.</p>
+						</br>
+						<p>&bull; Use PKCE (Proof Key for Code Exchange). PKCE (RFC 7636) was introduced to protect OAuth 2.0 client applications from the authorization code interception attack, mostly targeting native mobile apps. The use of PKCE will also protect users from CSRF attacks, once the code_verifier is attached to the user&rsquo;s browser session.</p>
+						</br>
 				</div>
 			</div>
 		</div>
