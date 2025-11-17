@@ -134,7 +134,11 @@
 					<h1 class="header-title mb-0">Federating Access to APIs</h1>
 				</div>
 				<div class="market-status-table mt-4">
-					
+					<p>Federation, in the context of API security, is about propagating user identities across distinct identity management systems or distinct enterprises. Let&rsquo;s start with a simple use case where you have an API exposed to your partners. How would you authenticate users for this API from different partners? These users belong to the external partners and are managed by them.</p>
+					<p>HTTP Basic authentication won&rsquo;t work. You don&rsquo;t have access to the external users&rsquo; credentials, and, at the same time, your partners won&rsquo;t expose an LDAP or a database connection outside their firewall to external parties. Asking for usernames and passwords simply doesn&rsquo;t work in a federation scenario.</p>
+					<p>Would OAuth 2.0 work? To access an API secured with OAuth, the client must present an access token issued by the owner of the API or issued by an entity that your API trusts. Users from external parties have to authenticate first with the OAuth authorization server that the API trusts and then obtain an access token. Ideally, the authorization server the API trusts is from the same domain as the API.</p>
+					</br>
+					<p>Neither the authorization code grant type nor the implicit grant type mandates how to authenticate users at the authorization server. It&rsquo;s up to the authorization server to decide. If the user is local to the authorization server, then it can use a username and password or any other direct authentication protocol. If the user is from an external entity, then you have to use some kind of brokered authentication.</p>					
 				</div>
 			</div>
 		</div>
