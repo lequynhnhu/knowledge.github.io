@@ -79,6 +79,25 @@
 						<p>&nbsp;Also, there is a cost of making API calls. Most of the client applications are given a throttle limit&mdash;meaning a given application can only do n number of calls during a minute or some fixed time period. If one user tries to invoke APIs with a script, that could possibly eat out the complete throttle limit of the application&mdash;making an undesirable impact on the other users of the same application.</p>
 						<p>To overcome such scenarios, the recommended approach is to introduce throttle limits by user by application&mdash;not just by the application. In that way, if a user wants to eat out his own throttle limit, go out and do it! The other solution is to use Token Binding,</p>
 						</br>
+					<h6>4. Token Leakage/Export</h6>
+					</br>
+						<p>More than 90% of the OAuth 2.0 deployments are based on bearer tokens&mdash;not just the public/Internet scale ones but also at the enterprise level. The use of a bearer token is just like using cash. When you buy a cup of coffee from Starbucks, paying by cash, no one will bother how you got that ten-dollar note&mdash;or if you&rsquo;re the real owner of it. OAuth 2.0 bearer tokens are similar to that. If someone takes the token out of the wire (just like stealing a ten-dollar note from your pocket), he/she can use it just as the original owner of it&mdash;no questions asked!</p>
+						<p>Whenever you use OAuth 2.0, it&rsquo;s not just recommended but a must to use TLS. Even though TLS is used, still a man-in-the-middle attack can be carried out with various techniques. Most of the time, the vulnerabilities in TLS implementations are used to intercept the TLS-protected communication channels. The Logjam attack discovered in May 2015 allowed a man-in-the-middle attacker to downgrade vulnerable TLS connections to 512-bit export-grade cryptography. This allowed the attacker to read and modify any data passed over the connection.</p>
+						<p>There are few things we need to worry about as precautions to keep the attacker away from having access to the tokens:</p>
+						</br>
+							<p style="padding-left: 20px;">&bull; Always be on TLS (use TLS 1.2 or later).</p>
+							<p style="padding-left: 20px;">&nbsp;&bull; Address all the TLS-level vulnerabilities at the client, authorization server, and the resource server.</p>
+							<p style="padding-left: 20px;">&bull; The token value should be &gt;=128 bits long and constructed from a cryptographically strong random or pseudorandom number sequence.</p>
+							<p style="padding-left: 20px;">&bull; Never store tokens in cleartext&mdash;but the salted hash.&nbsp;</p>
+							<p style="padding-left: 20px;">&bull; Never write access/refresh tokens into logs.</p>
+							<p style="padding-left: 20px;">&bull; Use TLS tunneling over TLS bridging.&nbsp;</p>
+							<p style="padding-left: 20px;">&bull; Decide the lifetime of each token based on the risk associated with token leakage, duration of the underlying access grant (SAML grant (RFC 7522) or JWT grant (RFC 7523)), and the time required for an attacker to guess or produce a valid token.&nbsp;</p>
+							<p style="padding-left: 20px;">&bull; Prevent reuse of the authorization code&mdash;just once.&nbsp;</p>
+							<p style="padding-left: 20px;">&bull; Use one-time access tokens. Under the OAuth 2.0 implicit grant type, access token comes as a URI fragment&mdash;which will be in the browser history. In such cases, it can be immediately invalidated by exchanging it to a new access token from the client application (which is an SPA).</p>
+							<p style="padding-left: 20px;">&bull; Use strong client credentials. Most of the applications just use client id and client secret to authenticate the client application to the authorization server. Rather than passing credentials over the wire, client can use either the SAML or JWT assertion to authenticate.</p>
+						</br>
+						<p>In addition to the preceding measures, we can also cryptographically bind the OAuth 2.0 access/refresh tokens and authorization codes to a given TLS channel&mdash;so those cannot be exported and used elsewhere. There are few specifications developed under the IETF Token Binding working group to address this aspect.</p>
+						
 				</div>
 			</div>
 		</div>
