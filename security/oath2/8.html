@@ -193,6 +193,15 @@
 						</br>
 						<p>This does not completely solve the problem. If the client decides to get a single access token (with all the scopes) to access all the resources, then still a malicious client can use that access token to access another resource by impersonating the original client. To overcome this, the client can first get an access token with all the scopes, then it can exchange the access token to get multiple access tokens with different scopes, following the OAuth 2.0 Token Exchange specification. A given resource server will only see an access token having scopes only related to that particular resource server.</p>
 						</br>
+						<p>Let&rsquo;s see another example of token reuse. Here assume that you log in to an OAuth 2.0 client application with Facebook. Now the client has an access token, which is good enough to access the user info endpoint of Facebook and find who the user is. This client application is under an attacker, and now the attacker tries to access another client application, which uses the implicit grant type, with the same access token, as shown in the following.</p>
+						</br>
+						<p>The preceding URL will let the attacker log in to the client application as the original user unless the target client application has proper security checks in place. How do we overcome this? There are multiple options:</p>
+						</br>
+						<p>&bull; Avoid using OAuth 2.0 for authentication&mdash;instead use OpenID Connect. The ID token issued by the authorization server (via OpenID Connect) has an element called aud (audience)&mdash;and its value is the client id corresponding to the client application. Each application should make sure that the value of the aud is known to it before accepting the user. If the attacker tries to replay the ID token, it will not work since the audience validation will fail at the second client application (as the second application expects a different aud value).</p>
+						<p>&bull; Facebook login is not using OpenID Connect&mdash;and the preceding attack can be carried out against a Facebook application which does not have the proper implementation. There are few options introduced by Facebook to overcome the preceding threat. One way is to use the undocumented API, <em>https://graph.facebook.com/ app?access_token=&lt;access_token&gt;</em>, to get access token metadata. This will return back in a JSON message the details of the application which the corresponding access token is issued to. If it&rsquo;s not yours, reject the request.</p>
+						<p>&nbsp;&bull; Use the standard token introspection endpoint of the authorization server to find the token metadata. The response will have the <em>client_ id</em> corresponding to the OAuth 2.0 application&mdash;and if it does not belong to you, reject the login request.</p>
+						</br>
+						
 				</div>
 			</div>
 		</div>
