@@ -189,6 +189,12 @@
 						</br>
 					<h6>2. Single Sign-On with the Delegated Access Control</h6>
 					</br>
+						<p>Suppose a medium-scale enterprise has a number of APIs. Company employees are allowed to access these APIs via web applications while they&rsquo;re behind the company firewall. All user data are stored in Microsoft Active Directory, and all the web applications are connected to an identity provider, which supports Security Assertion Markup Language (SAML) 2.0 to authenticate users. The web applications need to access back-end APIs on behalf of the logged-in user.</p>
+						</br>
+						<p>The catch here is the last statement: &ldquo;The web applications need to access back-end APIs on behalf of the logged-in user.&rdquo; This suggests the need for an access delegation protocol: OAuth 2.0. However, users don&rsquo;t present their credentials directly to the web application&mdash;they authenticate through a SAML 2.0 identity provider.</p>
+						</br>
+						<p>In this case, you need to find a way to exchange the SAML token a web application receives via the SAML 2.0 Web SSO protocol for an OAuth access token, which is defined in the SAML grant type for the OAuth 2.0 specification. Once the web application receives the SAML token, it has to exchange the SAML token to an access token by talking to the OAuth 2.0 authorization server.</p>
+						</br>
 						
 					</br>
 				</div>
