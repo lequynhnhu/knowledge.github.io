@@ -201,7 +201,10 @@
 						<p>&bull; Facebook login is not using OpenID Connect&mdash;and the preceding attack can be carried out against a Facebook application which does not have the proper implementation. There are few options introduced by Facebook to overcome the preceding threat. One way is to use the undocumented API, <em>https://graph.facebook.com/ app?access_token=&lt;access_token&gt;</em>, to get access token metadata. This will return back in a JSON message the details of the application which the corresponding access token is issued to. If it&rsquo;s not yours, reject the request.</p>
 						<p>&nbsp;&bull; Use the standard token introspection endpoint of the authorization server to find the token metadata. The response will have the <em>client_ id</em> corresponding to the OAuth 2.0 application&mdash;and if it does not belong to you, reject the login request.</p>
 						</br>
-						
+						<p>There is another flavor of token reuse&mdash;rather we call it token misuse. When implicit grant type is used with a single-page application (SPA), the access token is visible to the end user&mdash;as it&rsquo;s on the browser. It&rsquo;s the legitimate user&mdash;so the user seeing the access token is no big deal. But the issue is the user would probably take the access token out of the browser (or the app) and automate or script some API calls, which would generate more load on the server that would not expect in a normal scenario.</p>
+						<p>&nbsp;Also, there is a cost of making API calls. Most of the client applications are given a throttle limit&mdash;meaning a given application can only do n number of calls during a minute or some fixed time period. If one user tries to invoke APIs with a script, that could possibly eat out the complete throttle limit of the application&mdash;making an undesirable impact on the other users of the same application.</p>
+						<p>To overcome such scenarios, the recommended approach is to introduce throttle limits by user by application&mdash;not just by the application. In that way, if a user wants to eat out his own throttle limit, go out and do it! The other solution is to use Token Binding,</p>
+						</br>
 				</div>
 			</div>
 		</div>
