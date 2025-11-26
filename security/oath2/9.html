@@ -109,6 +109,18 @@
 						<p>&bull; Validate the redirecting URL at open redirector and make sure you only redirect to the domains you own.&nbsp;</p>
 						<p>&bull; Use JWT Secured Authorization Request (JAR) or Pushed Authorization Requests (PAR)&nbsp; to protect the integrity of the authorization request, so the attacker won&rsquo;t be able to modify the request to include the open redirector query parameter to the <em>redirect_uri</em>.</p>
 					</br>
+					<h6>6. Code Interception Attack</h6>
+					</br>
+						<p>Code interception attack could possibly happen in a native mobile app. OAuth 2.0 authorization requests from native apps should only be made through external user agents, primarily the user&rsquo;s browser.</p>
+						<p>The way you do single sign-on in a mobile environment is by spinning up the system browser from your app and then initiate OAuth 2.0 flow from there. Once the authorization code is returned back to the redirect_uri (from the authorization server) on the browser, there should be a way to pass it over to the native app. This is taken care by the mobile OS&mdash;and each app has to register for a URL scheme with the mobile OS.</p>
+						<p>When the request comes to that particular URL, the mobile OS will pass its control to the corresponding native app. But, the danger here is, there can be multiple apps that get registered for the same URL scheme, and there is a chance a malicious app could get hold of the authorization code.</p>
+						<p>Since many mobile apps embed the same client id and client secret for all the instances of that particular app, the attacker can also find out what they are. By knowing the client id and client secret, and then having access to the authorization code, the malicious app can now get an access token on behalf of the end user.</p>
+					</br>
+						<p>1. The OAuth 2.0 client app generates a random number (<em>code_ verifie</em>r) and finds the SHA256 hash of it&mdash;which is called the <em>code_challenge</em>. </p>
+						<p>2. The OAuth 2.0 client app sends the <em>code_challenge </em>along with the hashing method in the authorization grant request to the authorization server. </p>
+						<p>3. Authorization server records the code_challenge (against the issued authorization code) and replies back with the code. </p>
+						<p>4. The client sends the <em>code_verifier </em>along <em>with </em>the authorization code to the token endpoint. </p>
+						<p>5. The authorization server finds the hash of the provided <em>code_ verifier</em> and matches it against the stored <em>code_challenge</em>. If it does not match, rejects the request.</p>
 				</div>
 			</div>
 		</div>
