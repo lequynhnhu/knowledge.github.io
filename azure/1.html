@@ -86,7 +86,9 @@
 						<br/>
 							<p>SSH is a protocol used to communicate securely with remote computers and is the most common way to log in to Linux VMs. It&rsquo;s similar to using an RDP connection to a Windows VM, except that in Linux, the whole SSH session is typically consolebased. With public-key cryptography, you can use a digital key pair to authenticate you with a remote Linux VM.</p>
 							<p>An SSH key pair has two parts: a public key and a private key. The public key is stored on your Linux VM in Azure. You keep a copy of the private key. When you need to log in to your Linux VM, the public key on the remote VM is matched with the private key you keep locally. If the key pairs match, you&rsquo;re logged in to the VM. There&rsquo;s a little more to the process than that, but at its core, public-key cryptography is a great means to verify identity.</p>
-							
+							<br/>
+							<p>In real-world scenarios, you shouldn&rsquo;t open remote management ports for SSH or RDP to the public internet. Seriously, just don&rsquo;t! Follow the best practices that you should use in the non-cloud, on-premises world, such as connecting only when necessary and limiting remote access to a specific set of management addresses.</p>
+							<p>A common way to provide remote access is to use a bastion host, or a jump box. In this kind of setup, you don&rsquo;t connect directly to application servers from your laptop or desktop. Instead, you connect to a dedicated bastion host and then connect to the server you need to manage. This approach locks down access to a limited set of addresses and provides a secure way to allow remote management.</p>
 					<br/>
 				</div>
 			</div>
