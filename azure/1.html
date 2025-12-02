@@ -82,7 +82,11 @@
 						<br/>
 						<p>The basic web server you&rsquo;ll build in this chapter requires a specific type of virtual IP address: a public IP address. This public IP address is assigned to the virtual NIC and allows external traffic to reach your VM. Then you can control the flow of traffic to your VM with NSGs (network security groups). Think of a regular firewall that you use to open or close various ports and protocols; in Azure, network security groups lock down traffic by default and allow only the specific traffic that you define. Common traffic to allow would be HTTP or HTTPS on TCP ports 80 and 443.</p>
 						<br/>
-						
+						<p><strong>SSH key pairs</strong></p>
+						<br/>
+							<p>SSH is a protocol used to communicate securely with remote computers and is the most common way to log in to Linux VMs. It&rsquo;s similar to using an RDP connection to a Windows VM, except that in Linux, the whole SSH session is typically consolebased. With public-key cryptography, you can use a digital key pair to authenticate you with a remote Linux VM.</p>
+							<p>An SSH key pair has two parts: a public key and a private key. The public key is stored on your Linux VM in Azure. You keep a copy of the private key. When you need to log in to your Linux VM, the public key on the remote VM is matched with the private key you keep locally. If the key pairs match, you&rsquo;re logged in to the VM. There&rsquo;s a little more to the process than that, but at its core, public-key cryptography is a great means to verify identity.</p>
+							
 					<br/>
 				</div>
 			</div>
