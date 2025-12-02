@@ -71,6 +71,16 @@
 						<br/>
 						<p>A memory-optimized VM is a good fit, as databases often need a larger amount of memory than CPU resources. Always try to estimate resource needs and then monitor performance after deployment. Don&rsquo;t be afraid to switch to a different VM size to provide the desired performance.</p>
 						<br/>
+						<p><strong>Virtual networking</strong></p>
+						<br/>
+						<p>A virtual network in Azure is made up of the same core features as a regular physical network:</p>
+							<p style="padding-left: 20px;"> An address space and a subnet mask, such as 10.0.0.0/16</p>
+							<p style="padding-left: 20px;"> One or more subnets, which you can use to divide external, database, or application traffic, for example&nbsp;</p>
+							<p style="padding-left: 20px;"> Virtual network interface cards (NICs) that connect VMs to a given subnet</p>
+							<p style="padding-left: 20px;"> Virtual IP addresses that are assigned to resources such as a virtual NIC or load balancer</p>
+						<br/>
+						<p>You can create a VM that&rsquo;s only attached to a virtual network without providing external connectivity, which may be the case for backend database or application servers. To connect to these VMs for administration and maintenance, you can create a virtual private network (VPN) connection, or you can use a private, dedicated connection to Azure from your on-premises networking equipment. In Azure, this dedicated connection is called ExpressRoute.</p>
+						<br/>
 						
 					<br/>
 				</div>
