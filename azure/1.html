@@ -68,7 +68,6 @@
 						<p>A premium SSD disk is usually what you should run for production workloads. This type is often the default choice when you create a VM. Standard SSD disks are an okay second choice, and ultra SSDs should be only used on very disk-intensive applications that require low latency. Although there&rsquo;s a little bit of cost savings with standard HDDs, performance often is great, just as with on-premises virtual environments.&nbsp;</p>
 						<br/>
 						<p><em> What VM family is a good choice for a database server? </em></p>
-						<br/>
 						<p>A memory-optimized VM is a good fit, as databases often need a larger amount of memory than CPU resources. Always try to estimate resource needs and then monitor performance after deployment. Don&rsquo;t be afraid to switch to a different VM size to provide the desired performance.</p>
 						<br/>
 						<p><strong>Virtual networking</strong></p>
@@ -80,6 +79,8 @@
 							<p style="padding-left: 20px;"> Virtual IP addresses that are assigned to resources such as a virtual NIC or load balancer</p>
 						<br/>
 						<p>You can create a VM that&rsquo;s only attached to a virtual network without providing external connectivity, which may be the case for backend database or application servers. To connect to these VMs for administration and maintenance, you can create a virtual private network (VPN) connection, or you can use a private, dedicated connection to Azure from your on-premises networking equipment. In Azure, this dedicated connection is called ExpressRoute.</p>
+						<br/>
+						<p>The basic web server you&rsquo;ll build in this chapter requires a specific type of virtual IP address: a public IP address. This public IP address is assigned to the virtual NIC and allows external traffic to reach your VM. Then you can control the flow of traffic to your VM with NSGs (network security groups). Think of a regular firewall that you use to open or close various ports and protocols; in Azure, network security groups lock down traffic by default and allow only the specific traffic that you define. Common traffic to allow would be HTTP or HTTPS on TCP ports 80 and 443.</p>
 						<br/>
 						
 					<br/>
