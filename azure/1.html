@@ -92,7 +92,17 @@
 						<p>In real-world scenarios, you shouldn&rsquo;t open remote management ports for SSH or RDP to the public internet. Seriously, just don&rsquo;t! Follow the best practices that you should use in the non-cloud, on-premises world, such as connecting only when necessary and limiting remote access to a specific set of management addresses.</p>
 						<p>A common way to provide remote access is to use a bastion host, or a jump box. In this kind of setup, you don&rsquo;t connect directly to application servers from your laptop or desktop. Instead, you connect to a dedicated bastion host and then connect to the server you need to manage. This approach locks down access to a limited set of addresses and provides a secure way to allow remote management.</p>
 					<br/>
-					
+						<p>Your web server is up and running, but if you enter the public IP address of your VM in a web browser, the web page doesn&rsquo;t load. Why? Remember the network security groups? When you created the VM, a network security group was created for you. A rule was added to allow remote management&mdash;in this case, SSH. The rest of the VM is locked down. To allow visitors to access your web server over the internet, you need to create a rule in the network security group that allows web traffic.</p>
+					<br/>
+						<h5>Cleaning up resources</h5>
+						<br/>
+							<p> Deallocate a VM. You can select the Stop button in the portal to stop and deallocate a VM, releasing all held compute and network resources.</p>
+							<p> Delete a VM. This option is rather obvious. If there&rsquo;s nothing left in Azure, there&rsquo;s nothing to pay for. Make sure that you&rsquo;re finished with the VM before you delete it. There&rsquo;s no Undo button in Azure!</p>
+						<br/>
+						<p><strong>Take a REST? We just got started!</strong></p>
+						<br/>
+						
+					<br/>
 				</div>
 			</div>
 		</div>
