@@ -40,7 +40,15 @@
 					<h1 class="header-title mb-0">Azure Storage</h1>
 				</div>
 				<div class="market-status-table mt-4">
-					
+					<p>The Azure Managed Disks service simplifies the approach to VM storage. Managed disks abstract away a lot of the behind-the-scenes work to give you . . . well, a disk. That&rsquo;s all you really need to care about for VMs: how big and how fast they are, and what they connect to. Throughout the book, and in all your own real-world deployments, you should always use managed disks for VMs. Managed disks are the default option, and there aren&rsquo;t a lot of good reasons to change that behavior.</p>
+						</br>
+					<p>Before managed disks, you had to create a uniquely named storage account, limit the number of virtual disks you created in each, and move custom disk images manually to create VMs in different regions. These types of disks are known as unmanaged disks or classic disks. The Managed Disks service removes the need for a storage account, limits you to &ldquo;only&rdquo; 50,000 disks per subscription, and lets you create VMs from a custom image across regions. You also gain the ability to create and use snapshots of disks, automatically encrypt data at rest, and use disks up to 64 TiB.</p>
+						</br>
+					<p>Why is this important? If you run across old documentation or blog posts, they may have you create a storage account for your VMs. Stop right there! Yes, you can convert VMs from unmanaged disks to managed disks, but if you have a clean slate, look to begin each project with managed disks from the start. The use case for unmanaged disks is more to maintain backward compatibility with existing deployments, although I argue that you should look to convert those workloads to managed disks!</p>
+						</br>
+					<h5>OS disks</h5>
+					</br>
+					</br>
 				</div>
 			</div>
 		</div>
