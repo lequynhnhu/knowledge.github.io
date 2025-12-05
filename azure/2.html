@@ -48,6 +48,25 @@
 						</br>
 					<h5>OS disks</h5>
 					</br>
+						<p><strong> Premium SSD disks</strong> &mdash;Use high-performance SSD disks for optimal performance, greater IOPS, and low latency; recommended storage type for most production workloads.</p>
+						<p> <strong>Standard SSD disks</strong> &mdash;Use standard SSDs and deliver consistent performance compared with hard disk drives (HDDs). These disks are great for development and testing workloads, or budget--conscious and low-demand production use.</p>
+						<p> <strong>Standard HDD disks </strong>&mdash;Use regular spinning disks for more infrequent data access, such as archives and backups.</p>
+					</br>
+					<h5>Ephemeral OS disk</h5>
+					 </br>
+						<p>There&rsquo;s a special type of OS disk called an ephemeral disk. It&rsquo;s still a managed disk, of sorts, but it&rsquo;s local to the underlying Azure host. This fact makes an ephemeral disk really fast, with low latency.</p>
+						<p>As the data isn&rsquo;t written out to a remote storage array, the data may not persist during VM reboots if you move to a different underlying host. Ephemeral disks are great for stateless workloads that can handle booting up with a clean image each time and don&rsquo;t need to store data locally to access across reboots.</p>
+						<p>Only certain VM sizes support ephemeral disks, but there&rsquo;s no additional cost to using them, and they&rsquo;re available in all regions. You lose some functionality for things like Azure Site Recovery and Azure Disk Encryption, but if you want high speed, low-latency storage, check out ephemeral disks.</p>
+					</br>
+					<h6>Temporary disks and data disks</h6>
+						</br>
+						<p> Temporary disks &mdash;Every VM automatically has local SSD storage attached from the underlying host that offers a small amount of high-performance storage. Take great care how you use this temporary disk! As the name implies, this disk may not persist with the VM. If the VM moves to a new host in a maintenance event, a new temporary disk will be attached, and any data you stored there will be lost. The temporary disk is designed to be a scratch space or application cache.</p>
+						<p> Data disks &mdash;Any disks you specifically create and attach to the VM act as you&rsquo;d expect in terms of partitions, filesystems, and persistent mount points. Data disks are reattached as the VM moves around the Azure data center, and they&rsquo;re where the bulk of your applications and data should be stored. You can still use storage spaces or software RAID to pool data disks at the VM level for even greater performance.</p>
+						</br>
+						<p>There&rsquo;s a specific type of data disk that you can attach to a VM if you need maximum performance and low latency: ultra disks. These disks are a step above premium SSD disks and are available only for data disks. Ultra disks are designed for large databases and data-intensive workloads like SAP HANA. How fast are we talking about? At the time of writing, ultra disks can be up to 64 TiB in size and provide up to 160,000 IOPS per disk with a maximum throughput of 2,000 MBps.</p>
+						</br>
+					<h6>Disk-caching options</h6>
+					</br>
 					</br>
 				</div>
 			</div>
