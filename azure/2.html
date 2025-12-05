@@ -23,8 +23,24 @@
 								<p>With PaaS solutions such as Web Apps, the infrastructure is intentionally abstracted. As the names of some of the service plan tiers imply, web apps run across a shared platform of available resources. That&rsquo;s not at all to say that web apps are insecure and that others can view your private data! But compliance or regulatory reasons may require you to run your applications in a controlled, isolated environment. Enter App Service Environments: isolated environments that let you run App Service instances such as web apps in a segmented part of an Azure data center.</p>
 								<p>You control the inbound and outbound network traffic, and can implement firewalls and create virtual private network (VPN) connections back on your on-premises resources. All these infrastructure components are still largely abstracted with App Service environments, but this approach provides great balance when you want the flexibility of PaaS solutions but also want to retain some of the more fine-grained controls over the network connections traffic flow.</p>
 							</br>
-							
+							<p><strong>Deployment slots, behind the scenes </strong></p>
+							<p>When you swap slots, what was live in the production slot is now in the dev slot, and what was in dev is now live in production. Not all settings can swap, such as SSL settings and custom domains, but for the most part, deployment slots are a great way to stage and validate content before it goes live to your customers. You can also perform a swap with preview, which gives you the opportunity to make sure the swapped content works correctly before it&rsquo;s publicly live in production.</p>
+							<p>For production use in DevOps workflows, you can also configure Auto Swap. Here, when a code commit is noted in source control such as GitHub, it can trigger a build to an Azure Web Apps deployment slot. When that build is complete and the app is ready to serve content, the deployment slots swap automatically to make the code live in production. You typically use this workflow with a test environment to review the code changes first, not to publish live straight to production!</p>
 						</br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+			<div class="card-body" id="card-body">
+				<div class="d-sm-flex justify-content-between align-items-center">
+					<h1 class="header-title mb-0">Azure Storage</h1>
+				</div>
+				<div class="market-status-table mt-4">
+					
 				</div>
 			</div>
 		</div>
