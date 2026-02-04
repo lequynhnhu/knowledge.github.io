@@ -1,4 +1,4 @@
-<div class="row mt-5 mb-5">
+		<div class="row mt-5 mb-5">
 	<div class="col-12">
 		<div class="card" id="card">
 			<div class="card-body" id="card-body">
@@ -133,7 +133,10 @@
 						</br>
 						<p>Performance may also be a challenge due to shared resources. This can cause a noisy neighbor problem, where one tenant consumes too many resources and affects others. To prevent this, you need to use resource management strategies such as load balancing, query limits, and throttling to keep the system fair.</p>
 					</br>
-						
+					<h5>Hybrid Methods</h5>
+					</br>
+						<p>There are also hybrid approaches that combine the best of both worlds. For example, you might serve most customers within a shared multitenant environment, but provide dedicated instances for enterprise customers that need more security or performance guarantees. This vertical partitioning model allows you to achieve cost savings for most tenants while isolating only those who require it. Additionally, you can charge a premium for a single-tenant deployment option.</p>
+						<p>The trade-off is increased complexity. Your codebase must support both multi-tenant and single-tenant modes in parallel. You&rsquo;ll also need clear processes to migrate a customer from the shared environment to a dedicated one (and vice versa) if their needs change. Aside from the added complexity, hybrid architectures are common for SaaS providers serving large enterprises and SMBs, or for offering tiered plans.</p>
 					</br>
 				</div>
 			</div>
