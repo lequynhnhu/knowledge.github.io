@@ -81,9 +81,13 @@
 								</br>
 								<p>Desire for interoperability at this level has led to the development of the JSON Web Token (JWT) format and the Token Introspection protocol, discussed in chapter 11. The token itself remains opaque to the client, but now other parties can understand its format.</p>
 							</br>
-							<h5></h5>
+							<h5>OAuth 2.0 defines no cryptographic methods,</h5>
 							</br>
-								
+								<p>unlike OAuth 1.0. Instead of defining a new set of cryptographic mechanisms specific to OAuth, the OAuth 2.0 protocol is built to allow the reuse of more general-purpose cryptographic mechanisms that can be used out- side of OAuth. This deliberate omission has helped lead to the development of the JSON Object Signing and Encryption (JOSE) suite of specifications, which provides general- purpose cryptographic mechanisms that can be used alongside and even outside OAuth.</p>
+							</br>
+							<h5>OAuth 2.0 is also not a single protocol. </h5>
+							</br>
+								<p>As discussed previously, the specification is split into multiple definitions and flows, each of which has its own set of use cases. The core OAuth 2.0 specification has somewhat accurately been described as a security protocol generator, because it can be used to design the security architecture for many different use cases. As discussed in the previous section, these systems aren&rsquo;t necessarily compat- ible with each other.</p>
 							</br>
 						</div>
 				</div>
