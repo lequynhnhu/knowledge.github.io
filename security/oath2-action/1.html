@@ -35,7 +35,9 @@
 								</br>
 								<p>The distinction between a delegation and an authorization protocol is important here because the authorizations being carried by the OAuth token are opaque to most of the system. Only the protected resource needs to know the authorization, and as long as it&rsquo;s able to find out from the token and its presentation context, it can serve the API as required.</p>
 								</br>
-								
+								<p>OAuth systems often follow the principle of TOFU: Trust On First Use. In a TOFU model, the first time a security decision needs to be made at runtime, and there is no existing context or configuration under which the decision can be made, the user is prompted. This can be as simple as &ldquo;Connect a new application?&rdquo; although many implementations allow for greater control during this step. Whatever the user experi- ence here, the user with appropriate authority is allowed to make a security decision.</p>
+								</br>
+								<p>The Trust On First Use (TOFU) method of managing security decisions is not required by OAuth implementations, but it&rsquo;s especially common to find these two technolo- gies together. Why is that? The TOFU method strikes a good balance between the flexibility of asking end users to make security decisions in context and the fatigue of asking them to make these decisions constantly. Without the &ldquo;Trust&rdquo; portion of TOFU, users would have no say in how these delegations are made. Without the &ldquo;On First Use&rdquo; portion of TOFU, users would quickly become numb to an unending bar- rage of access requests. This kind of security system fatigue breeds workarounds that are usually more insecure than the practices that the security system is attempt- ing to address.</p>
 							</br>
 					</div>
 				</div>
