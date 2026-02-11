@@ -29,6 +29,12 @@
 								</br>
 								<p>This all makes sense in light of HTTP&rsquo;s origins as a document access protocol, but the web has grown significantly in both scope and breadth of use since those early days. HTTP as a protocol makes no distinction between transactions with a browser in which the user is present and transactions with another piece of software without an intermediary browser. This fundamental flexibility has been key to the unfathom- able success and adoption of the HTTP protocol. But as a consequence, when HTTP started to be used for direct-access APIs in addition to user-facing services, its existing security mechanisms were quickly adopted for this new use case. This simple techno- logical decision has contributed to the long-running misuse of continuously-presented passwords for both APIs and user-facing pages.</p>
 							</br>
+								<h5>Authorization delegation: why it matters and how it’s used</h5>
+								</br>
+								<p>Fundamental to the power of OAuth is the notion of delegation. Although OAuth is often called an authorization protocol (and this is the name given to it in the RFC which defines it), it is a delegation protocol. Generally, a subset of a user&rsquo;s authoriza- tion is delegated, but OAuth itself doesn&rsquo;t carry or convey the authorizations. Instead, it provides a means by which a client can request that a user delegate some of their authority to it. The user can then approve this request, and the client can then act on it with the results of that approval.</p>
+								</br>
+								<p>The distinction between a delegation and an authorization protocol is important here because the authorizations being carried by the OAuth token are opaque to most of the system. Only the protected resource needs to know the authorization, and as long as it&rsquo;s able to find out from the token and its presentation context, it can serve the API as required.</p>
+								</br>
 								
 							</br>
 					</div>
