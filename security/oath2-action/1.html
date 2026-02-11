@@ -53,6 +53,38 @@
 						</div>
 						<div class="market-status-table mt-4">
 							<p>OAuth is used for many different kinds of APIs and applications, connecting the online world in ways never before possible. Even though it&rsquo;s approaching ubiquity, there are many things that OAuth is not, and it&rsquo;s important to understand these boundaries when understanding the protocol itself.</p>
+							</br>
+								<h5>OAuth isn’t defined outside of the HTTP protocol. </h5>
+									</br>
+										<p>Since OAuth 2.0 with bearer tokens provides no message signatures, it is not meant to be used outside of HTTPS (HTTP over TLS). Sensitive secrets and information are passed over the wire, and OAuth requires a transport layer mechanism such as TLS to protect these secrets.</p>
+									</br>
+									<p>A standard exists for presenting OAuth tokens over Simple Authentication and Security Layer (SASL)&ndash;protected protocols, there are new efforts to define OAuth over Constrained Application Protocol (CoAP), and future efforts could make parts of the OAuth pro- cess usable over non-TLS links. But even in these cases, there needs to be a clear mapping from the HTTPS transactions into other protocols and systems.</p>
+							</br>
+								<h5>OAuth isn’t an authentication protocol</h5>
+								</br>
+									<p>even though it can be used to build one, an OAuth transaction on its own tells you nothing about who the user is, or even if they&rsquo;re there. Think of our photo-printing example: the photo printer doesn&rsquo;t need to know who the user is, only that somebody said it was OK to download some photos.</p>
+									</br>
+									<p>OAuth is, in essence, an ingredient that can be used in a larger recipe to provide other capabilities. Additionally, OAuth uses authentication in several places, particularly authentication of the resource owner and client software to the authorization server. This embedded authentication does not itself make OAuth an authentication protocol.</p>
+								</br>
+							</br>
+							<h5>OAuth doesn’t define a mechanism for user-to-user delegation,</h5>
+							</br>
+								<p>even though it is fundamen- tally about delegation of a user to a piece of software. OAuth assumes that the resource owner is the one that&rsquo;s controlling the client. In order for the resource owner to autho- rize a different user, more than OAuth is needed. This kind of delegation is not an uncommon use case, and the User Managed Access protocol uses OAuth to create a system capable of user-to-user delegation.</p>
+							</br>
+								<h5>OAuth doesn’t define authorization-processing mechanisms.</h5>
+								</br>
+								<p>OAuth provides a means to convey the fact that an authorization delegation has taken place, but it doesn&rsquo;t define the contents of that authorization. Instead, it is up to the service API definition to use OAuth&rsquo;s components, such as scopes and tokens, to define what actions a given token is applicable to.</p>
+							</br>
+							<h5>OAuth doesn’t define a token format.</h5>
+							</br>
+								<p>In fact, the OAuth protocol explicitly states that the content of the token is completely opaque to the client application. This is a departure from previous security protocols such as WS-*, Security Assertion Markup Language (SAML), or Kerberos, in which the client application needed to be able to parse and process the token. However, the token still needs to be understood by the authorization server that issues it and the protected resource that accepts it.</p>
+								</br>
+								<p>Desire for interoperability at this level has led to the development of the JSON Web Token (JWT) format and the Token Introspection protocol, discussed in chapter 11. The token itself remains opaque to the client, but now other parties can understand its format.</p>
+							</br>
+							<h5></h5>
+							</br>
+								
+							</br>
 						</div>
 				</div>
 		</div>
