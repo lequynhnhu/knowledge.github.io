@@ -49,6 +49,16 @@
 								</br>
 								<p><strong>Token disclosure.</strong> A token might contain sensitive information about the system and the attacker is then something that they couldn&rsquo;t know otherwise. Informa- tion disclosure can be considered a minor problem compared with the previous one, but it&rsquo;s still something we need to care about.</p>
 								</br>
+							<h5>How to protect bearer tokens</h5>
+							</br>
+								<p>It is of extreme importance that access tokens sent as bearer tokens are not sent in the clear over an insecure channel. As per the core OAuth specification, transmission of access tokens must be protected using end-to-end confidentiality, such as SSL/TLS.</p>
+								</br>
+								<p>What is SSL/TLS then? Transport Layer Security (TLS), formerly known as Secure Sockets Layer (SSL), is a cryptographic protocol designed to provide communications security over a computer network. The protocol protects transmissions between two parties directly connected to each other, and the encryption process has the following aspects:</p>
+								</br>
+								<ul>
+									<li>The connection is private because symmetric cryptography is used to encrypt the data transmitted.</li>
+									<li>The connection is reliable because each message transmitted includes a message integrity check using a message authentication code.</li>
+								</ul>
 								
 							</br>
 						</div>
