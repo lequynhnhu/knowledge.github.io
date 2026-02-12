@@ -32,6 +32,24 @@
 								<p>One of the authors knows first hand of a developer whose OAuth 1.0 implementation used an uppercase hex encoding on the client side (as %3F, %2D, and %3A), and lowercase hex encoding on the server side (as %3f, %2d, and %3a). This particular implementation bug was infuriating to discover.</p>
 								<p>Although a human can easily see these as equivalent, and any machine interpreting the hex value can easily transform it, cryptographic functions require an exact match between both sides in order for the signature to validate properly.</p>						
 								</br>
+								<p>Furthermore, the requirement for TLS never went away. Without TLS for the get- a-token step, the access token and its secret could be stolen. Without TLS for the use-a-token step, the results of the authorized call could be stolen (and sometimes replayed within a time window). As a result, OAuth 1.0 had the reputation of being a complicated, difficult-to-use protocol.</p>
+								<p>The new OAuth 2.0 specification was formed with bearer tokens at the center of a new simplified protocol. Message-level signatures weren&rsquo;t entirely abandoned, but merely set aside. With time, some users of the OAuth 2.0 specification asked for an extension of the protocol that included some sort of sig- nature</p>
+								</br>
+							<h5>Risks and considerations of using bearer tokens</h5>
+							</br>
+								<p>Bearer tokens have characteristics similar to the session cookies used in browsers. Unfortunately, misunderstanding this parallelism leads to all sorts of security prob- lems. When an attacker is able to intercept an access token, they are able to access all resources covered by the scope of that particular token.</p>
+								</br>
+								<p>A client using a bearer token doesn&rsquo;t need to prove possession of any additional security items, such as cryp- tographic key material. Apart from token hijacking (which we&rsquo;ve covered in depth in many parts of this book), the following threats associated with OAuth&rsquo;s bearer tokens are common to many other token-based protocols:</p>
+								</br>
+								<p><strong>Token forgery.</strong> An attacker may manufacture its own bogus token or modify an existing valid one, causing the resource server to grant inappropriate access to the client. For example, an attacker can craft a token to gain access to informa- tion they weren&rsquo;t able to view before. Alternatively, an attacker could modify the token and extend the validity of the token itself.</p>
+								</br>
+								<p><strong>Token replay.</strong> An attacker attempts to use an old token that was already used in the past and is supposed to be expired. The resource server shouldn&rsquo;t return any valid data in this case; instead, it should return an error. In a concrete scenario, an attacker legitimately obtains an access token in the first place and they&rsquo;ll try to reuse it long after the token has expired.</p>
+								</br>
+								<p><strong>Token redirect.</strong> An attacker uses a token generated for consumption by one resource server to gain access to a different resource server that mistakenly believes the token to be valid for it. In this case, an attacker legitimately obtains an access token for a specific resource server and they try to present this access token to a different one.</p>
+								</br>
+								<p><strong>Token disclosure.</strong> A token might contain sensitive information about the system and the attacker is then something that they couldn&rsquo;t know otherwise. Informa- tion disclosure can be considered a minor problem compared with the previous one, but it&rsquo;s still something we need to care about.</p>
+								</br>
+								
 							</br>
 						</div>
 				</div>
