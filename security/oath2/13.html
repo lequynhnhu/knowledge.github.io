@@ -166,6 +166,52 @@
 										<p>This line of thinking turns out to be true in some cases, but only when the access token was freshly minted in the context of a user being authenticated at the authori- zation server. Remember, though, this isn&rsquo;t the only way to obtain an access token in OAuth. Refresh tokens and assertions can be used to obtain access tokens without the user being present, and in some cases access grants can occur without the user having to authenticate at all.</p>
 										</br>
 										<p>Furthermore, the access token will generally be usable long after the user is no longer present. The protected resource isn&rsquo;t generally going to be in a position to tell from the token alone whether the user is present, since by the nature of the OAuth 2.0 protocol the user won&rsquo;t be present on the connection between the client and pro- tected resource. In many larger OAuth 2.0 ecosystems, the user has no means of ever authenticating to the protected resource. Although the protected resource can prob- ably tell which user originally authorized the token, it will generally be hard pressed to say anything about that user&rsquo;s current state.</p>
+										</br>
+										<p>This becomes especially problematic when there is a large gap of time between the authorization event and the use of the token at the protected resource. OAuth 2.0 can work well when the user is no longer present at either the client or the authorization server, but because the entire point of an authentication protocol is to know whether the user is present, the client can&rsquo;t rely on the presence of a functioning access token to determine whether the user&rsquo;s there.</p>
+										</br>
+										<p>The client can counter this problem by only checking for user information when it knows the token is relatively fresh, and by not assuming a user is present just because the user API can be accessed by a given access token. We could also counter this by having an artifact directed to the client directly that it knows to accept only directly from the IdP, such as the ID token and signed request discussed in the previous section. These tokens have a separate lifecycle from the access tokens, and their contents can be used alongside any additional information from a protected resource.</p>
+										</br>
+									<h6>Injection of access tokens</h6>
+									</br>
+										<p>An additional (and dangerous) threat occurs when clients accept access tokens from sources other than the return of an intentional request to token endpoint. This is especially troublesome for a client that uses the implicit flow, in which the token is passed directly to the client as a parameter in the URL hash.</p>
+										</br>
+										<p>An attacker can take an access token, either a valid one from a different application or a spoofed one, and pass it to the waiting RP as if it were requested by that RP. This is problematic enough in plain OAuth 2.0, in which the client can be tricked into accessing resources other than those of the real resource owner, but it is utterly disastrous in an authentication protocol because it would allow an attacker to copy tokens and use them to log in to another application.</p>
+										</br>
+										<p>This issue can also occur if different parts of an application pass the access token between components in order to &ldquo;share&rdquo; access among them. This is problematic because it opens up a place for access tokens to potentially be injected into an applica- tion by an outside party and potentially leak outside of the application. If the client application doesn&rsquo;t validate the access token through some mechanism, it has no way of differentiating between a valid token and an attacker&rsquo;s token.</p>
+										</br>
+										<p>This can be mitigated by using the authorization code flow instead of the implicit flow, which would mean the client would accept tokens only directly from the authori- zation server&rsquo;s token endpoint. The state parameter allows a client to provide a value that is unguessable by an attacker. If this parameter is absent or it doesn&rsquo;t align with an expected value, the client can easily reject the incoming token as invalid.</p>
+										</br>
+									<h6>Lack of audience restriction</h6>
+									</br>
+										<p>Most OAuth 2.0 APIs don&rsquo;t provide any mechanism of audience restriction for their returned information. That is to say, there&rsquo;s no way for a client to tell whether an access token was intended for it or another client. It&rsquo;s possible to take a naive client, hand it a (valid) token from another client, and have the naive client call a user API.</p>
+										</br>
+										<p>Since&nbsp;the protected resource doesn&rsquo;t know the identity of the client making the call, only the validity of the token, this act will return valid user information. However, this informa- tion was intended for consumption by another client. The user hasn&rsquo;t even authorized the naive client, and yet it treats the user as logged in.</p>
+										</br>
+										<p>This problem can be mitigated by communicating the authentication information to a client along with an identifier that the client can recognize and validate as its own. This will allow the client to differentiate between an authentication for itself and an authentication for another application. This attack can be further mitigated by pass- ing the set of authentication information directly to the client during the OAuth 2.0 process instead of through a secondary mechanism such as an OAuth 2.0&ndash;protected API, preventing a client from having an unknown and untrusted set of information injected later in the process.</p>
+										</br>
+									<h6>njection of invalid user information</h6>
+									</br>
+										<p>If an attacker is able to intercept or co-opt one of the calls from the client, it could alter the content of the returned user information without the client being able to know anything was amiss. This would allow an attacker to impersonate a user at a naive client by swapping out a user identifier in the right call sequence, for example, in the return value from a user information API or inside a token directed at the client.</p>
+										</br>
+										<p>This attack can be mitigated by cryptographically protecting and verifying the authentication information as it&rsquo;s passed to the client. All communication pathways between the client and the authorization server need to be protected by TLS, and the client needs to verify the server&rsquo;s certificate when it connects. In addition, the user information or the token (or both) can be signed by the server and verified by the client. This additional signature will prevent an adversary from altering or injecting user information even if they&rsquo;re able to hijack the connection between the parties.</p>
+										</br>
+									<h6>Different protocols for every potential identity provider</h6>
+									</br>
+										<p>One of the biggest problems with OAuth 2.0&ndash;based identity APIs is that different iden- tity providers will inevitably implement the details of the identity API differently, even if they&rsquo;re using fully standards-compliant OAuth as the basis.</p>
+										</br>
+										<p>For example, a user&rsquo;s unique identifier might be found in a user_id field in one provider but in the sub field in another provider. Even though these fields are semantically equivalent, they would require two separate code paths to process. Although the authorization may happen the same way at each provider, the conveyance of the authentication informa- tion could be different.</p>
+										</br>
+										<p>This problem occurs because the mechanisms for conveying authentication infor- mation discussed here are explicitly left out of scope for OAuth 2.0. OAuth 2.0 defines no specific token format, defines no common set of scopes for the access token, and doesn&rsquo;t address how a protected resource validates an access token. Consequently, this problem can be mitigated by providers using a standard authentication protocol built on top of the OAuth standard so that, no matter where the identity information is coming from, it&rsquo;s transmitted in the same way. Is there such a standard?</p>
+										</br>
+								<h5>OpenID Connect: a standard for authentication and identity on top of OAuth 2.0</h5>
+								</br>
+									<p>OpenID Connect is an open standard published4 by the OpenID Foundation in Feb- ruary 2014 that defines an interoperable way to use OAuth 2.0 to perform user authen- tication. In essence, it&rsquo;s a widely published &ldquo;recipe for chocolate fudge&rdquo; that has been built and tested by a wide variety of implementers.</p>
+									</br>
+									<p>As an open standard, OpenID Con- nect can be implemented without license or intellectual property concerns. Since the protocol is designed to be interoperable, an OpenID client application can speak one protocol to many identity providers instead of implementing a slightly different proto- col to each identity provider.</p>
+									</br>
+									<p>OpenID Connect is built directly on OAuth 2.0 and remains compatible with it. In many instances, it&rsquo;s deployed along with a plain OAuth infrastructure that protects other APIs. In addition to OAuth 2.0, OpenID Connect uses the JSON Object Sign- ing and Encryption (JOSE) suite of specifications (which we covered in chapter 11) for carrying signed and encrypted information around in different places.</p>
+									</br>
+									<p>An OAuth 2.0 deployment with JOSE capabilities is already far along on the way to being a fully compliant OpenID Connect system, as the delta between the two is relatively small. But that delta makes a big difference, and OpenID Connect manages to avoid many of the pitfalls discussed previously by adding several key components to the OAuth 2.0 base.</p>
 								</br>
 						</div>
 				</div>
