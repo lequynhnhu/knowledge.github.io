@@ -202,6 +202,30 @@
 									</br>
 									<p>The unsigned JWT that we built by hand in the last sec- tion is merely a special case of an unsigned JWS object with a JSON-based payload. Although the details of JOSE could fill a book on its own, we&rsquo;re going to look at two common cases: symmetric signing and validation using the HMAC signature scheme and asymmetric signing and validation using the RSA signature scheme. We&rsquo;ll also be using JWK to store our public and private RSA keys.</p>
 									</br>
+								<h6>Symmetric signatures using HS256</h6>
+								</br>
+									<p>For our next exercise, we&rsquo;re going to sign our token using a shared secret at the autho- rization server and then validate that token using the shared secret at the protected resource. This is a useful approach when the authorization server and protected resources are tied closely enough to have a long-term shared secret, similar to an API key, but do not have a direct connection to each other to validate each token directly.</p>
+									</br>
+									<p>Take special note that we have passed in the token string exactly as it was handed to us on the wire. We didn&rsquo;t use the decoded or parsed JSON objects, nor did we re-encode them on our own. Had we done any of that, it&rsquo;s entirely possible (and completely legal) that the serialization of the JSON would have been slightly different, such as by adding or removing spaces and indentation or by re-ordering the members of a data object. As we discussed, the JOSE specifications effectively armor the token against transfor- mation in transit specifically so that this validation step can be performed without any renormalization.</p>
+									</br>
+									<p>Only if the signature is valid do we parse the JWT and check its contents for consis- tency. If all checks pass, we can hand it off to the application, as we did previously. Now the resource server will only accept tokens that have been signed by the secret that it shares with the authorization server. To test this, edit the secret in either the autho- rization server&rsquo;s or protected resource&rsquo;s code so that they differ. The resource server should reject the resulting token.</p>
+								</br>
+								<h6>Asymmetric signatures using RS256</h6>
+								</br>
+									<p>In this section&rsquo;s exercise, we&rsquo;re once again going to sign the token with a secret key, as we did in the last section. However, this time, we&rsquo;re going to use public key cryptog- raphy to do it. With a shared secret, both systems need the same key either to create or to validate the signature. This effectively means that either the authorization server or the resource server could create the tokens in the last exercise, because they both had access to the keying material needed to do so.</p>
+									</br>
+									<p>With public key cryptography, the authorization server has both a private key and a public key that it can use to generate tokens, whereas the protected resource needs to be able to access only the authoriza- tion server&rsquo;s public key to verify the token. Unlike with a shared secret, the protected resource has no way of generating its own valid tokens even though it can easily verify them. We&rsquo;re going to be using the RS256 signature method from JOSE, which uses the RSA algorithm under the hood.</p>
+								<h6>Other token protection options</h6>
+								</br>
+									<p>The methods that we&rsquo;ve gone over in these exercises aren&rsquo;t the only JOSE-based means of protecting a token&rsquo;s contents. For instance, we used the HS256 symmetric signature method previously, which provides a 256-byte hash of the token&rsquo;s contents. JOSE also defines HS384 and HS512, both of which use larger hashes to provide increased security at the cost of larger token signatures.</p>
+									</br>
+									<p>Similarly, we used the RS256 asymmetric signature method, which provides a 256-byte hash of the RSA signature output. JOSE also defines the RS384 and RS512 methods, with the same kinds of trade-offs as their symmetric counterparts. JOSE also defines the PS256, PS384, and PS512 signature methods, all based on a different RSA signature and hashing mechanism.</p>
+									</br>
+									<p>JOSE also provides elliptical curve support, with the core standard referencing three curves and associated hashes in ES256, ES384, and ES512. Elliptical curve cryp- tography has several benefits over RSA cryptography, including smaller signature sizes and lower processing requirements for validation, but support for the underlying cryp- tographic functions isn&rsquo;t nearly as widespread as RSA at the time of this writing. On top of this, JOSE&rsquo;s list of algorithms is extensible by new specifications, allowing new algorithms to be defined as they&rsquo;re invented and needed.</p>
+									</br>
+									<p>Sometimes signatures aren&rsquo;t enough, though. With a token that&rsquo;s only signed, the client could potentially peek at the token itself and find out things that it might not be privileged to know, such as a user identifier in the sub field. The good news is that in addition to signatures, JOSE provides an encryption mechanism called JWE with several different options and algorithms. Instead of a three-part structure, a JWT encrypted with JWE is a five-part structure.</p>
+									</br>
+									<p>Each portion still uses Base64 URL encoding, and the payload is now an encrypted object that can&rsquo;t be read without access to the appropriate key. Covering the JWE process is a bit much for this chapter, but for an advanced exercise try adding JWE to the tokens. First, give the resource server a key pair and give the authorization server access to the public key portion of this key pair. Then use the public key to encrypt the contents of the token using JWE. Finally, have the resource server decrypt the contents of the token using its own private key and pass the payload of the token along to the application.</p>
 							</br>
 						</div>
 				</div>
