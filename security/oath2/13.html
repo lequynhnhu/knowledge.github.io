@@ -3,9 +3,47 @@
 		<div class="card" id="card">
 				<div class="card-body" id="card-body">
 						<div class="d-sm-flex justify-content-between align-items-center">
-							<h1 class="header-title mb-0">Operators</h1>
+							<h1 class="header-title mb-0">Managing dynamically registered clients</h1>
 						</div>
 						<div class="market-status-table mt-4">
+								<p>A client&rsquo;s metadata doesn&rsquo;t always remain static over time. Clients could change their display names, add or remove redirect URIs, require a new scope for new functionality, or make any number of other changes over the lifetime of the client. The client might want to read its own configuration, too. If the authorization server rotates a client&rsquo;s secret after some amount of time or a triggering event, the client will need to know the new secret. Finally, if a client knows that it&rsquo;s not going to be used again, such as when it&rsquo;s getting uninstalled by the user, it can tell the authorization server to get rid of its client ID and associated data.</p>
+								</br>
+								<h4>How the management protocol works</h4>
+								</br>
+									<p>For all of these use cases, the OAuth Dynamic Client Registration Management proto- col3 defines a RESTful protocol extension to OAuth Dynamic Client Registration. The management protocol extends the core registration protocol&rsquo;s &ldquo;create&rdquo; method with associated &ldquo;read,&rdquo; &ldquo;update,&rdquo; and &ldquo;delete&rdquo; methods, allowing for full lifecycle manage- ment of dynamically registered clients.</p>
+									</br>
+									<p>To accomplish this, the management protocol extends the response from the reg- istration endpoint with two additional fields. First, the server sends the client a client configuration endpoint URI in the registration_client_uri field. This URI pro- vides all of the management functionality for this specific client. The client uses this URI directly as it&rsquo;s given, with no additional parameters or transformations required.</p>
+									</br>
+									<p>It&rsquo;s often unique for each client registered at an authorization server, but it&rsquo;s entirely up to the authorization server to decide how the URI itself is structured. Second, the server also sends a specialized access token, called a registration access token, in the <em>registration_access_token</em> field. This is an OAuth bearer token that the client can use to access the client configuration endpoint, and nowhere else. As with all other OAuth tokens, it&rsquo;s entirely up to the authorization server what the format of this token is, and the client uses it as given.</p>
+									</br>
+									<p>The server responds in the same way, except that the JSON object is extended as we discussed. Our authorization server creates the client configuration endpoint URI by concatenating the client ID to the registration endpoint, in keeping with common RESTful design principles, but the authorization server is free to format this URL however it pleases. The registration access token in our server is another randomized string like other tokens we generate.</p>
+									</br>
+										<p>{<br /> "client_id": "1234-wejeg-0392",<br /> "client_secret": "6trfvbnklp0987trew2345tgvcxcvbjkiou87y6t5r", "client_id_issued_at": 2893256800,<br /> "client_secret_expires_at": 0,<br /> "token_endpoint_auth_method": "client_secret_basic",<br /> "client_name": "OAuth Client",<br /> "redirect_uris": ["http://localhost:9000/callback"],<br /> "client_uri": "http://localhost:9000/",<br /> "grant_types": ["authorization_code"],<br /> "response_types": ["code"],<br /> "scope": "foo bar baz",<br /> "registration_client_uri": "http://localhost:9001/register/1234-wejeg-0392" "registration_access_token": "ogh238fj2f0zFaj38dA"</p>
+<p>}</p>
+									</br>
+									<p>The remainder of the registration response is the same as it was earlier. If the client wants to read its registration information, it sends an HTTP GET request to the cli- ent configuration endpoint, using the registration access token in the authorization header.</p>
+									</br>
+									<p>The authorization server checks to make sure that the client referred to in the con- figuration endpoint URI is the same one that the registration access token was issued to. As long as everything is valid, the server responds similarly to a normal registra- tion request. The body is still a JSON object describing the registered client, but the response code is now an HTTP 200 OK message instead.</p>
+									</br>
+									<p>The authorization server is free to update any of the client&rsquo;s fields, including the client secret and registration access token, but the client ID doesn&rsquo;t change. In this example, the server has rotated the client&rsquo;s secret for a new one, but all other values remain the same. Note that the response includes the client configuration endpoint URI as well as the registration access token.</p>
+									</br>
+									<p>If the client wants to be able to update its registration, it sends an HTTP PUT request to the configuration endpoint, again using the registration access token in the authori- zation header. The client includes its entire configuration as returned from its registra- tion request, including its previously issued client ID and client secret. However, just as in the initial dynamic registration request, the client cannot choose its own values for its client ID or client secret. The client also doesn&rsquo;t include the following fields (or their associated values) in its request:</p>
+									</br>
+										<ul>
+											<li>client_id_issued_at</li>
+											<li>client_secret_expires_at</li>
+											<li>registration_client_uri</li>
+											<li>registration_access_token</li>
+										</ul>
+									</br>
+									<p>The authorization server once again checks to make sure that the client referred to in the configuration endpoint URI is the same one that the registration access token was issued to. The authorization server will also check the client secret, if included, to make sure that it matches the expected value.</p>
+									</br>
+									<p>The authorization server responds with a message identical to the one from a read request, an HTTP 200 OK with the details of the registered client in a JSON object in the body. The authorization server is free to reject or replace any input from the client as it sees fit, as with the initial registra- tion request. The authorization server is once again able to change any of the client&rsquo;s metadata information, except for its client ID.</p>
+									</br>
+									<p>If the client wants to unregister itself from the authorization server, it sends an HTTP DELETE request to the client configuration endpoint with the registration access token in the authorization header.</p>
+									</br>
+									
+								</br>
 						</div>
 				</div>
 		</div>
