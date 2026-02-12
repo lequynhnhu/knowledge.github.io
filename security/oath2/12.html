@@ -15,6 +15,23 @@
 									<li>No secret or signature is involved.</li>
 									<li>TLS is the basis of the security model.</li>
 								</ul>
+								</br>
+								<p>But there are some differences:</p>
+								<ul>
+									<li>Browsers have a long history of dealing with cookies, whereas OAuth clients don&rsquo;t.</li>
+									<li>Browsers enforce the same origin policy, meaning that a cookie for one domain isn&rsquo;t passed to another domain. This isn&rsquo;t the case for OAuth clients (and may be a source of problems).</li>
+								</ul>
+								</br>
+								<p>The original OAuth 1.0 protocol called for tokens that also had an associated secret, which was used to calculate a signature across the request. This signature was then veri- fied by the protected resource alongside the token value itself, proving possession of both the token and its associated secret.</p>
+								</br>
+								<p>Calculating this signature correctly and consis- tently turned out to be a big burden for client and server developers, and the process was prone to many frustrating errors.</p>
+								</br>
+								<p>Calculating the signature depended on many factors, such as encoding string values, ordering the request parameters, and canoniza- tion of the URI. In combination with the fact that cryptography doesn&rsquo;t forgive even the smallest mistake, things constantly broke because of mismatching signatures.</p>
+								</br>
+								<p>For instance, a server-side application framework could inject or reorder parame- ters, or a reverse proxy could hide the original request URI from the application doing the OAuth processing.</p>
+								<p>One of the authors knows first hand of a developer whose OAuth 1.0 implementation used an uppercase hex encoding on the client side (as %3F, %2D, and %3A), and lowercase hex encoding on the server side (as %3f, %2d, and %3a). This particular implementation bug was infuriating to discover.</p>
+								<p>Although a human can easily see these as equivalent, and any machine interpreting the hex value can easily transform it, cryptographic functions require an exact match between both sides in order for the signature to validate properly.</p>						
+								</br>
 							</br>
 						</div>
 				</div>
