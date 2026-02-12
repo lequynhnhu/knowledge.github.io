@@ -19,7 +19,7 @@
 									<p>The server responds in the same way, except that the JSON object is extended as we discussed. Our authorization server creates the client configuration endpoint URI by concatenating the client ID to the registration endpoint, in keeping with common RESTful design principles, but the authorization server is free to format this URL however it pleases. The registration access token in our server is another randomized string like other tokens we generate.</p>
 									</br>
 										<p>{<br /> "client_id": "1234-wejeg-0392",<br /> "client_secret": "6trfvbnklp0987trew2345tgvcxcvbjkiou87y6t5r", "client_id_issued_at": 2893256800,<br /> "client_secret_expires_at": 0,<br /> "token_endpoint_auth_method": "client_secret_basic",<br /> "client_name": "OAuth Client",<br /> "redirect_uris": ["http://localhost:9000/callback"],<br /> "client_uri": "http://localhost:9000/",<br /> "grant_types": ["authorization_code"],<br /> "response_types": ["code"],<br /> "scope": "foo bar baz",<br /> "registration_client_uri": "http://localhost:9001/register/1234-wejeg-0392" "registration_access_token": "ogh238fj2f0zFaj38dA"</p>
-<p>}</p>
+										<p>}</p>
 									</br>
 									<p>The remainder of the registration response is the same as it was earlier. If the client wants to read its registration information, it sends an HTTP GET request to the cli- ent configuration endpoint, using the registration access token in the authorization header.</p>
 									</br>
@@ -42,7 +42,12 @@
 									</br>
 									<p>If the client wants to unregister itself from the authorization server, it sends an HTTP DELETE request to the client configuration endpoint with the registration access token in the authorization header.</p>
 									</br>
-									
+									<p>The authorization server yet again checks to make sure that the client referred to in the configuration endpoint URI is the same one that the registration access token was issued to. If they match, and if the server is able to delete the client, it responds with an empty HTTP 204 No Content message.</p>
+										<pre>        HTTP/1.1 204 No Content
+										</pre>
+										<p>From there, the client needs to discard its registration information including its client ID, client secret, and registration access token. The authorization server should also, if possible, delete all access and refresh tokens associated with the now-deleted client.</p>
+									</br>
+								
 								</br>
 						</div>
 				</div>
