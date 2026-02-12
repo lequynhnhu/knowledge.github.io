@@ -59,7 +59,51 @@
 									<li>The connection is private because symmetric cryptography is used to encrypt the data transmitted.</li>
 									<li>The connection is reliable because each message transmitted includes a message integrity check using a message authentication code.</li>
 								</ul>
-								
+								</br>
+								<p>This is achieved typically by using certificates with public key cryptography; in particu- lar, on the public internet, the application initiating the connection request verifies the certificate of the application receiving the connection request.</p>
+								</br>
+								<p>In some limited circumstances, the certificate of the application initiating the connection request can also be verified, but such mutual authentication of the TLS connection is fairly limited and rare. It is important to remember that OAuth bearer tokens can&rsquo;t be used securely without TLS being part of the connection in order to protect them in transit.</p>
+								</br>
+								<h6>At the client</h6>
+								</br>
+									<p>We&rsquo;ve seen in various parts of this book how access tokens can be stolen from client applications and revealed to the attacker. We need to remember that bearer access tokens are transparent for clients and there isn&rsquo;t any cryptographic operation they need to perform. Hence, when an attacker obtains a bearer access token, they&rsquo;re able to access all the resources associated with the token and its scope.</p>
+									</br>
+									<p>One countermeasure that a client can apply is to limit the scope of the token to the minimum required for its tasks. For example, if all the client needs to achieve its purpose is the resource owner&rsquo;s profile information, it would be enough to ask for the profile scope (and not any other scope, for example, photo or location).</p>
+									</br>
+									<p>This approach of &ldquo;minimal privilege&rdquo; limits what the token can be used for if it&rsquo;s captured. To minimize impact on the user experience, a client can ask for all appropriate scopes during the authorization phase, then use the refresh token to get limited-scope access tokens to call the resource directly.</p>
+									</br>
+									<p>It would also be beneficial, if feasible, to keep access tokens in transient memory to minimize attacks derived from repository injections. Doing so even if the attacker is able to get their hands on the client&rsquo;s database won&rsquo;t gain any information regarding access tokens. This isn&rsquo;t always feasible for all client types, but secure storage of tokens, away from the prying eyes of other applications and even end users, is something that every OAuth client application should be doing.</p>
+								</br>
+								<h6>At the authorization server</h6>
+								</br>
+									<p>If an attacker is able to gain access to the authorization server database or launch a SQL injection against it, then the security of multiple resource owners might be compromised. This happens because the authorization server is the central point that coordinates and emits access tokens, issued to multiple clients and potentially consumed by multiple protected resources.</p>
+									</br>
+									<p>In most implementations, including our own so far, the authorization server stores access tokens in a database. The protected resource validates them upon receipt from a client. This can be achieved in multiple ways but typically a query is launched against the data looking for the matching token.</p>
+									</br>
+									<p>As one efficient precaution, the authorization server can store hashes of the access token (for example, using SHA-256) instead of the text of the token itself. In this case, even if the attacker was able to steal the entire database containing all the access tokens, there isn&rsquo;t much it can do with the information leaked.</p>
+									</br>
+									<p>Although hash salting is recommended for storage of user passwords, it should not be required to use addi- tional salt because the access token value should already include a reasonable level of entropy in order to make offline dictionary attacks difficult. For instance, with a random-value token, the token value should be at least 128 bits long and constructed using a cryptographically strong random or pseudorandom number sequence.</p>
+									</br>
+									<p>In addition, it would be good to keep access token lifetimes short in order to mini- mize the risk associated with the leak of a single access token. This way, even if a token is compromised, its valid lifetime limits its usefulness to the attacker. If a client needs to have longer access to a resource, the authorization server can issue a refresh token to the client.</p>
+									</br>
+									<p>Refresh tokens are passed between the client and authorization server, but never the protected resource, limiting the attack surface for this style of long- lived token significantly. The definition of what constitutes a &ldquo;short&rsquo; token lifetime depends entirely on the application being protected, but generally speaking, the token shouldn&rsquo;t live much longer than it will be needed for average use of an API.</p>
+									</br>
+									<p>Ultimately, one of the best things that can be done at the authorization server is pervasive and secure auditing and logging. Whenever a token is issued, consumed, or revoked, the context in which that took place (the client, resource owner, scopes, resource, time, and so on) can be used to watch for suspicious behavior. As a corollary, all of these logs must be kept clear of the access token values to keep them from leaking.</p>
+								</br>
+								<h6>At the protected resource</h6>
+								</br>
+									<p>The protected resource often handles access tokens in a way similar to that of the authorization server, and should be treated with the same care for security. Since there are likely to be more protected resources than authorization servers on a network, perhaps even more direct care should be given.</p>
+									</br>
+									<p>After all, if you&rsquo;re using bearer tokens, there is nothing stopping a malicious protected resource from replaying an access token to other protected resources. Keep in mind that access tokens can inadvertently leak in system logs, especially those that capture all incoming HTTP traffic for analysis. Tokens should be scrubbed from such logs so that the token value isn&rsquo;t used there.</p>
+									</br>
+									<p>A resource endpoint should be designed to limit token scope, respecting the col- lection minimization principle and asking only for the minimum set of scopes needed to handle a particular job. Although it&rsquo;s the clients that request the scopes associated with a token, designers of protected resources can protect the ecosystem by requiring tokens with only the most specific set of scopes possible for functionality. This part of the design process partitions the application&rsquo;s resources in logical ways such that a client won&rsquo;t need to ask for more functionality than necessary in order to do its job.</p>
+									</br>
+									<p>The resource server should also properly validate the token and avoid the use of special-purpose access tokens that have some sort of super power.2 Although it&rsquo;s com- mon for a protected resource to cache the current status of a token, especially when using a protocol such as token introspection, the protected resource must always weigh the benefits and drawbacks of such a cache. It&rsquo;s also a good idea to use rate limiting and other techniques to protect the API, which help prevent attackers from fishing for valid tokens at the protected resource.</p>
+									</br>
+									<p>Keeping access tokens in transient memory is something that will help out in case of attacks against the resource server&rsquo;s data store. This will make it more difficult for an attacker to discover valid access tokens by attacking a back-end system. Granted, in these cases, the attacker will likely have access to the data being protected by the resource, so as always the costs and benefits need to be balanced.</p>
+								</br>
+							<h5>Authorization code</h5>
+							</br>
 							</br>
 						</div>
 				</div>
