@@ -227,6 +227,28 @@
 									</br>
 									<p>Each portion still uses Base64 URL encoding, and the payload is now an encrypted object that can&rsquo;t be read without access to the appropriate key. Covering the JWE process is a bit much for this chapter, but for an advanced exercise try adding JWE to the tokens. First, give the resource server a key pair and give the authorization server access to the public key portion of this key pair. Then use the public key to encrypt the contents of the token using JWE. Finally, have the resource server decrypt the contents of the token using its own private key and pass the payload of the token along to the application.</p>
 							</br>
+							<h5>Looking up a token’s information online: token introspection</h5>
+							</br>
+								<p>Packing the information about the token into the token itself does have its drawbacks. The tokens themselves can grow to be quite large as they incorporate all the required claims and cryptographic structures required to protect those claims. Furthermore, if the protected resource is relying solely on information carried in the token itself, it becomes prohibitively difficult to revoke active tokens once they&rsquo;ve been created and sent into the wild.</p>
+								</br>
+								<h6>The introspection protocol</h6>
+								</br>
+									<p>The OAuth Token Introspection protocol defines a mechanism for a protected resource to actively query an authorization server about the state of the token. Since the authorization server minted the token, it&rsquo;s in the perfect position to know the sur- rounding details of the authorization delegation that the token represents.</p>
+									</br>
+									<p>The protocol is a simple augmentation of OAuth. The authorization server issues the token to the client, the client presents the token to the protected resource, and the protected resource introspects the token at the authorization server.</p>
+									</br>
+									<p>The introspection request is a form-encoded HTTP request to the authorization server&rsquo;s introspection endpoint, which allows the protected resource to ask, &ldquo;Someone gave me this token; what is it good for?&rdquo; of the authorization server. The protected resource authenticates itself during this request so that the authorization server can tell who is asking the question and potentially give a different response depending on who&rsquo;s asking.</p>
+									</br>
+									<p>The introspection specification doesn&rsquo;t dictate how the protected resource needs to authenticate itself, only that it does so. In our example, the pro- tected resource authenticates using an ID and secret over HTTP Basic, much in the same way that an OAuth client would authenticate itself to the token endpoint.</p>
+									</br>
+									<p>The introspection specification also defines several claims in addition to those defined by JWT, the most important of which is the active claim. This claim tells the protected resource whether the current token is active at the authorization server, and it&rsquo;s the only claim required to be returned.</p>
+									</br>
+									<p>Because there are many different kinds of OAuth token deployments, there is no single definition of what an active token is. In general, though, this means that the token was issued by this authorization server, it hasn&rsquo;t expired yet, it hasn&rsquo;t been revoked, and the requesting protected resource is allowed to fetch information about it. Interestingly, this piece of information is something that can&rsquo;t be included in the token itself, since no token would ever claim to be non-active.</p>
+									</br>
+									<p>The introspection response may also include the scope of the token, represented as a space-separated list of scope strings as in the original OAuth request. As we&rsquo;ve seen, the scope of a token allows a protected resource to determine the rights delegated to the client by the resource owner in a more fine-grained manner. Finally, information about the client and user can also be included. All of this together can give the protected resource a rich set of data from which to make the final authoriza- tion decision.</p>
+									</br>
+									<p>The use of token introspection incurs the overhead of increased network traffic on the OAuth systems. To combat this, the protected resource is allowed to cache the results of the introspection call for a given token. It&rsquo;s recommended that the cache be short lived relative to the expected lifetime of the token in order to limit the chance of a token being revoked while the cache is in effect.</p>
+							</br>
 						</div>
 				</div>
 		</div>
