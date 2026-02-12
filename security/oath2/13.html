@@ -253,6 +253,18 @@
 										<p>An OpenID Connect client can optionally authenticate using a signed JWT in lieu of OAuth&rsquo;s more traditional shared client secret. This JWT can be signed with a client&rsquo;s asymmetric key if it registers its public key with the server, or it can be signed symmetri- cally with the client secret. This method provides a higher level of security for clients, which avoid sending their passwords across the network.</p>
 										</br>
 										<p>Similarly, an OpenID Connect client can optionally send its requests to the authoriza- tion endpoint as a signed JWT instead of a set of form parameters. As long as the key used to sign this request object is registered with the server, the server can validate the parameters inside the request object and be assured that the browser did not tamper with them.</p>
+										</br>
+										<p>An OpenID Connect server can optionally sign or encrypt the output from the server, including the UserInfo endpoint, as a JWT. The ID token can likewise be encrypted in addition to being signed by the server. These protections can assure the client that the output was not tampered with, in addition to the assurances garnered from using TLS on the connection.</p>
+										</br>
+										<p>Other parameters have been added as extensions to the OAuth 2.0 endpoints, including hints for display types, prompting behavior, and authentication context references. Using the request object construct, an OpenID Connect client can make much more fine-tuned requests of the authorization server than its OAuth 2.0 counterparts thanks to the inherent expressivity of the request object&rsquo;s JSON payload. These requests can include fine-grained user claims information, such as requesting that only a user matching a specific identifier be logged in.</p>
+										</br>
+										<p>OpenID Connect provides a way for the server (or another third party) to initiate the login process. Although all canonical OAuth 2.0 transactions are initiated by the client application, this optional feature gives the client a way to receive signals to start the login process with a specific IdP.</p>
+										</br>
+										<p>OpenID Connect also defines a few different ways to retrieve tokens, including hybrid flows whereby some information (such as the ID token) is conveyed on the front channel and other information (such as the access token) is conveyed on the back channel. These flows should not be thought of as simple combinations of existing OAuth 2.0 flows, but instead as new functionality for different applications.</p>
+										</br>
+										<p>Finally, OpenID Connect provides a specification for managing sessions between the RP and IdP, or even between multiple RPs. Since OAuth 2.0 has no notion of the user being present apart from the moment of authorization delegation, extensions are required for handling the lifecycle of a federated authentication. If the user logs out from one RP, they may want to log out from others as well, and the RP needs to be able to signal the IdP that this should happen. Other RPs need to be able to listen for a signal from the IdP that a logout has taken place and be able to react accordingly.</p>
+										</br>
+										<p>OpenID Connect provides all of these extensions without breaking compatibility with OAuth 2.0.</p>
 								</br>
 						</div>
 				</div>
