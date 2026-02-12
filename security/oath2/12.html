@@ -298,6 +298,12 @@
 									<p>Both of these are protected by OAuth, and both can be stood up by different providers. Although a piece of client software could talk to these standard APIs no matter what domains they were running on, we know that managing client IDs in this space is unfeasible. Simply put, writing a new client or deploying a new server for this protocol ecosystem would be a logistical nightmare.</p>
 									</br>
 									<p>Even if we have a single authorization server to deal with, what about multiple instances of a given client? This is particularly pernicious with native clients on mobile&nbsp;platforms, because every copy of the client software would have the same client ID and client secret. With dynamic registration, each instance of a client can register itself with the authorization server. Each instance then gets its own client ID and, importantly, its own client secret that it can use to protect its user.</p>
+									</br>
+									<p>Remember that we said that the kind of interactions email clients have with servers is a driving use case for dynamic registration. Today, OAuth can be used to access Inter- net Message Access Protocol (IMAP) email services using a Simple Authentication and Security Layer&ndash;Generic Security Service Application Program Interface (SASL- GSSAPI) extension.</p>
+									</br>
+									<p>Without dynamic registration, every single mail client would have to preregister with every single possible email provider that allowed OAuth access. This registration would need to be completed by the developer before the software ships, because the end user won&rsquo;t be able to modify and configure the email client once it&rsquo;s installed.</p>
+									</br>
+									<p>The possible combinations are staggering for both authorization servers that need to know about every mail client and for mail clients that need to know about every server. Better, instead, to use dynamic client registration, in which each instance of a mail client can register itself with each instance of an authorization server that it needs to talk to.</p>
 							</br>
 						</div>
 				</div>
