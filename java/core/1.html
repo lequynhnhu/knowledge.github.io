@@ -353,7 +353,13 @@
 								</br>
 							<h5>Interfaces</h5>
 							</br>
-								
+								<p>Using the keyword interface, you can fully abstract a class&rsquo; interface from its implementation. That is, using interface, you can specify what a class must do, but not how it does it. Interfaces are syntactically similar to classes, but they lack instance variables, and, as a general rule, their methods are declared without any body.</p>
+								</br>
+								<p>Interfaces are designed to support dynamic method resolution at run time. Normally, in order for a method to be called from one class to another, both classes need to be present at compile time so the Java compiler can check to ensure that the method signatures are compatible. This requirement by itself makes for a static and nonextensible classing environment.</p>
+								</br>
+								<p>Inevitably in a system like this, functionality gets pushed up higher and higher in the class hierarchy so that the mechanisms will be available to more and more subclasses. Interfaces are designed to avoid this problem. They disconnect the definition of a method or set of methods from the inheritance hierarchy.</p>
+								</br>
+								<p>Since interfaces are in a different hierarchy from classes, it is possible for classes that are unrelated in terms of the class hierarchy to implement the same interface. This is where the real power of interfaces is realized.</p>
 							</br>
 						</div>
 				</div>
