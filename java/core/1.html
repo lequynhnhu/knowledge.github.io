@@ -21,7 +21,26 @@
 							<p>Furthermore, not all sequences of bytecode are compiled&mdash;only those that will benefit from compilation. The remaining code is simply interpreted. However, the just-in- time approach still yields a significant performance boost. Even when dynamic compilation is applied to bytecode, the portability and safety features still apply, because the JVM is still in charge of the execution environment.</p>
 							</br>
 							<p>One other point: Beginning with JDK 9, some Java environments will also support an ahead-of-time compiler that can be used to compile bytecode into native code prior to execution by the JVM, rather than on-the-fly. Ahead-of- time compilation is a specialized feature, and it does not replace Java&rsquo;s traditional approach just described.</p>
-														
+							<h4>The Java Buzzwords</h4>	
+							</br>
+								<h5>Object-Oriented</h5>
+								</br>
+									<p>Although influenced by its predecessors, Java was not designed to be source- code compatible with any other language. This allowed the Java team the freedom to design with a blank slate. One outcome of this was a clean, usable, pragmatic approach to objects. Borrowing liberally from many seminal object- software environments of the last few decades, Java manages to strike a balance between the purist&rsquo;s &ldquo;everything is an object&rdquo; paradigm and the pragmatist&rsquo;s &ldquo;stay out of my way&rdquo; model. The object model in Java is simple and easy to extend, while primitive types, such as integers, are kept as high- performance nonobjects.</p>
+								<h5>Robust</h5>
+								</br>
+									<p>To better understand how Java is robust, consider two of the main reasons for program failure: memory management mistakes and mishandled exceptional conditions (that is, run-time errors). Memory management can be a difficult, tedious task in traditional programming environments. For example, in C/C++, the programmer will often manually allocate and free dynamic memory.</p>
+									</br>
+									<p>This sometimes leads to problems, because programmers will either forget to free memory that has been previously allocated or, worse, try to free some memory that another part of their code is still using. Java virtually eliminates these problems by managing memory allocation and deallocation for you. (In fact, deallocation is completely automatic, because Java provides garbage collection for unused objects.)</p>
+									</br>
+									<p>Exceptional conditions in traditional environments often arise in situations such as division by zero or &ldquo;file not found,&rdquo; and they must be managed with clumsy and hard-to-read constructs. Java helps in this area by providing object-oriented exception handling. In a well-written Java program, all run-time errors can&mdash;and should&mdash;be managed by your program.</p>
+									</br>
+								<h5>Multithreaded</h5>
+								</br>
+									<p>Java was designed to meet the real-world requirement of creating interactive, networked programs. To accomplish this, Java supports multithreaded programming, which allows you to write programs that do many things simultaneously. The Java run-time system comes with an elegant yet sophisticated solution for multiprocess synchronization that enables you to construct smoothly running interactive systems.</p>
+								<h5></h5>
+								</br>
+								
+							</br>
 						</div>
 				</div>
 		</div>
