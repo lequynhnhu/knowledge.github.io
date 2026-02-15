@@ -186,7 +186,21 @@
 							</br>
 							<p>Variables defined within a class are called instance variables because each instance of the class (that is, each object of the class) contains its own copy of these variables. Thus, the data for one object is separate and unique from the data for another.</p>
 							</br>
-							
+							<h5>Assigning Object Reference Variables</h5>
+							</br>
+								<p>Box b1 = new Box();</p>
+								<p>Box b2 = b1;</p>
+								</br>
+								<p>Instead, after this fragment executes, b1 and b2 will both refer to the same object. The assignment of b1 to b2 did not allocate any memory or copy any part of the original object. It simply makes b2 refer to the same object as does b1. Thus, any changes made to the object through b2 will affect the object to which b1 is referring, since they are the same object.</p>
+								</br>
+								<p><strong>REMEMBER</strong> When you assign one object reference variable to another object reference variable, you are not creating a copy of the object, you are only making a copy of the reference.</p>
+							</br>
+							<h5>Constructors</h5>
+							</br>
+								<p>A constructor initializes an object immediately upon creation. It has the same name as the class in which it resides and is syntactically similar to a method. Once defined, the constructor is automatically called when the object is created, before the new operator completes.</p>
+								</br>
+								<p>Constructors look a little strange because they have no return type, not even void. This is because the implicit return type of a class&rsquo; constructor is the class type itself. It is the constructor&rsquo;s job to initialize the internal state of an object so that the code creating an instance will have a fully initialized, usable object immediately.</p>
+							</br>
 						</div>
 				</div>
 		</div>
