@@ -278,6 +278,12 @@
 							</br>
 							<p>However, it is possible to create a member that can be used by itself, without reference to a specific instance. To create such a member, precede its declaration with the keyword static. When a member is declared static, it can be accessed before any objects of its class are created, and without reference to any object.</p>
 							</br>
+							<p>Methods declared as static have several restrictions:</p>
+							<p>&bull; They can only directly call other static methods of their class.
+								<br /> &bull; They can only directly access static variables of their class.
+								<br /> &bull; They cannot refer to this or super in any way.</p>
+							</br>
+							<p>f you need to do computation in order to initialize your static variables, you can declare a static block that gets executed exactly once, when the class is first loaded.</p>
 						</div>
 				</div>
 		</div>
