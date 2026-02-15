@@ -294,3 +294,40 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+				<div class="card-body" id="card-body">
+						<div class="d-sm-flex justify-content-between align-items-center">
+							<h1 class="header-title mb-0">Inheritance</h1>
+						</div>
+						<div class="market-status-table mt-4">
+							<p>Using inheritance, you can create a general class that defines traits common to a set of related items. This class can then be inherited by other, more specific classes, each adding those things that are unique to it.</p>
+							</br>
+							<p>In the terminology of Java, a class that is inherited is called a superclass. The class that does the inheriting is called a subclass. Therefore, a subclass is a specialized version of a superclass. It inherits all of the members defined by the superclass and adds its own, unique elements.</p>
+							</br>
+							<h5>Method Overriding</h5>
+								</br>
+									<p>In a class hierarchy, when a method in a subclass has the same name and type signature as a method in its superclass, then the method in the subclass is said to override the method in the superclass. When an overridden method is called from within its subclass, it will always refer to the version of that method defined by the subclass. The version of the method defined by the superclass will be hidden.</p>
+								</br>
+								<p>Overridden methods allow Java to support run-time polymorphism. Polymorphism is essential to object-oriented programming for one reason: it allows a general class to specify methods that will be common to all of its derivatives, while allowing subclasses to define the specific implementation of some or all of those methods.</p>
+								</br>
+								<p>This allows the subclass the flexibility to define its own methods, yet still enforces a consistent interface. Thus, by combining inheritance with overridden methods, a superclass can define the general form of the methods that will be used by all of its subclasses.</p>
+								</br>
+								<p>Dynamic, run-time polymorphism is one of the most powerful mechanisms that object-oriented design brings to bear on code reuse and robustness. The ability of existing code libraries to call methods on instances of new classes without recompiling while maintaining a clean abstract interface is a profoundly powerful tool.</p>
+								</br>
+							<h5>Using Abstract Classes</h5>
+							</br>
+								<p>There are situations in which you will want to define a superclass that declares the structure of a given abstraction without providing a complete implementation of every method. That is, sometimes you will want to create a superclass that only defines a generalized form that will be shared by all of its subclasses, leaving it to each subclass to fill in the details.</p>
+								</br>
+								<p>Such a class determines the nature of the methods that the subclasses must implement. One way this situation can occur is when a superclass is unable to create a meaningful implementation for a method.</p>
+								</br>
+							<h5>Using final with Inheritance</h5>
+							</br>
+								<p>While method overriding is one of Java&rsquo;s most powerful features, there will be times when you will want to prevent it from occurring. To disallow a method from being overridden, specify final as a modifier at the start of its declaration. Methods declared as final cannot be overridden.</p>
+							</br>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
