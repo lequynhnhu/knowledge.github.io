@@ -361,6 +361,18 @@
 								</br>
 								<p>Since interfaces are in a different hierarchy from classes, it is possible for classes that are unrelated in terms of the class hierarchy to implement the same interface. This is where the real power of interfaces is realized.</p>
 							</br>
+							<h5>Default Interface Methods</h5>
+							</br>
+								<p>Prior to JDK 8, an interface could not define any implementation whatsoever. This meant that for all previous versions of Java, the methods specified by an interface were abstract, containing no body. This is the traditional form of an interface and is the type of interface that the preceding discussions have used.</p>
+								</br>
+								<p>The release of JDK 8 changed this by adding a new capability to interface called the default method. A default method lets you define a default implementation for an interface method. In other words, by use of a default method, it is possible for an interface method to provide a body, rather than being abstract.</p>
+								</br>
+								<p>A primary motivation for the default method was to provide a means by which interfaces could be expanded without breaking existing code. Recall that there must be implementations for all methods defined by an interface.</p>
+								</br>
+								<p>In the past, if a new method were added to a popular, widely used interface, then the addition of that method would break existing code because no implementation would be found for that new method. The default method solves this problem by supplying an implementation that will be used if no other implementation is explicitly provided. Thus, the addition of a default method will not cause preexisting code to break.</p>
+								</br>
+								<p>Another motivation for the default method was the desire to specify methods in an interface that are, essentially, optional, depending on how the interface is used.</p>
+							</br>
 						</div>
 				</div>
 		</div>
