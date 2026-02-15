@@ -235,9 +235,21 @@
 							<h1 class="header-title mb-0">Methods and Classes</h1>
 						</div>
 						<div class="market-status-table mt-4">
-							<h5></h5>
+							<h5>Method overloading</h5>
 							</br>
-								
+								<p>Method overloading supports polymorphism because it is one way that Java implements the &ldquo;one interface, multiple methods&rdquo; paradigm. To understand how, consider the following. In languages that do not support method overloading, each method must be given a unique name. However, frequently you will want to implement essentially the same method for different types of data.</p>
+								</br>
+								<p>Consider the absolute value function. In languages that do not support overloading, there are usually three or more versions of this function, each with a slightly different name.</p>
+								</br>
+								<p>When you overload a method, each version of that method can perform any activity you desire. There is no rule stating that overloaded methods must relate to one another.</p>
+							</br>
+							<h5>A Closer Look at Argument Passing</h5>
+							</br>
+								<p>In general, there are two ways that a computer language can pass an argument to a subroutine. The first way is call-by-value. This approach copies the value of an argument into the formal parameter of the subroutine. Therefore, changes made to the parameter of the subroutine have no effect on the argument. The second way an argument can be passed is call-by-reference.</p>
+								</br>
+								<p>In this approach, a reference to an argument (not the value of the argument) is passed to the parameter. Inside the subroutine, this reference is used to access the actual argument specified in the call. This means that changes made to the parameter will affect the argument used to call the subroutine. As you will see, although Java uses call-by-value to pass all arguments, the precise effect differs between whether a primitive type or a reference type is passed.</p>
+								</br>
+								<p>When you pass a primitive type to a method, it is passed by value. Thus, a copy of the argument is made, and what occurs to the parameter that receives the argument has no effect outside the method.</p>
 							</br>
 						</div>
 				</div>
