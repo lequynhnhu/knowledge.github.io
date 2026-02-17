@@ -428,7 +428,12 @@
 							</br>
 							<h5>The Java Thread Model</h5>
 							</br>
-							
+							<p>The value of a multithreaded environment is best understood in contrast to its counterpart. Single-threaded systems use an approach called an event loop with polling. In this model, a single thread of control runs in an infinite loop, polling a single event queue to decide what to do next.</p>
+							</br>
+							<p>Once this polling mechanism returns with, say, a signal that a network file is ready to be read, then the event loop dispatches control to the appropriate event handler. Until this event handler returns, nothing else can happen in the program.</p>
+							</br>
+							<p>This wastes CPU time. It can also result in one part of a program dominating the system and preventing any other events from being processed. In general, in a single- threaded environment, when a thread blocks (that is, suspends execution) because it is waiting for some resource, the entire program stops running.</p>
+							</br>
 						</div>
 				</div>
 		</div>
