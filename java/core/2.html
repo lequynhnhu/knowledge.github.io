@@ -30,6 +30,13 @@
 									<p>Although annotations are designed mostly for use by other development or deployment tools, if they specify a retention policy of RUNTIME, then they can be queried at run time by any Java program through the use of reflection. Reflection is the feature that enables information about a class to be obtained at run time.</p>
 									<p><strong>Notice</strong> the &lt;?&gt; that follows Class in the declaration of getClass( ) just shown. This is related to Java&rsquo;s generics feature. getClass( ) and several other reflection-related methods discussed in this chapter make use of generics.</p>
 								</br>
+								<h6>Some Restrictions</h6>
+								</br>
+									<p>First, no annotation can inherit another. Second, all methods declared by an annotation must be without parameters. Furthermore, they must return one of the following:</p>
+									<p>&bull; A primitive type, such as int or double</p>
+									<p>&bull; An object of type String or Class<br /> &bull; An object of an enum type<br /> &bull; An object of another annotation type</p>
+									<p>&bull; An array of a legal type.</p>
+								</br>
 						</div>
 				</div>
 		</div>
