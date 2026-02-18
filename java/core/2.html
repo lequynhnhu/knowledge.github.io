@@ -67,6 +67,14 @@
 								</br>
 									<p>When an instance variable is declared as transient, its value need not persist when an object is stored.&nbsp;</p>
 									<p>Here, if an object of type T is written to a persistent storage area, the contents of a would not be saved, but the contents of b would.</p>
+								</br>
+								<p>The volatile modifier tells the compiler that the variable modified by volatile can be changed unexpectedly by other parts of your program. One of these situations involves multithreaded programs. In a multithreaded program, sometimes two or more threads share the same variable.</p>
+								</br>
+								<p>For efficiency considerations, each thread can keep its own, private copy of such a shared variable. The real (or master) copy of the variable is updated at various times, such as when a synchronized method is entered. While this approach works fine, it may be inefficient at times.</p>
+								</br>
+								<p>In some cases, all that really matters is that the master copy of a variable always reflects its current state. To ensure this, simply specify the variable as volatile, which tells the compiler that it must always use the master copy of a volatile variable (or, at least, always keep any private copies up-to-date with the master copy, and vice versa). Also, accesses to the shared variable must be executed in the precise order indicated by the program.</p>
+								</br>
+								
 							</br>
 						</div>
 				</div>
