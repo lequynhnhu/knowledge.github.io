@@ -98,7 +98,9 @@
 									<p>Occasionally, the compiler will need to add a bridge method to a class to handle situations in which the type erasure of an overriding method in a subclass does not produce the same erasure as the method in the superclass.</p>
 									<p>In this case, a method is generated that uses the type erasure of the superclass, and this method calls the method that has the type erasure specified by the subclass. Of course, bridge methods only occur at the bytecode level, are not seen by you, and are not available for your use.</p>
 									</br>
-									
+								<h6>Ambiguity Errors</h6>
+								</br>
+								<p>The inclusion of generics gives rise to another type of error that you must guard against: ambiguity. Ambiguity errors occur when erasure causes two seemingly distinct generic declarations to resolve to the same erased type, causing a conflict.</p>
 							</br>
 						</div>
 				</div>
