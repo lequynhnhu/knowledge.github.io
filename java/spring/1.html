@@ -54,9 +54,17 @@
 		<div class="card" id="card">
 				<div class="card-body" id="card-body">
 						<div class="d-sm-flex justify-content-between align-items-center">
-							<h1 class="header-title mb-0">Spring Boot</h1>
+							<h1 class="header-title mb-0">Messaging with Spring Boot</h1>
 						</div>
 						<div class="market-status-table mt-4">		
+							<p>Messaging is a way of communicating between one or more entities and it is everywhere.</p>
+							<p>Computer messaging in one form or another has been around since the invention of the computer, and it is defined as a method of communication between hardware and/or software components or applications. There is always a sender and one or more receivers. Messaging can be synchronous and asynchronous, pub-sub and peer-to-peer, RPC and enterprise-based, Message Broker, ESB (Enterprise Service Bus), MOM (Message Oriented Middleware), etc.</p>
+							</br>
+							<p>Let&rsquo;s start by using JMS (Java Message Service). This is an old technology that is still being used by some companies that have legacy applications. JMS was created by Sun Microsystems to create a way to send messages synchronously and asynchronously, and it defines interfaces that need to be implemented by message brokers such as WebLogic, IBM MQ, ActiveMQ, HornetQ, etc.</p>
+							</br>
+							<p>JMS is a Java-only technology, and even so there have been some attempts to create message bridges to combine JMS with other programming languages. Still it&rsquo;s difficult or very expensive to mix different technologies. I know that you are thinking that this is not true, because you can use Spring integration, Google Protobuffers, Apache Thrift, and another technologies to integrate JMS, but it&rsquo;s still a lot of work, because you need to know and maintain code from all these technologies.</p>
+							</br>
+							<p>Every time the producer sends a message to the queue, this consumer will be listening to that queue and will consume the message. Then you can process it or do your business logic around the message. In this example you are printing out the message.</p>
 							
 						</div>
 				</div>
