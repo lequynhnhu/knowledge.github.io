@@ -42,6 +42,8 @@
 							</br>
 							<p>Yes, a Tomcat server. Spring Boot has all these non-functional features that bring more to your application. You will learn more about this in later chapters, but for now you need to know that every time you create a web application, you will have a Tomcat server embedded. Note that you can exclude Tomcat and use another server like Jetty or Undertow.</p>
 						</br>
+						<p>The @<strong>ConditionalOnProperty</strong>, which applies only if the spring.cloud property is enabled. It&rsquo;s worth mentioning that this auto-configuration will be executed in a cloud profile, denoted by the @<strong>Profile</strong> annotation. The @<strong>Import</strong> annotation will be applied only if the other annotations met their conditions, meaning that the import of the <strong>CloudScanConfiguration</strong> class will be executed if the spring-cloud classes are in the classpath.</p>
+						</br>	
 					</div>
 				</div>
 		</div>
@@ -52,9 +54,10 @@
 		<div class="card" id="card">
 				<div class="card-body" id="card-body">
 						<div class="d-sm-flex justify-content-between align-items-center">
-							<h1 class="header-title mb-0">Operators</h1>
+							<h1 class="header-title mb-0">Spring Boot</h1>
 						</div>
-						<div class="market-status-table mt-4">
+						<div class="market-status-table mt-4">		
+							
 						</div>
 				</div>
 		</div>
