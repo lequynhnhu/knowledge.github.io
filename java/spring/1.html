@@ -34,8 +34,28 @@
                 		</br>
 						<h6>How Spring Boot Works</h6>
 						</br>
+							<p>The important key for Spring Boot to work is the @<strong>EnableAutoConfiguration</strong> annotation, because it contains the Auto-Configuration feature, and this is where it all starts to happen. Spring Boot will use auto-configuration based on your classpath, your annotations, and your configuration to add the right technology and create a suitable application. This means that all those annotations facilitate how Spring Boot will configure your app.</p>
+							</br>
+							<p>To sum up, Spring Boot uses the @<strong>SpringBootApplication</strong> and the auto-configuration (based on the @<strong>EnableAutoConfiguration</strong> annotation) to try to identify all your components. First it will inspect your classpath, and because your dependency is a spring-boot-starter-web, it will try to configure the application as a web application.</p>
+							</br>
+							<p>It will also identify that the JournalController class is a web controller because it is marked with the @<strong>Controller</strong> and because it contains the @<strong>RequestMapping</strong> annotations. And because the spring-boot-starter-web has the Tomcat server as a dependency, the Spring Boot will use it when you run your application.</p>
+							</br>
+							<p>Yes, a Tomcat server. Spring Boot has all these non-functional features that bring more to your application. You will learn more about this in later chapters, but for now you need to know that every time you create a web application, you will have a Tomcat server embedded. Note that you can exclude Tomcat and use another server like Jetty or Undertow.</p>
 						</br>
 					</div>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+				<div class="card-body" id="card-body">
+						<div class="d-sm-flex justify-content-between align-items-center">
+							<h1 class="header-title mb-0">Operators</h1>
+						</div>
+						<div class="market-status-table mt-4">
+						</div>
 				</div>
 		</div>
 	</div>
