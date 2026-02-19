@@ -145,6 +145,19 @@
 									</br>
 									<h6>Which comes first: the Config Server or the Service Registry?</h6>
 									</br>
+										<p>You&rsquo;re setting up your microservices to learn about the Eureka service registry from the Config Server. This is a common approach to avoid propagating service registry details across every single microservice in an application.</p>
+										</br>
+										<p>Alternatively, it&rsquo;s possible to have the Config Server register itself with Eureka and have each microservice discover the Config Server as it would any other service. If you prefer this model, you&rsquo;ll need to configure the Config Server as a discovery client and set the spring.cloud.config.discovery.enabled property to true. As a result, the Config Server will register itself in Eureka with the name &ldquo;configserver.&rdquo;</p>
+										</br>
+										<p>The downside of this approach is that each service will need to make two calls at startup: one to Eureka to discover the Config Server, followed by one to Config Server to fetch configuration data.</p>
+										</br>
+										<p>When the application starts up, the property source provided by the Config Server cli- ent will make a request to the Config Server. Whatever properties it receives will be made available in the application&rsquo;s environment. What&rsquo;s more, those properties will be effectively cached; they&rsquo;ll be available even if the Config Server goes down.</p>
+									<h6>14.4 Serving application- and profile-specific properties</h6>
+									</br>
+										<p>As you&rsquo;ll recall, when a Config Server client starts up, it makes a request to the Config Server with a request path that contains both the application name as well as the name of an active profile. When serving configuration data, Config Server will consider these values and return application-specific and profile-specific configuration to the client.</p>
+										</br>
+										<p>From a client perspective, consuming application-specific and profile-specific con- figuration properties isn&rsquo;t much different than if you weren&rsquo;t using Config Server. An application&rsquo;s name is specified by setting the spring.application.name property (the same one used to identify the application to Eureka). And the active profile(s) can be specified by setting the spring.profiles.active property (often as an envi- ronment variable named SPRING_PROFILES_ACTIVE).</p>
+										</br>
 									
 							</br>
 						</div>
