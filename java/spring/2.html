@@ -118,7 +118,16 @@
 									</br>
 									<p>If this seems complex, don&rsquo;t worry. As you&rsquo;ll soon see, most of this is handled auto- matically and transparently. But before you can register and consume services, you need to enable a Eureka server.</p>
 									</br>
-									
+								<h6>Consuming services</h6>
+								</br>
+									<p>On the other hand, the consuming application has a lot of responsibility when it comes to looking up a service in Eureka. Eureka may reply to the lookup with many instances for the same service. If the consumer asks for ingredient-service and receives a half-dozen or so service instances in return, how does it choose the correct service?</p>
+									</br>
+									<p>The good news is that consuming applications don&rsquo;t need to make that choice or even explicitly look up a service on their own. Spring Cloud&rsquo;s Eureka client support, along with the Ribbon client-side load balancer, makes it simple work to look up, select, and consume a service instance. Two ways to consume a service looked up from Eureka include:</p>
+									</br>
+									<p> A load-balanced RestTemplate</p>
+									<p> Feign-generated client interfaces</p>
+								</br>
+								<p>The @<strong>LoadBalanced</strong> annotation has two purposes: first, and most importantly, it tells Spring Cloud that this <strong>RestTemplate</strong> should be instrumented with the ability to look up services through Ribbon. Secondly, it acts as an injection qualifier, so that if you have two or more RestTemplate beans, you can specify that you want the load-balanced RestTemplate at the injection point.</p>
 							</br>
 						</div>
 				</div>
