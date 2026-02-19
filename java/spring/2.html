@@ -70,7 +70,21 @@
 									<p>Most programming languages, including Java, support concurrent programming. It&rsquo;s fairly easy to fire up another thread in Java and send it on its way to perform some work while the invoking thread carries on with something else. But although it&rsquo;s easy to create threads, those threads are likely to end up blocked themselves. Managing concurrency in multiple threads is challenging. More threads mean more complexity.</p>
 									</br>
 									<p>In contrast, reactive programming is functional and declarative in nature. Rather than describe a set of steps that are to be performed sequentially, reactive program- ming involves describing a pipeline or stream through which data flows. Rather than requiring the data be available to be processed as a whole, a reactive stream processes data as it becomes available. In fact, the incoming data may be endless (a constant stream of a location&rsquo;s real-time temperature data, for instance).</p>
-									
+									</br>
+									<p>To apply a real-world analogy, consider imperative programming as a water bal- loon and reactive programming as a garden hose. Both are suitable ways to surprise and soak an unsuspecting friend on a hot summer day. But they differ in their execu- tion style:</p>
+										<ul>
+											<li><p> &nbsp;A water balloon carries its payload all at once, soaking its intended target at the moment of impact. The water balloon has a finite capacity, however, and if you wish to soak more people (or the same person to a greater extent), your only choice is to scale up by increasing the number of water balloons.</p></li>
+											<li><p> &nbsp;A garden hose carries its payload as a stream of water that flows from the spigot to the nozzle. The garden hose&rsquo;s capacity may be finite at any given point in time, but it&rsquo;s unlimited over the course of a water battle. As long as water is entering the hose from the spigot, it will continue to flow through the hose and spray out of the nozzle. The same garden hose is easily scalable to soak as many friends as you wish.</p></li>
+										</ul>
+									</br>
+									<h6>Java Streams vs. Reactive Streams</h6>
+									</br>
+										<p>There&rsquo;s a lot of similarity between Java Streams and Reactive Streams. To start with, they both have the word Streams in their names. They also both provide a functional API for working with data. In fact, as you&rsquo;ll see later when we look at Reactor, they even share many of the same operations.</p>
+										</br>
+										<p>Java Streams, however, are typically synchronous and work with a finite set of data. They&rsquo;re essentially a means of iterating over a collection with functions.</p>
+										</br>
+										<p>Reactive Streams support asynchronous processing of datasets of any size, including infinite datasets. They process data in real time, as it becomes available, with back- pressure to avoid overwhelming their consumers.</p>
+									</br>
 								</br>
 						</div>
 				</div>
