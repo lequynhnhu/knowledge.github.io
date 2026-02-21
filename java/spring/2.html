@@ -234,7 +234,12 @@
 								</ul>
 							</br>
 							<p>Application startup exposes the Hystrix stream, which can then be consumed using any REST client you want. But, before you set out to write a custom Hystrix stream client, be aware that each entry in the HTTP stream is rich with all kinds of JSON data, and it&rsquo;ll require a lot of client-side work to interpret that data. Although writing your own Hystrix stream presentation client isn&rsquo;t an impossible task, perhaps you should consider using the Hystrix dashboard before expending much effort on your own dashboard.</p>
-							
+								<h6>Understanding Hystrix thread pools</h6>
+								</br>
+								<p>Imagine that a method is taking an excessive amount of time to do its job. Perhaps that method is making an HTTP request to another service, and the service is sluggish in responding. Until the service responds, Hystrix blocks the thread, waiting for a response.</p>
+								<p>If the method is executing in the context of the same thread as the caller of the method, then the caller doesn&rsquo;t have an opportunity to walk away from the long-running method. Moreover, if the blocked thread is one of a limited set of threads, such as a request-handling thread from Tomcat, and if the problem persists, then scalability can take a hit when all the threads are saturated and waiting for responses.</p>
+								<p>To avoid this situation, Hystrix assigns a thread pool for each dependency (for example, for each Spring bean with one or more Hystrix command methods). When one of the Hystrix command methods is called, it&rsquo;ll be executed in a thread from the Hystrix-managed thread pool, isolating it from the calling thread. This allows the call- ing thread to give up and walk away from the call if it&rsquo;s taking too long, and isolates any potential thread saturation to the Hystrix-managed thread pool.</p>
+							</br>
 						</div>
 				</div>
 		</div>
