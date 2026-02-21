@@ -221,8 +221,20 @@
 								</br>
 								<p> Methods that are potentially slow&mdash;These won&rsquo;t necessarily fail, but may be consid- ered unhealthy if they're taking too long to do their job.</p>
 								</br>
-								
+								<p>Netflix Hystrix is a Java implementation of the circuit breaker pattern. Put sim- ply, a Hystrix circuit breaker is implemented as an aspect applied to a method that triggers a fallback method should the target method fail. And, to properly imple- ment the circuit breaker pattern, the aspect also tracks how frequently the target method fails and then forwards all requests to the fallback if the failure rate exceeds some threshold.</p>
 							</br>
+							<h5>Monitoring failures</h5>
+							</br>
+							<p>Every time a circuit breaker protected method is invoked, several pieces of data are collected about the invocation and published in an HTTP stream that can be used to monitor the health of the running application in real time. Among the data collected for each circuit breaker, the Hystrix stream includes the following:</p>
+								<ul>
+									<li>How many times the method is called</li>
+									<li>How many times it&rsquo;s called successfully</li>
+									<li>How many times the fallback method is called</li>
+									<li>How many times the method times out</li>
+								</ul>
+							</br>
+							<p>Application startup exposes the Hystrix stream, which can then be consumed using any REST client you want. But, before you set out to write a custom Hystrix stream client, be aware that each entry in the HTTP stream is rich with all kinds of JSON data, and it&rsquo;ll require a lot of client-side work to interpret that data. Although writing your own Hystrix stream presentation client isn&rsquo;t an impossible task, perhaps you should consider using the Hystrix dashboard before expending much effort on your own dashboard.</p>
+							
 						</div>
 				</div>
 		</div>
