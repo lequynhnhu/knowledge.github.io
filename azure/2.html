@@ -102,7 +102,12 @@
 						</br>
 						<p>Azure data centers are designed to be fault-tolerant, with redundant internet connections, power generators, multiple network paths, storage arrays, and so on. But you still need to do your part when you design and run applications. With Azure Storage, you choose what level of storage redundancy you need. This level varies for each application and depending on how critical the data is. Here are the available storageredundancy options:</p>
 						</br>
-							
+							<ul>
+								<li><strong>Locally redundant storage (LRS)</strong> &mdash;Your data is replicated three times inside the single data center in which your storage account was created. This option provides redundancy in the event of a single hardware failure, but if the entire data center goes down (rare, but possible), your data goes down with it.</li>
+								<li><strong>Zone-redundant storage (ZRS)</strong> &mdash;The next level up from LRS replicates your data three times across two or three data centers in a region (when multiple data centers exist in a region) or across regions. ZRS is also available across availability zones.</li>
+								<li><strong>Georedundant storage (GRS)</strong> &mdash;With GRS, your data is replicated three times in the primary region in which your storage is created and then replicated three times in a paired region. The paired region is usually hundreds or more miles away. West US is paired with East US, for example; North Europe is paired with West Europe, and Southeast Asia is paired with East Asia. GRS provides a great redundancy option for production applications.&nbsp;</li>
+								<li><strong>Read-access georedundant storage (RA-GRS)</strong> &mdash;This option is the premium dataredundancy option. Your data is replicated across paired regions as in GRS, but you also have read access to the data in that secondary zone.</li>
+							</ul>
 					</br>
 				</div>
 			</div>
