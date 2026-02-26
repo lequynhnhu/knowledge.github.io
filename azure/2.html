@@ -193,7 +193,25 @@
 						</br>
 						<h6>Securing and controlling resources</h6>
 						</br>
-						
+							<p>Each resource can have different security permissions applied to it. These policies define who can do what. Think about it&mdash;do you want an intern restarting your web app or deleting the VM data disks? And do you think that your good buddies over in the network team want you to create a new virtual network subnet? Probably not. In Azure, there are four core roles you can assign to resources, much like file permissions:</p>
+							</br>
+								<ul>
+									<li><strong>Owner </strong>&mdash;Complete control, basically an administrator&nbsp;</li>
+									<li><strong>Contributor </strong>&mdash;Full management of the resource except making changes in the security and role assignments&nbsp;</li>
+									<li><strong>Reader </strong>&mdash;Ability to view all information about the resource but make no changes&nbsp;</li>
+									<li><strong>User access administrator </strong>&mdash;Ability to assign or remove access to resources</li>
+								</ul>
+							</br>
+							<p>Role-based access control (RBAC) is a core feature of Azure resources that automatically integrates with the user accounts across your subscriptions. Think of file permissions on your normal computer. The basic file permissions are read, write, and execute. When these permissions are combined, you can create different sets of permissions for each user or group on your computer. As you work with network file shares, permissions are common tools for controlling access. RBAC in Azure works along the same lines to control access to resources, just like file permissions on your local computer or network share.</p>
+							</br>
+						<h6></h6>
+						</br>
+							<p>The permissions-based approach of RBAC is great for limiting who can access what. But mistakes can still happen. There&rsquo;s a reason why you typically don&rsquo;t log on to a server as a user with administrative, or root, permissions. One wrong keystroke or mouse click, and you could mistakenly delete resources. Even if you have backups (You do have backups, right? And you test them regularly?), it&rsquo;s a time-consuming process that may mean lost productivity or revenue to the business.</p>
+							</br>
+							<p>Another feature built into the Resource Manager model is resource locks. Each resource can have a lock applied that limits it to read-only access or prevents delete operations. The delete lock is particularly helpful, because it can be all too easy to delete the wrong resource group. When you start a delete operation, there&rsquo;s no going back or canceling the operation after the Azure platform has accepted your request.</p>
+							</br>
+							<p>For production workloads, I suggest that you implement locks on your core resources to prevent deletes. These locks are only at the Azure resource and platform levels, not for the data within your resources. You could delete files within a VM or drop a table in a database, for example. The Azure resource locks would apply only if you tried to delete the entire VM or Azure SQL database. The first time a lock kicks</p>
+							</br>
 					</br>
 				</div>
 			</div>
