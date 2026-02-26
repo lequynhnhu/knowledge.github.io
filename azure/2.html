@@ -204,7 +204,7 @@
 							</br>
 							<p>Role-based access control (RBAC) is a core feature of Azure resources that automatically integrates with the user accounts across your subscriptions. Think of file permissions on your normal computer. The basic file permissions are read, write, and execute. When these permissions are combined, you can create different sets of permissions for each user or group on your computer. As you work with network file shares, permissions are common tools for controlling access. RBAC in Azure works along the same lines to control access to resources, just like file permissions on your local computer or network share.</p>
 							</br>
-						<h6></h6>
+						<h6>Protecting resources with locks</h6>
 						</br>
 							<p>The permissions-based approach of RBAC is great for limiting who can access what. But mistakes can still happen. There&rsquo;s a reason why you typically don&rsquo;t log on to a server as a user with administrative, or root, permissions. One wrong keystroke or mouse click, and you could mistakenly delete resources. Even if you have backups (You do have backups, right? And you test them regularly?), it&rsquo;s a time-consuming process that may mean lost productivity or revenue to the business.</p>
 							</br>
@@ -212,6 +212,15 @@
 							</br>
 							<p>For production workloads, I suggest that you implement locks on your core resources to prevent deletes. These locks are only at the Azure resource and platform levels, not for the data within your resources. You could delete files within a VM or drop a table in a database, for example. The Azure resource locks would apply only if you tried to delete the entire VM or Azure SQL database. The first time a lock kicks</p>
 							</br>
+						<h6>Managing and grouping resources with tags</h6>
+						</br>
+							<p>One final feature in the Azure Resource Manager model that I want to bring up is tags. There&rsquo;s nothing new or special about how you tag resources in Azure, but this management concept is often overlooked. You can apply tags to a resource in Azure that describe properties such as the application it&rsquo;s part of, the department responsible for it, or whether it&rsquo;s a development or production resource.</p>
+							</br>
+							<p>You can target resources based on tags to apply locks or RBAC roles, or to report on resource costs and consumption. Tags aren&rsquo;t unique to a resource group and can be reused across your subscription. Up to 50 tags can be applied to a single resource or resource group, so you have a lot of flexibility in how you tag and then filter tagged resources.</p>
+						</br>
+					<h5>Azure Resource Manager templates</h5>
+					</br>
+						
 					</br>
 				</div>
 			</div>
