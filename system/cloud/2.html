@@ -326,6 +326,22 @@
 								</br>
 								<p>As with any architectural constraint, there are trade-offs. The more abstraction that is built into an architecture, the more flexible and agile the architecture will be, but it comes with a price. Building RESTful services correctly takes more up-front time because building loosely coupled services is a much more involved design process. Another trade-off is performance. Abstraction creates overhead, which can impact performance. There may be some use cases where the performance requirements far exceed the benefits of REST and, for that particular use case, another method may be required.</p>
 							</br>
+							<h5>The Challenges of Migrating Legacy Systems to the Cloud</h5>
+							</br>
+								<p>One of the challenges companies have when they decide to port applications from on-premises to the cloud is that many of their legacy systems are reliant on ACID transactions. ACID (atomicity, consistency, isolation, durability) transactions are used to ensure that a transaction is complete and consistent.</p>
+								</br>
+								<p>With ACID transactions, a transaction is not complete until it is committed and the data is up to date. In an on-premises environment where data may be tied to a single partition, forcing consistency is perfectly acceptable and often the preferred method. In the cloud, there is quite a different story.</p>
+								</br>
+								<p>Cloud architectures rely on Basically Available, Soft State, Eventually Consistent (BASE) transactions. BASE transactions acknowledge that resources can fail and the data will eventually become consistent. BASE is often used in volatile environments where nodes may fail or systems need to work whether the user is connected to a network or not.</p>
+								</br>
+								<p>Getting back to the legacy system discussion, legacy systems often rely on ACID transactions, which are designed to run in a single partition and expect the data to be consistent. Cloud-based architectures require partition tolerance, meaning if one instance of a compute resource cannot complete the task, another instance is called on to finish the job.</p>
+								</br>
+								<p>Eventually the discrepancies will be reconciled and life will go on its merry way. However, if a legacy system with ACID transactionality is ported and not modified to deal with partition tolerance, users of the system will not get the data consistency they are accustomed to and they will challenge the quality of the system.</p>
+								</br>
+								<p>Architects will have to account for reconciling inconsistencies, which is nothing new. In retail they call that balancing the till, which is an old way of saying making sure the cash in the drawer matches the receipt tape at the end of the day. But many legacy applications were not designed to deal with eventual consistency and will frustrate the end users if they are simply ported to the cloud without addressing this issue.</p>
+								</br>
+								<p>What about those mega-vendors out there whose legacy applications are now cloud-aware applications? Most of those rebranded dinosaurs are actually running in a single partition and don&rsquo;t really provide the characteristics of cloud-based systems such as rapid elasticity and resource pooling. Instead, many of them are simply large, monolithic legacy systems running on a virtual machine at a hosted facility, a far cry from being a true cloud application. It is critical that architects dig under the covers of these vendor solutions and make sure that they are not being sold snake oil.</p>
+							</br>
 						</div>
 				</div>
 		</div>
