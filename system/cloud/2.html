@@ -221,6 +221,43 @@
 							<p>These limits, sometimes called throttling, protect the platform from getting overloaded by an individual customer, thus protecting all customers in the process. Most PaaS vendors throttle an individual user&rsquo;s bandwidth to protect against network collisions and congestion. Some PaaS vendors throttle CPU utilization to reduce the amount of heat generation in the data center and to conserve power.</p>
 							</br>
 							<p>Other PaaS vendors that price based on fixed amounts of consumption such as blocks of storage will throttle the customer when the customer has consumed all of the resources that they have paid for. Developers must understand the limitations of their selected platform and design accordingly.</p>
+							</br>
+							<p>Many PaaS service providers protect their platform and its customers by throttling the database activity of customers. Developers must account for this in their designs. One way is to trap for these types of errors and retry until successful. Another method is to break units of work into smaller chunks before calling the database.</p>
+							</br>
+							<p>This trick can be used to design around bandwidth limitations, as well. For some applications, designing around throttles creates unacceptable delays in processing time or it may impact the quality and reliability of the application. If this is the case, then PaaS may not be the right service model and IaaS should be used instead. Websites with extremely high volumes or highly distributed applications that crunch through enormous amounts of data are typically poor candidates for PaaS.</p>
+							</br>
+							<h5>When to Use IaaS</h5>
+							</br>
+								<p>If an application or service has performance or scalability requirements that require the developers to manage memory, configure database servers and application servers to maximize throughput, specify how data is distributed across disk spindles, manipulate the operating system, and so on, then you should leverage IaaS. If you don&rsquo;t need to worry about those things, then you should consider PaaS.</p>
+								</br>
+								<p>Another factor is cost. PaaS can reduce costs substantially by reducing the amount of work and the number of resources required to build and deploy applications. However, the PaaS pay-as-you-go model can get extremely expensive when data gets into the tens of terabytes or when the bandwidth or CPU demands exceed normal levels. As of March 5, 2013, Amazon has reduced the costs of its EC2 (Elastic Compute Cloud) 26 times, and other IaaS vendors have been following its lead. As time progresses the cost of IaaS may become so low that PaaS providers might have to follow suit in order to compete.</p>
+								</br>
+								<p>Another reason for leveraging IaaS over PaaS is related to mitigating risks of downtime. When a PaaS provider has an outage, the customer can only wait for the provider to fix the issue and get the services back online. The same is true for SaaS solutions. With IaaS, the customer can architect for failure and build redundant services across multiple physical or virtual data centers.</p>
+								</br>
+								<p>AWS has had some highly publicized outages in recent years and major websites like Reddit, Foursquare, and others were down. But many other sites survived the outage due to cross-zone redundancy. Most times when AWS has an outage, PaaS provider Heroku, which runs its services on top of AWS, is impacted. Heroku customers are out of luck until both AWS and Heroku recover. Many AWS customers can and have survived an AWS outage.</p>
+								</br>
+								<p>As we move up the stack toward SaaS we increase speed to market, reduce the number of human resources required, and reduce operational costs. As we move down the stack toward IaaS, we get more control of the infrastructure and have a better chance of avoiding or recovering from a vendor outage.</p>
+								</br>
+							<h5>Common Cloud Use Cases</h5>
+							</br>
+								<h6>Cloud Bursting</h6>
+								</br>
+								<p>Many organizations choose to leverage the cloud to handle peaks in traffic. They may have applications running in their data centers and choose to send excess capacity out to a cloud service provider instead of investing in physical infrastructure to accommodate peaks. Retailers that deal with seasonal spikes around the holidays or companies that process tax returns that have low traffic for most of the year but experience huge peaks during the tax season are examples of companies that might take advantage of cloud bursting.</p>
+								</br>
+								<h6>Archiving/Storage</h6>
+								</br>
+								<p>Some organizations are finding innovative ways to reduce archiving and storage costs by leveraging storage in the cloud. Traditional archiving strategies involve several pieces of infrastructure and software such as backup tape and disk devices, various types of storage media, transportation services, and much more.</p>
+								</br>
+								<p>Now companies can eliminate all of those physical components and leverage cloud storage services that can be totally automated through scripts. The cost of storage in the cloud is drastically cheaper than storage on physical storage media and the processes for data retrieval can be much less complex.</p>
+								</br>
+								<h6>Data Mining and Analytics</h6>
+								</br>
+								<p>The cloud is a great place for processing large amounts of data on-demand. As disks gets cheaper, organizations are storing more data now than ever before. It is not uncommon for companies to be storing many terabytes or even petabytes of information.</p>
+								</br>
+								<p>Analyzing large amounts of data like this can become very challenging on-premises because an extraordinary amount of infrastructure is required to process all of that data. To make matters worse, the analytics of these large data sets are usually ad hoc in nature, which means often the infrastructure is sitting idle until someone initiates a request.</p>
+								</br>
+								<p>Moving these types of big data workloads to a public cloud is much more economical. In the public cloud, resources can be provisioned only when a request is initiated. There is a huge cost savings both in physical infrastructure and in the management of the systems by deploying an on-demand cloud model.</p>
+							</br>
 						</div>
 				</div>
 		</div>
