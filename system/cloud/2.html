@@ -148,7 +148,17 @@
 								</br>
 								<p>Both IaaS and PaaS solutions offer Database as a Service (DBaaS) solutions that automatically manage database management tasks like replication, autoscaling, monitoring, backups, and more. One limitation of DBaaS is the lack of control over the database.</p>
 								</br>
-								
+								<p>My first start-up, M-Dot Network, winner of the 2010 AWS Global Start-Up Challenge, had a unique technical solution for processing digital incentives at point-of-sale (POS) systems. M-Dot partnered with POS vendors to build a message broker that was integrated and shipped with POS software. The message broker sent the shopping orders and items to M-Dot&rsquo;s cloud-based digital incentive platform on AWS.</p>
+								</br>
+								<p>The digital incentive platform would process the incoming data and determine if shoppers qualified to redeem any digital offers that were in their digital wallets. The redemption message was returned to the POS system in subsecond response time. Anyone familiar with the retail industry knows that POS systems require extremely high service level agreements (SLAs) and the worst thing a third party can do is shut down a retailer&rsquo;s POS system.</p>
+								</br>
+								<p>M-Dot wanted to leverage Amazon Relational Database Service (Amazon RDS), Amazon&rsquo;s DBaaS application programming interface (API), to take advantage of the advanced features and automation of database management tasks. However, the consequences of the database going off-line were so great that we chose to manage the database ourselves.</p>
+								</br>
+								<p>This strategy paid off. AWS had a few well-publicized outages, and in several of those outages, RDS was either down or impacted. Because M-Dot chose to manage the database itself, we never missed a POS transaction on any AWS outage even though many popular websites were completely down. It came with a cost, though. We invested a lot of time and money in architecting a fail-over solution that included master&ndash;slave and cross-zone redundancy.</p>
+								</br>
+								<p>The financial aspects should focus on total cost of ownership (TCO), which requires a lot more thought than calculating the price per hour or per month of a cloud service. If the project is focused on building new applications, it is much easier to calculate the TCO, but for projects that are migrating solutions to the cloud or are new but are constrained by existing legacy architectures, the TCO is much more complex to calculate.</p>
+								</br>
+								<p>For the latter, decision makers must estimate the cost to change and/or integrate with the legacy architectures. In many cases, moving to the cloud brings costs of retrofitting existing architectures so that they can be integrated with new cloud services. On top of the costs to build new services in the cloud, other costs may include projects to reengineer legacy architectures, employee training, hiring new employees or consultants, acquiring tools or services to assist in reengineering, and much more.</p>
 							</br>
 						</div>
 				</div>
