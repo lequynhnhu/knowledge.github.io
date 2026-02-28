@@ -273,3 +273,61 @@
 		</div>
 	</div>
 </div>
+<div class="row mt-5 mb-5">
+	<div class="col-12">
+		<div class="card" id="card">
+				<div class="card-body" id="card-body">
+						<div class="d-sm-flex justify-content-between align-items-center">
+							<h1 class="header-title mb-0">The Key to the Cloud</h1>
+						</div>
+						<div class="market-status-table mt-4">
+							<p>There are many reasons that Representational State Transfer (RESTful) services are a critical component of any cloud solution. First, when building services in the cloud one typically builds on top of an Infrastructure as a Service (IaaS) or Platform as a Service (PaaS) provider or integrates with one-to-many Software as a Service (SaaS) offerings.</p>
+							</br>
+							<p>All of these cloud service providers have exposed their application programming interfaces (APIs) using RESTful services. In addition, clouds are heterogeneous ecosystems that connect many different services from many different companies written in many different technology stacks. The complexities of the underlying stacks and protocols should be abstracted away from the business logic so this ecosystem of services can easily connect and work in harmony.</p>
+							</br>
+							<p>A great example of this concept in practice is how simply we can plug in social media functionality from Facebook, Twitter, Pinterest, and other social media touchpoints. Underneath those widely used APIs are some very diverse and complex systems. These high-scale systems combine multiple programming stacks, multiple database technologies, and technologies for integration, caching, queuing, event processing, and much more.</p>
+							</br>
+							<p>The beauty of services is that all of that complexity is hidden from us as developers and literally within minutes we can connect our applications and services and leverage all of that wonderful, complex functionality with no knowledge of how the underlying technologies work. That is agility at its finest.</p>
+							</br>
+							<p>A second reason that RESTful services are a critical component of any cloud solution pertains to the many touchpoints that users consume information on in today&rsquo;s day and age. Gone are the days of building separate systems for individual touchpoints. Today, the preferred method is to build multiple user interfaces (web, mobile, tablet, etc.) that leverage the same services and are always in sync.</p>
+							</br>
+							<p>We have to build things this way because our users are bouncing around between devices and browsers and will leave in droves if each touchpoint displays different result sets. To make things even easier, there are a few new companies that are delivering mobile platforms so that developers can build a single user interface (UI), and the platforms will transform the code into the various mobile and tablet user interfaces. Did I mention agility?</p>
+							</br>
+							<p>Third, and most important, cloud infrastructure is virtual and dynamic, meaning resources come and go in an elastic matter and every piece of cloud infrastructure is expected to fail. The cloud is designed to be fault-tolerant so that if any node fails, the system can continue its operations either in a degraded mode or without any degradation if other nodes become available to replace the failed node.</p>
+							</br>
+							<p>To take advantage of fault-tolerant cloud infrastructure, software must be built to be fault-tolerant as well. To accomplish fault tolerance with software, the software must not be tightly coupled to the infrastructure. A key best practice to writing loosely coupled software in the cloud is to store the application state on the client instead of the server, thus breaking the dependencies between the hardware and the software. This concept is a core principle for building RESTful web services.</p>
+							</br>
+							<h5>Why REST?</h5>
+							</br>
+								<ul>
+									<li>Separation of resource from representation. Resources and representations must be loosely coupled. For example, a resource may be a data store or a chunk of code, while the representation might be an XML or JSON result set or an HTML page.</li>
+									<li>Manipulation of resources by representations. A representation of a resource with any metadata attached provides sufficient information to modify or delete the resource on the server, provided the client has permission to do so.</li>
+									<li>Self-descriptive messages. Each message provides enough information to describe how to process the message. For example, the &ldquo;Accept application/xml&rdquo; command tells the parser to expect XML as the format of the message.</li>
+									<li>Hypermedia as the engine of application state (HATEOAS). The client interacts with applications only through hypermedia (e.g., hyperlinks). The representations reflect the current state of the hypermedia applications.</li>
+								</ul>
+								</br>
+								<p>Let&rsquo;s look at these constraints one at a time. By separating the resource from its representation, we can scale the different components of a service independently.</p>
+								</br>
+								<p>For example, if the resource is a photo, a video, or some other file, it may be distributed across a content delivery network (CDN), which replicates data across a high-performance distributed network for speed and reliability. The representation of that resource may be an XML message or an HTML page that tells the application what resource to retrieve.</p>
+								</br>
+								<p>The HTML pages may be executed on a web server farm across many servers in multiple zones in Amazon&rsquo;s public cloud&mdash;Amazon Web Services (AWS)&mdash;even though the resource (let&rsquo;s say it is a video) is hosted by a third-party content delivery network (CDN) vendor like AT&amp;T. This arrangement would not be possible if both the resource and the representation did not adhere to the constraint.</p>
+								</br>
+								<p>The next constraint, manipulation of resources by representations, basically says that resource data (let&rsquo;s say it is a customer row in a MySQL table) can only be modified or deleted on the database server if the client sending the representation (let&rsquo;s say it is an XML file) has enough information (PUT, POST, DELETE) and has permission to do so (meaning that the user specified in the XML message has the appropriate database permissions). Another way to say that is the representation should have everything it needs to request a change to a resource provider assuming the requester has the appropriate credentials.</p>
+								</br>
+								<p>The third constraint simply says that the messages must contain information that describes how to parse the data. For example, Twitter has an extensive library of APIs that are free for the public to use. Since the end users are unknown entities to the architects at Twitter, they have to support many different ways for users to retrieve data. They support both XML and JSON as output formats for their services.</p>
+								</br>
+								<p>Consumers of their services must describe in their requests which format their incoming messages are in so that Twitter knows which parser to use to read the incoming messages. Without this constraint, Twitter would have to write a new version of each service for every different format that its users might request. With this constraint in place, Twitter can simply add parsers as needed and can maintain a single version of its services.</p>
+								</br>
+								<p>The fourth and most important constraint is HATEOAS. This is how RESTful services work without maintaining application state on the server side. By leveraging hypermedia as the engine of application state (HATEOAS), the application state is represented by a series of links&mdash;uniform resource identifiers or URIs&mdash;on the client side, much like following the site map of a website by following the URLs. When a resource (i.e., server or connection) fails, the resource that resumes working on the services starts with the URI of the failed resource (the application state) and resumes processing.</p>
+								</br>
+								<p>A good analogy of HATEOAS is the way a GPS works in a car. Punch in a final destination on the GPS and the application returns a list of directions. You start driving by following these directions. The voice on the GPS tells you to turn when the next instruction is due. Let&rsquo;s say you pull over for lunch and shut off the car. When you resume driving, the remaining directions in the trip list pick right up where they left off. This is exactly how REST works via hypermedia. A node failing is similar to shutting your car off for lunch and another node picking up where the failed node left off is similar to restarting the car and the GPS. Make sense?</p>
+								</br>
+								<p>Why are the four constraints of REST so important when building solutions in the cloud? The cloud, like the Internet, is a massive network of independent resources that are designed to be fault-tolerant. By following the constraints of REST, the software components that run in the cloud have no dependencies on the underlying infrastructure that may fail at any time. If these four constraints are not followed, it creates limitations on the application&rsquo;s ability to scale and to fail over to the next available resource.</p>
+								</br>
+								<p>As with any architectural constraint, there are trade-offs. The more abstraction that is built into an architecture, the more flexible and agile the architecture will be, but it comes with a price. Building RESTful services correctly takes more up-front time because building loosely coupled services is a much more involved design process. Another trade-off is performance. Abstraction creates overhead, which can impact performance. There may be some use cases where the performance requirements far exceed the benefits of REST and, for that particular use case, another method may be required.</p>
+							</br>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
