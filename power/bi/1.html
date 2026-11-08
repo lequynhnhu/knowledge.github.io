@@ -26,6 +26,38 @@
 								</br>
 							<h3>How It Works (Simplified)</h3>
 							</br>
+							<p>The VertiPaq engine relies on two internal components:</p>
+								<ul>
+									<li>Storage Engine (SE) – Handles data retrieval, compression, and scanning of columnar data</li>
+									<li>Formula Engine (FE) – Executes DAX calculations, applies logic, and orchestrates queries</li>
+								</ul>
+								<p>The Storage Engine performs fast column scans and aggregations. The Formula Engine processes business logic and calculated measures.</p>
+								</br>
+								<p>In simple terms:</p>
+									<ul>
+										<li>Data is compressed and stored in memory →</li>
+										<li>Storage Engine scans columns efficiently →</li>
+										<li>Formula Engine applies DAX logic →</li>
+										<li>Results are returned quickly.</li>
+									</ul>
+									<p>VertiPaq’s performance depends heavily on model design, cardinality optimization, and memory management, which directly affect scalability in enterprise environments.</p>
+								</br>
+								<h3>How VertiPaq Works (Without Getting Academic)</h3>
+									</br>
+										<p>VertiPaq’s performance advantage comes from how it stores and compresses data in memory. The goal is not just speed. It is compression efficiency, lower memory footprint, and reduced capacity pressure in enterprise environments.</p>
+									</br>
+									<h4>Columnar Storage</h4>
+										</br>
+											<p>VertiPaq stores data by column instead of by row.</p>
+											<p>Because analytical queries typically scan specific columns rather than entire records, columnar storage allows the engine to read only what is needed. This reduces memory access, improves aggregation speed, and lowers overall resource consumption inside shared Fabric capacity.</p>
+										<p>In 2026, that translates directly into better concurrency and more efficient capacity utilization.</p>
+									</br>
+									<h4>Dictionary Encoding</h4>
+										</br>
+											<p>VertiPaq replaces repeating values with numeric identifiers stored in a dictionary. This is called dictionary encoding.</p>
+											<p>Below is a simple example. Instead of storing city names like “New York,” “Tokyo,” “London,” and “Shanghai” repeatedly in every row, the engine assigns each unique city a numeric ID. The data column then stores only those compact IDs, while the actual city names are kept once in a separate dictionary.</p>
+										</br>
+									
 						</br>
 						</div>
 				</div>
