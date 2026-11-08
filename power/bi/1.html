@@ -126,7 +126,31 @@
 									<p>An inefficient VertiPaq engine rarely fails loudly. Instead, it creates subtle performance and cost signals that compound over time.</p>
 									<p>Watch for these indicators:</p>
 									</br>
-								
+										<ol>
+											<li>High-cardinality columns inflating model size</li>
+											<li>Slow dataset refresh despite moderate data volumes</li>
+											<li>Sudden memory spikes inside Fabric capacity</li>
+											<li>Frequent dataset eviction or capacity throttling&nbsp;</li>
+											<li>Copilot prompts or natural language queries lagging under concurrency</li>
+											<li>Reports performing well in isolation but degrading under multi-user load</li>
+										</ol>
+										</br>
+										<p>If these patterns appear, the issue is often not data volume, but semantic model design.</p>
+										<p>In Fabric environments, inefficient VertiPaq engine behavior can quietly increase capacity consumption and reduce performance stability long before teams recognize the architectural root cause.</p>
+										</br>
+								<h3>Strategic Approach to Semantic Model Engineering</h3>
+								</br>
+									<p>Optimizing the VertiPaq engine is not about tweaking formulas. It is about disciplined semantic model architecture. Organizations that treat modeling as an engineering practice, rather than a reporting exercise, see measurable gains in performance stability, cost control, and AI readiness.</p>
+									</br>
+									<ul>
+										<li><strong>Star schema enforcement</strong> to reduce ambiguity, simplify relationships, and improve storage engine efficiency</li>
+										<li><strong>Cardinality reduction</strong> through normalization, surrogate keys, and controlled dimension design</li>
+										<li><strong>Column pruning</strong> to eliminate unused fields that inflate memory footprint and compression overhead</li>
+										<li><strong>Governance standards </strong>for naming, partitioning, refresh scheduling, and workspace isolation</li>
+										<li><strong>AI-ready modeling</strong> that supports natural language queries, Copilot prompts, and consistent semantic definitions across domains</li>
+									</ul>
+									</br>
+									<p>In the Fabric era, semantic modeling is no longer just a BI development task. It is an architectural discipline that influences capacity economics, scalability behavior, and long-term analytics resilience.</p>
 						</br>
 						</div>
 				</div>
